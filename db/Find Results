@@ -1,0 +1,62 @@
+Searching 366 files for "season_id"
+
+/Users/Zi-Xiang/Documents/Coding/WR-Database/WR-Stats/db/schema.rb:
+   48  
+   49    create_table "bracket_olympics", force: :cascade do |t|
+   50:     t.integer  "season_id"
+   51      t.string   "weight"
+   52      t.integer  "bracket"
+   ..
+   68  
+   69    create_table "brackets", force: :cascade do |t|
+   70:     t.integer  "season_id"
+   71      t.string   "weight"
+   72      t.integer  "round101"
+   ..
+  186  
+  187    create_table "contestants", force: :cascade do |t|
+  188:     t.integer  "season_id"
+  189      t.string   "weight"
+  190      t.integer  "wrestler_id"
+  ...
+  485  
+  486    create_table "scorings", force: :cascade do |t|
+  487:     t.integer  "season_id"
+  488      t.integer  "first"
+  489      t.integer  "second"
+  ...
+  580  
+  581    create_table "wrestler_schools", force: :cascade do |t|
+  582:     t.integer  "season_id"
+  583      t.integer  "wrestler_id"
+  584      t.integer  "school_id"
+
+/Users/Zi-Xiang/Documents/Coding/WR-Database/WR-Stats/db/migrate/20160511193113_create_brackets.rb:
+    2    def change
+    3      create_table :brackets do |t|
+    4:     	t.integer :season_id	
+    5      	t.string :weight	
+    6      	t.integer :round101	
+
+/Users/Zi-Xiang/Documents/Coding/WR-Database/WR-Stats/db/migrate/20160511193125_create_bracket_olympics.rb:
+    2    def change
+    3      create_table :bracket_olympics do |t|
+    4:     	t.integer :season_id
+    5      	t.string :weight
+    6      	t.integer :bracket	
+
+/Users/Zi-Xiang/Documents/Coding/WR-Database/WR-Stats/db/migrate/20160511193152_create_contestants.rb:
+    2    def change
+    3      create_table :contestants do |t|
+    4:     	t.integer :season_id
+    5      	t.string :weight	
+    6      	t.integer :wrestler_id	
+
+/Users/Zi-Xiang/Documents/Coding/WR-Database/WR-Stats/db/migrate/20160511193223_create_scorings.rb:
+    2    def change
+    3      create_table :scorings do |t|
+    4:     	t.integer :season_id	
+    5      	t.integer :first
+    6      	t.integer :second	
+
+9 matches across 5 files

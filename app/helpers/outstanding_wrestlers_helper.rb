@@ -1,0 +1,3 @@
+module OutstandingWrestlersHelper
+	
+end

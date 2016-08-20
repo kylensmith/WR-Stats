@@ -33,9 +33,11 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'outstanding_wrestlers#index'
   resources :seasons, param: :year
-  resources :outstanding_wrestlers, :team_ranking_releases, :schools, :wrestlers
+  resources :outstanding_wrestlers, :team_ranking_releases, :wrestlers
+  resources :schools, param: :name
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+  # get 'schools/:name' => 'schools#show'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

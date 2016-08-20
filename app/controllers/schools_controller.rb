@@ -10,4 +10,8 @@ class SchoolsController < ApplicationController
 
   def index
   end
+
+  def show
+  	@team = School.find_by(name: params[:name])
+  end
 end

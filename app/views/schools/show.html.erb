@@ -1,0 +1,15 @@
+<h1>School#show</h1>
+<p>Find me in app/views/school/new.html.erb</p>
+
+<h1><%=@team.name%></h1>
+
+<br>
+<br>
+All Americans:
+<br>
+<% @team.aa_wrestlers.each do |aa|%>
+
+<%=aa.name%><br>
+
+
+<%end%>

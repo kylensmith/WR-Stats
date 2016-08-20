@@ -1,0 +1,12 @@
+<h1>TeamRankingReleases#show</h1>
+<p>Find me in app/views/team_ranking_releases/show.html.erb</p>
+
+
+<%= @poll.date.strftime("%B %d, %Y")%>
+<br>
+<%= @poll.poll_name%>
+<br><br><br><br><br><br>
+<% @rank_array.each do |rank|%>
+	<%= "#{rank.rank}.  'TBD School'"%>
+	<br>
+<%end%>

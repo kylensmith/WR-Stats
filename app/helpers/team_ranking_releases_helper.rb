@@ -1,0 +1,2 @@
+module TeamRankingReleasesHelper
+end

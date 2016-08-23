@@ -12,6 +12,12 @@ class SchoolsController < ApplicationController
   end
 
   def show
-  	@team = School.find_by(name: params[:name])
+  	school_name =  params[:name].tr('_', ' ') 
+    @team = School.where{ name =~ school_name }
+    @team = @team[0]
+    @ds = @team.dual_seasons.reverse
+    
+   
+
   end
 end

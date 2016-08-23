@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(version: 20160511205057) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "coaches", force: :cascade do |t|
+  create_table "coach_records", force: :cascade do |t|
     t.integer  "coach_id"
     t.integer  "seasons"
     t.integer  "total_duals"
@@ -190,6 +190,26 @@ ActiveRecord::Schema.define(version: 20160511205057) do
     t.integer  "total_ties"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "coaches", force: :cascade do |t|
+    t.integer  "coach_id"
+    t.string   "name"
+    t.string   "lname"
+    t.string   "fname"
+    t.boolean  "active"
+    t.integer  "total_seasons"
+    t.integer  "total_duals"
+    t.integer  "total_wins"
+    t.integer  "total_losses"
+    t.integer  "total_ties"
+    t.float    "win_percentage"
+    t.integer  "total_champs"
+    t.integer  "total_aas"
+    t.float    "aa_percentage"
+    t.float    "champ_percentage"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "consolation_inputs", force: :cascade do |t|
@@ -277,11 +297,6 @@ ActiveRecord::Schema.define(version: 20160511205057) do
   end
 
   create_table "gorrarians", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "head_coaches", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

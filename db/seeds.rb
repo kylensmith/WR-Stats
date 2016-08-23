@@ -234,9 +234,47 @@ wrsc1.each do |wr|
  # p @tie.id
 	TeamRanking.create(season_id: wr[0], team_ranking_release_id: @tie.id, rank: wr[2], school_id: wr[3])
 # date: to_timestamp(wr[3], MM/DD/YY),
-
-
 end
+
+
+# # Seed the list of coaches.
+csv2_text = File.read(Rails.root.join('lib', 'seeds', 'HeadCoach.csv'))
+sc= CSV.parse(csv2_text, :headers => true)
+
+for i in 1..1254
+	t = Coach.new
+	t.save
+end
+sc.each do |row|
+  Coach.find(row[0]).update(name: row[1], fname: row[3], lname: row[2], active: row[4], total_seasons: row[5], total_duals: row[6], total_wins: row[7], total_losses: row[8], total_ties: row[9], win_percentage: row[10], total_champs: row[11], total_aas: row[12], aa_percentage: row[14], champ_percentage: row[13])
+end
+
+# Shouldn't need to run this as coach_id = 0 has been removed.
+# DualSeason.where(coach_id: 0).each do |bar|
+# 	bar.update(coach_id: 2)
+# end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

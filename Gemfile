@@ -18,6 +18,9 @@ gem 'coffee-rails', '~> 4.1.0'
 # devise login system
 gem 'devise', git: 'https://github.com/plataformatec/devise'
 
+gem 'squeel', git: 'https://github.com/activerecord-hackery/squeel'
+
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

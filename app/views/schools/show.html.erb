@@ -3,13 +3,35 @@
 
 <h1><%=@team.name%></h1>
 
+Championship Outstanding Wrestlers <%=@team.ow_wrestlers.count%>
+
+<br>
+
+
+
+Season Record Coach  All-Americans
+<br>
+<% @ds.each do |dual|%>
+
+<%=dual.season_id %>:  <%="#{dual.wins}-#{dual.losses}-#{dual.ties}"%> <%="#{dual.coach.fname} #{dual.coach.lname}  #{dual.school.aa_count}"  %>
+
+<br>
+
+
+<%end%>
+
+
+
 <br>
 <br>
 All Americans:
 <br>
-<% @team.aa_wrestlers.each do |aa|%>
+
+ <% @team.aa_wrestlers.each do |aa|%>
 
 <%=aa.name%><br>
 
 
 <%end%>
+
+

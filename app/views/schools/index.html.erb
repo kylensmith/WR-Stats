@@ -1,2 +1,10 @@
 <h1>School#index</h1>
 <p>Find me in app/views/school/index.html.erb</p>
+
+
+<%@schools.each do |school|%>
+<%=link_to school.name, school_path(school)%>
+<br>
+
+
+<%end%>

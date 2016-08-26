@@ -8,6 +8,8 @@ class OutstandingWrestler < ActiveRecord::Base
 	belongs_to :wrestler 
 	belongs_to :school
 	belongs_to :division
+	# has_one :division
+	# has_one :season
 
 
 

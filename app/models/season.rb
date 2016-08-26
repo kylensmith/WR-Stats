@@ -17,6 +17,7 @@ class Season < ActiveRecord::Base
 	has_many :aa_wrestlers, through: :all_americans, source: :wrestler
 	has_many :aa_place_winners
 	has_many :bouts
+	has_many :events
 
 # Note: The select option adds a datacall to the join table to return the value
 	has_many :ows, -> { select("wrestlers.*, outstanding_wrestlers.division_id AS division_id") }, through: :outstanding_wrestlers, source: :wrestler

@@ -85,10 +85,7 @@ class Wrestler < ActiveRecord::Base
 
 	end
 
-	def ow_count
-		outstanding_wrestlers.includes(:wrestler).count
-
-	end
+	
 
 	def natq
 		wrestler_schools.each do |this|
@@ -97,7 +94,7 @@ class Wrestler < ActiveRecord::Base
 	end
 
 	def nat_year
-		seasons.select('seasons.*, wrestler_schools.season_id').each do |it|
+		seasons.select('seasons.*, wrestler_schools.season').each do |it|
 			it
 		end
 	end

@@ -21,10 +21,17 @@ class School < ActiveRecord::Base
 
 	has_many :season_duals, -> { select("duals.*, dual_seasons.division_id AS division_id") }, through: :dual_seasons, source: :dual
 	
-	def aa_count
-		all_americans.where(:school).count
+	# def aa_count
+	# 	all_americans.where(school: dual.season_id).count
 
+	# end
+
+
+	def to_param
+		name.tr(' ', '_') 
 	end
+
+	
 
 
 

@@ -1,4 +1,5 @@
 class SchoolsController < ApplicationController
+  include ApplicationHelper
   def new
   end
 
@@ -9,6 +10,8 @@ class SchoolsController < ApplicationController
   end
 
   def index
+    @schools = School.all.order(:name)
+
   end
 
   def show
@@ -16,8 +19,29 @@ class SchoolsController < ApplicationController
     @team = School.where{ name =~ school_name }
     @team = @team[0]
     @ds = @team.dual_seasons.reverse
+p "*******************************"
+    p "*******************************"
+    p "*******************************"
+    p "*******************************"
+    p "*******************************"
+    p "*******************************"
+    p "*******************************"
+    p @thiser = @team.aa_wrestlers.first.inspect
+    p "*******************************"
+    p "*******************************"
+    p "*******************************"
+    p "*******************************"
+    p "*******************************"
+    p "*******************************"
+    p "*******************************"
+
+
+    # p @team.aa_wrestlers.to_hash
+
     
-   
+
+
+
 
   end
 end

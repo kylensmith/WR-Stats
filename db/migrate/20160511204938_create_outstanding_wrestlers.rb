@@ -5,6 +5,7 @@ class CreateOutstandingWrestlers < ActiveRecord::Migration
     	t.integer :season_id
     	t.integer :wrestler_id
     	t.integer :school_id
+    	t.integer :event_id
 
       t.timestamps null: false
     end

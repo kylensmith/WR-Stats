@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+
+
+  
+
+
+  devise_for :users
+  # get 'schedules/index,'
+
+  # get 'schedules/show'
+
+  
   # get 'team_ranking_releases/new'
 
   # get 'team_ranking_releases/create'
@@ -31,10 +42,14 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'outstanding_wrestlers#index'
+  root 'schedules#index'
   resources :seasons, param: :year
-  resources :outstanding_wrestlers, :team_ranking_releases, :wrestlers
+  resources :outstanding_wrestlers, :team_ranking_releases, :wrestlers, :schedules
   resources :schools, param: :name
+
+  resources :schools, param: :name, :key => :name do
+    resources :seasons, path: 'schedules', controller: 'schedules'
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
   # get 'schools/:name' => 'schools#show'

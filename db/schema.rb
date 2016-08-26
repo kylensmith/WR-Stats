@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511205057) do
+ActiveRecord::Schema.define(version: 20160824181958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -296,6 +296,30 @@ ActiveRecord::Schema.define(version: 20160511205057) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "events", force: :cascade do |t|
+    t.integer  "division_id"
+    t.integer  "season_id"
+    t.integer  "hofeventid"
+    t.string   "ordinal"
+    t.string   "name"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "location"
+    t.integer  "team_champion"
+    t.integer  "champs"
+    t.float    "winners_points"
+    t.text     "outstanding_wrestler"
+    t.integer  "ow_wrestler_id"
+    t.integer  "ow_school_id"
+    t.integer  "total_schools"
+    t.integer  "total_participants"
+    t.integer  "total_points"
+    t.integer  "weight_classes"
+    t.integer  "places"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   create_table "gorrarians", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -390,6 +414,7 @@ ActiveRecord::Schema.define(version: 20160511205057) do
     t.integer  "season_id"
     t.integer  "wrestler_id"
     t.integer  "school_id"
+    t.integer  "event_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -590,26 +615,30 @@ ActiveRecord::Schema.define(version: 20160511205057) do
     t.datetime "updated_at",              null: false
   end
 
-  create_table "tournament_summaries", force: :cascade do |t|
-    t.integer  "season_id"
-    t.integer  "hofeventid"
-    t.string   "ordinal"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.string   "location"
-    t.integer  "team_champion"
-    t.integer  "champs"
-    t.float    "points"
-    t.integer  "weight_classes"
-    t.integer  "places"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
   create_table "unis", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.boolean  "admin",                  default: false
+    t.boolean  "super_admin",            default: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "weight_classes", force: :cascade do |t|
     t.integer  "season_id"

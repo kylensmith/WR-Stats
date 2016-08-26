@@ -10,6 +10,11 @@ class CreateDualSeasons < ActiveRecord::Migration
     	t.integer :losses
     	t.integer :ties	
     	t.boolean :non_di
+      
+      # Might add individual tournament info later
+
+      # t.integer :total_aas
+      # t.integer :total_nqs
 
       t.timestamps null: false
     end

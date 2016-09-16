@@ -18,6 +18,10 @@ class DualSeason < ActiveRecord::Base
 		end
 	end
 
+	def poll
+		TeamRankingRelease.where(season_id: self.season_id).order(:date).last 
+	end
+
 
 
 

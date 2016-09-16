@@ -8,6 +8,8 @@ class SchedulesController < ApplicationController
     @team = School.where{ name =~ school_name }
     @team = @team[0]
     @season = Season.find(params[:id])
+
+    
   end
 
 end

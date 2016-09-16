@@ -8,6 +8,7 @@ class CreateTeamRankingReleases < ActiveRecord::Migration
     	t.string :poll_name
     	t.string :alt_name
     	t.boolean :dual_ranking
+      t.integer :division_id
     	t.string :date_text
 
       t.timestamps null: false

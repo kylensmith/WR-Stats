@@ -1,12 +1,13 @@
 <h1>TeamRankingReleases#show</h1>
 <p>Find me in app/views/team_ranking_releases/show.html.erb</p>
 
-
+<%= @poll.season_id%>
 <%= @poll.date.strftime("%B %d, %Y")%>
 <br>
-<%= @poll.poll_name%>
+++<%= @poll.poll_name%>++
 <br><br><br><br><br><br>
 <% @rank_array.each do |rank|%>
-	<%= "#{rank.rank}.  'TBD School'"%>
+	<%= "#{rank.rank}. "%><%= link_to "#{rank.school.name}", school_season_path(rank.school, @poll.season_id) %> 
+	
 	<br>
 <%end%>

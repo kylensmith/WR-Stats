@@ -19,6 +19,11 @@ class SchoolsController < ApplicationController
     @team = School.where{ name =~ school_name }
     @team = @team[0]
     @ds = @team.dual_seasons.reverse
+
+    @all_americans = @team.all_americans.order(:season_id, :weight)
+    # @all_americans.map
+    # .last.wrestler.name
+
 p "*******************************"
     p "*******************************"
     p "*******************************"

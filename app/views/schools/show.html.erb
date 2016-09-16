@@ -1,7 +1,7 @@
 <h1>School#show</h1>
 <p>Find me in app/views/school/new.html.erb</p>
 
-<h1><%=@team.name%></h1>
+<h1><%=link_to @team.name, school_path(@team)%></h1>
 
 Championship Outstanding Wrestlers <%=@team.ow_wrestlers.count%>
 
@@ -9,15 +9,23 @@ Championship Outstanding Wrestlers <%=@team.ow_wrestlers.count%>
 
 
 
-Season Record Coach  All-Americans
+Season Record Coach  Final Ranking
 <br>
 <% @ds.each do |dual|%>
 
 <%=dual.season_id %>:  <%= link_to "#{dual.wins}-#{dual.losses}-#{dual.ties}", school_season_path(@team, dual.season_id) %> 
 <% if dual.coach != nil%>
-<%="#{dual.coach.fname.first}. #{dual.coach.lname}  #{dual.rank_it}"%>  
-
+<%="#{dual.coach.fname.first}. #{dual.coach.lname}"%> 
 <%end%>
+
+
+
+<%= link_to_if dual.poll, "#{dual.rank_it}", :controller => 'team_ranking_releases',
+  :action => 'show', :id => dual.poll %>
+
+
+
+
 
 
 
@@ -36,7 +44,7 @@ All Americans:
 
  <% @team.aa_wrestlers.each do |aa|%>
 
-<%=aa.aa_years%>  <%=aa%><br><br>
+<%=aa.aa_years%>  <%=aa.name%><br><br>
 
 
 <%end%>

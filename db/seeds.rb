@@ -247,7 +247,7 @@ wrsc1.each do |wr|
 
 	@ndate = Date.parse("#{yr}-#{mon}-#{day}")
 
-	@tie = TeamRankingRelease.find_or_create_by(season_id: wr[0], date: @ndate, date_text: wr[1])
+	@tie = TeamRankingRelease.find_or_create_by(season_id: wr[0], date: @ndate, date_text: wr[1], division_id: 1)
 
 
  # p @tie.id
@@ -282,7 +282,7 @@ end
 p "DualSeason data cleaned"
 
 
-# Division_id,Season,HOFEventID,Ordinal,Start Date,End Date,Location,Team Champion,Champs,Points,Outstanding Wrestler,OW School,Schools,Participants,Total Points,Weight Classes,Places
+# # Division_id,Season,HOFEventID,Ordinal,Start Date,End Date,Location,Team Champion,Champs,Points,Outstanding Wrestler,OW School,Schools,Participants,Total Points,Weight Classes,Places
 
 
 csv2_text = File.read(Rails.root.join('lib', 'seeds', 'D1Event.csv'))
@@ -322,23 +322,67 @@ wrsc1.each do |wr|
 	@ended = Date.parse("#{yr2}-#{mon2}-#{day2}")
 	@started = Date.parse("#{yr1}-#{mon1}-#{day1}")
 	@athlete = Wrestler.find_by_name(wr[10])
+	@div = Division.find(wr[0])
+	@season = Season.find(wr[1])
 
-	@namer = ApplicationHelper.find_event(wr[0], wr[1])
-
-  Event.create(name: @namer, division_id: wr[0], season_id: wr[1], hofeventid: wr[2], ordinal: wr[3], start_date: @started, end_date: @ended, location: wr[6], team_champion: wr[7], champs: wr[8], winners_points: wr[9], outstanding_wrestler: wr[10], ow_wrestler_id: @athlete, ow_school_id: wr[11], total_schools: wr[12], total_participants: wr[13], total_points: wr[14], weight_classes: wr[15], places: wr[16])
+# This helper is failing
+	@namer = ApplicationHelper.find_event(@div, @season.id)
+# This helper is failing
+  Event.create(division_id: wr[0], season_id: wr[1], hofeventid: wr[2], ordinal: wr[3], start_date: @started, end_date: @ended, location: wr[6], team_champion: wr[7], champs: wr[8], winners_points: wr[9], outstanding_wrestler: wr[10], ow_wrestler_id: @athlete.id, ow_school_id: wr[11], total_schools: wr[12], total_participants: wr[13], total_points: wr[14], weight_classes: wr[15], places: wr[16])
 end
 p "D1Event Created"
+
+
+
+
+
 
 OutstandingWrestler.all.each do |ow|
 	@namer = ApplicationHelper.find_event(ow.division, ow.season_id)
 	# p @namer
 	@ev = Event.find_or_create_by(division_id: ow.division_id, season_id: ow.season_id)
+	def ncaa(event)
+		if event[0] != "N"
+			"NCAA #{event} Championship"
+		else
+			event
+		end
+	end
+	@namer = ncaa(@namer)
+
 	@ev.update(name: @namer)
 	@ev.save
 	ow.update(event_id: @ev)
 end
 
-p "Associations Created for OWS and Events"
+# p "Associations Created for OWS and Events"
+
+for i in 2010..2020 
+ Season.find_or_create_by(year: i)
+end
+
+
+
+
+
+
+
+csv2_text = File.read(Rails.root.join('lib', 'seeds', 'TeamScores.csv'))
+wrsc1 = CSV.parse(csv2_text, :headers => true)
+wrsc1.each do |wr|
+	@ev = Event.find(division_id: wr[0], season_id: wr[1])
+	Division ID	Season	School ID	Coach ID	Points	Place	Champs	Place Winners
+  TeamScore.create(event_id: @ev, division_id: wr[0], season_id: wr[1], coach_id: wr[3], points: wr[4], place: wr[5], champs: wr[6], place_winners: wr[7])
+end
+
+
+
+
+
+
+
+
+
 
 
 

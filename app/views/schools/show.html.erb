@@ -7,6 +7,82 @@ Championship Outstanding Wrestlers <%=@team.ow_wrestlers.count%>
 
 <br>
 
+<!-- bootstrap tab panes -->
+<div>
+  <!-- nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#team" aria-controls="team" role="tab" data-toggle="tab">Team</a></li>
+    <li role="presentation"><a href="#individual" aria-controls="individual" role="tab" data-toggle="tab">Individual</a></li>
+  </ul>
+
+  <!-- tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="team">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>Record</th>
+            <th>Coach</th>
+            <th>Final Rank</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @ds.each do |dual|%>
+            <tr>
+              <td><%=dual.season_id %>:</td>
+              <td><%= link_to "#{dual.wins}-#{dual.losses}-#{dual.ties}", school_season_path(@team, dual.season_id) %></td>
+              <% if dual.coach != nil%>
+                <td><%="#{dual.coach.fname.first}. #{dual.coach.lname} "%></td>
+              <%end%>
+              <td><%= link_to_if dual.poll, "#{dual.rank_it}", :controller => 'team_ranking_releases',
+  :action => 'show', :id => dual.poll %></td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="individual">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>National Finish</th>
+            <th>All-Americans</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- individual stats go here -->
+          <% @team.aa_wrestlers.each do |aa| %>
+            <tr>
+              <td><%= aa.aa_years %></td>
+              <td><%= aa.aa_count %></td>
+              <td>Names of All Americans</td>
+            </tr>
+          <% end %>
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+old data
+
+
+
+
+
+
+
+
+
+
 
 
 Season Record Coach  Final Ranking
@@ -33,6 +109,15 @@ Season Record Coach  Final Ranking
 
 
 <%end%>
+
+
+
+
+
+
+
+
+
 
 <%@thiser%>
 

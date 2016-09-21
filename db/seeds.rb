@@ -154,10 +154,11 @@ p "DualSeasons Created"
 
 csv2_text = File.read(Rails.root.join('lib', 'seeds', 'DualMeets.csv'))
 wrsc1 = CSV.parse(csv2_text, :headers => true)
-# Season	School ID	Division ID	Coach ID	Duals	Wins	Losses	Ties	Non DI
 wrsc1.each do |wr|
-  DualMeet.create(team_id: wr[0], season_id: wr[1], meet: wr[2], meet_number: wr[4], opponent_id: wr[5], team_score: wr[6], opponent_score: wr[7], result: wr[8], w: wr[9], l: wr[10], t: wr[11])
-# date: to_timestamp(wr[3], MM/DD/YY),
+	# Team ID,Season,Meet,Date,Meet Number,Site,Opponent ID,Team Score,Opponent Score,Result,W,L,T
+	dater = Date.parse(wr[3])
+  DualMeet.create(team_id: wr[0], season_id: wr[1], meet: wr[2], date: dater, meet_number: wr[4], site: wr[5], opponent_id: wr[6], team_score: wr[7], opponent_score: wr[8], result: wr[9], w: wr[10], l: wr[11], t: wr[12])
+
 end
 p "DualMeets Created"
 
@@ -357,7 +358,7 @@ end
 
 # p "Associations Created for OWS and Events"
 
-for i in 2010..2020 
+for i in 2010..2030 
  Season.find_or_create_by(year: i)
 end
 
@@ -371,7 +372,7 @@ csv2_text = File.read(Rails.root.join('lib', 'seeds', 'TeamScores.csv'))
 wrsc1 = CSV.parse(csv2_text, :headers => true)
 wrsc1.each do |wr|
 	@ev = Event.find(division_id: wr[0], season_id: wr[1])
-	Division ID	Season	School ID	Coach ID	Points	Place	Champs	Place Winners
+	# Division ID	Season	School ID	Coach ID	Points	Place	Champs	Place Winners
   TeamScore.create(event_id: @ev, division_id: wr[0], season_id: wr[1], coach_id: wr[3], points: wr[4], place: wr[5], champs: wr[6], place_winners: wr[7])
 end
 

@@ -12,7 +12,7 @@ class DualSeason < ActiveRecord::Base
 		if @trr != nil
 			@new_record = @trr.team_rankings.where(school_id: self.school_id)
 			if @new_record.length > 0
-				@new_record[0].rank
+				"##{@new_record[0].rank}"
 			end
 		else
 		end

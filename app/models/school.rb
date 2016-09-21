@@ -31,6 +31,12 @@ class School < ActiveRecord::Base
 		name.tr(' ', '_') 
 	end
 
+	def all_duals
+		arr = []
+		arr.push(Dual.where(opponent_id: self.id))
+		arr.push(Dual.where(school_id: self.id))
+	end
+
 	
 
 

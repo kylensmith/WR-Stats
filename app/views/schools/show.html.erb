@@ -30,7 +30,7 @@ Championship Outstanding Wrestlers <%=@team.ow_wrestlers.count%>
         <tbody>
           <% @ds.each do |dual|%>
             <tr>
-              <td><%=dual.season_id %>:</td>
+              <td><%=dual.season_id %></td>
               <td><%= link_to "#{dual.wins}-#{dual.losses}-#{dual.ties}", school_season_path(@team, dual.season_id) %></td>
               <% if dual.coach != nil%>
                 <td><%="#{dual.coach.fname.first}. #{dual.coach.lname} "%></td>
@@ -48,17 +48,19 @@ Championship Outstanding Wrestlers <%=@team.ow_wrestlers.count%>
         <thead>
           <tr>
             <th>Season</th>
-            <th>National Finish</th>
-            <th>All-Americans</th>
+            <th>National Championship</th>
+            <th>Head Coach</th>
+            <th>National Finish/th>
           </tr>
         </thead>
         <tbody>
           <!-- individual stats go here -->
-          <% @team.aa_wrestlers.each do |aa| %>
+          <% @indy.each do |national| %>
             <tr>
-              <td><%= aa.aa_years %></td>
-              <td><%= aa.aa_count %></td>
-              <td>Names of All Americans</td>
+              <td><%= national.season.year %></td>
+              <td><%= "#{national.try(:event).try(:ordinal)} #{national.event.name}" %></td>
+              <td><%= "#{national.try(:coach).fname.first}. #{national.try(:coach).lname}"%></td>
+              <td><%= "#{national.try(:standing)}"%></td>
             </tr>
           <% end %>
         </tbody>

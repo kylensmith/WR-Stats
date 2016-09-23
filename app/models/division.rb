@@ -5,5 +5,6 @@ class Division < ActiveRecord::Base
 	has_many :schools
 	has_many :outstanding_wrestlers
 	has_many :events
+	has_many :team_scores
 
 end

@@ -253,21 +253,23 @@ ActiveRecord::Schema.define(version: 20160824181958) do
   end
 
   create_table "dual_meets", force: :cascade do |t|
-    t.integer  "team_id"
     t.integer  "season_id"
-    t.integer  "meet"
     t.date     "date"
-    t.integer  "meet_number"
+    t.time     "time"
     t.string   "site"
-    t.integer  "opponent_id"
-    t.float    "team_score"
-    t.float    "opponent_score"
-    t.string   "result"
+    t.integer  "team1"
+    t.integer  "team2"
+    t.float    "team1_score"
+    t.float    "team2_score"
+    t.boolean  "tie_break"
     t.integer  "w"
     t.integer  "l"
-    t.integer  "t"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.boolean  "t"
+    t.integer  "attendance"
+    t.boolean  "complete"
+    t.boolean  "estimated"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "dual_seasons", force: :cascade do |t|
@@ -285,13 +287,21 @@ ActiveRecord::Schema.define(version: 20160824181958) do
   end
 
   create_table "duals", force: :cascade do |t|
-    t.integer  "school_id"
-    t.integer  "opponent_id"
     t.integer  "season_id"
-    t.string   "score"
-    t.boolean  "win"
-    t.boolean  "loss"
-    t.boolean  "tie"
+    t.date     "date"
+    t.time     "time"
+    t.integer  "site"
+    t.integer  "team1_id"
+    t.integer  "team2_id"
+    t.float    "team1_score"
+    t.float    "team2_score"
+    t.boolean  "tie_break"
+    t.integer  "w"
+    t.integer  "l"
+    t.boolean  "t"
+    t.integer  "attendance"
+    t.boolean  "complete"
+    t.boolean  "estimated"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -601,6 +611,7 @@ ActiveRecord::Schema.define(version: 20160824181958) do
     t.string   "poll_name"
     t.string   "alt_name"
     t.boolean  "dual_ranking"
+    t.integer  "division_id"
     t.string   "date_text"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -615,9 +626,18 @@ ActiveRecord::Schema.define(version: 20160824181958) do
     t.datetime "updated_at",              null: false
   end
 
-  create_table "unis", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "team_scores", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "division_id"
+    t.integer  "season_id"
+    t.integer  "school_id"
+    t.integer  "coach_id"
+    t.float    "points"
+    t.integer  "place"
+    t.integer  "champs"
+    t.integer  "place_winners"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "users", force: :cascade do |t|

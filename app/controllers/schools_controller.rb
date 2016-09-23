@@ -18,7 +18,12 @@ class SchoolsController < ApplicationController
   	school_name =  params[:name].tr('_', ' ') 
     @team = School.where{ name =~ school_name }
     @team = @team[0]
-    @ds = @team.dual_seasons.reverse
+    @ds = @team.dual_seasons.sort { |a, b| b.season_id <=> a.season_id }
+    @indy = @team.team_scores.sort { |a, b| b.season_id <=> a.season_id }
+
+
+AaPlaceWinner.group(:season_id).count
+# how to sort^^
 
     @all_americans = @team.all_americans.order(:season_id, :weight)
     # @all_americans.map

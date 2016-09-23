@@ -5,7 +5,53 @@
 Show a team's schedule here.
 
 <h1><%=link_to @team.name, school_path(@team)%></h1>
-<%=@team.name%>'s schedule for the <%= @season.id%>
+<%=@team.name%>'s schedule for <%= @season.year%>
+
+<br>
+
+
+
+<%= @duals.count%>
+
+ 
+           
+
+          <div>
+  <!-- nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#team" aria-controls="team" role="tab" data-toggle="tab">Team</a></li>
+    <li role="presentation"><a href="#individual" aria-controls="individual" role="tab" data-toggle="tab">Individual</a></li>
+  </ul>
+
+  <!-- tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="team">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>Opponent</th>
+            <th>Result</th>
+            <th>Final Rank</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @duals.each do |dual|%>
+            <tr>
+              <td><%=dual.date.strftime("%a %b %d, %y") %></td>
+              <% if dual.team1 == @team %>
+              <td><%=dual.team2.name %></td>
+              <% else %>
+              <td><%=dual.team1.name %></td>
+              <% end %>
+             
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+
+
 
 
 

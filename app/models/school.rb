@@ -16,6 +16,11 @@ class School < ActiveRecord::Base
 	has_many :dual_seasons
 	has_many :duals
 
+	has_many :team1, foreign_key: :team1_id, class_name: 'Dual'
+	has_many :team2, foreign_key: :team2_id, class_name: 'Dual'
+
+	has_many :team_scores
+
 	has_many :dual_meets
 	# belongs_to :team_ranking
 
@@ -31,11 +36,16 @@ class School < ActiveRecord::Base
 		name.tr(' ', '_') 
 	end
 
+	# def all_duals
+	# 	arr = []
+	# 	arr.push(Dual.where(opponent_id: self.id))
+	# 	arr.push(Dual.where(school_id: self.id))
+	# end
 	def all_duals
-		arr = []
-		arr.push(Dual.where(opponent_id: self.id))
-		arr.push(Dual.where(school_id: self.id))
+		team1 + team2
 	end
+
+
 
 	
 

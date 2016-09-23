@@ -8,8 +8,10 @@ class SchedulesController < ApplicationController
     @team = School.where{ name =~ school_name }
     @team = @team[0]
     @season = Season.find(params[:id])
+    @alldual = @team.all_duals
+    @duals = @alldual.select {|x| x['season_id'] == @season.year }
 
-    
+
   end
 
 end

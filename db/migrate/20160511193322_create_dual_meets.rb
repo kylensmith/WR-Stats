@@ -1,19 +1,24 @@
 class CreateDualMeets < ActiveRecord::Migration
   def change
     create_table :dual_meets do |t|
-    	t.integer :team_id	
-    	t.integer :season_id	
-    	t.integer :meet	
-    	t.date :date	
-    	t.integer :meet_number	
+        t.integer :season_id	
+    	t.date :date
+        t.time :time	 		
     	t.string :site	
-    	t.integer :opponent_id	
-    	t.float :team_score	
-    	t.float :opponent_score	
-    	t.string :result	
+    	t.integer :team1
+        t.integer :team2	
+    	t.float :team1_score	
+    	t.float :team2_score	
+    	t.boolean :tie_break	
     	t.integer :w	
     	t.integer :l	
-    	t.integer :t
+    	t.boolean :t
+        t.integer :attendance
+        t.boolean :complete
+        t.boolean :estimated
+
+        # estimated is used when a part of the record, such as the date or attendance, can not be confirmed
+
 
       t.timestamps null: false
     end

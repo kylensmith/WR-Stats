@@ -9,7 +9,7 @@ class SchedulesController < ApplicationController
     @team = @team[0]
     @season = Season.find(params[:id])
     @alldual = @team.all_duals
-    @duals = @alldual.select {|x| x['season_id'] == @season.year }
+    @duals = @alldual.select {|x| x['season_id'] == @season.year }.sort { |a, b| a.date <=> b.date }
 
 
   end

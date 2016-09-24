@@ -11,17 +11,11 @@ Show a team's schedule here.
 
 
 
-<%= @duals.count%>
-
  
            
 
           <div>
-  <!-- nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#team" aria-controls="team" role="tab" data-toggle="tab">Team</a></li>
-    <li role="presentation"><a href="#individual" aria-controls="individual" role="tab" data-toggle="tab">Individual</a></li>
-  </ul>
+
 
   <!-- tab panes -->
   <div class="tab-content">
@@ -29,7 +23,7 @@ Show a team's schedule here.
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Season</th>
+            <th>Date</th>
             <th>Opponent</th>
             <th>Result</th>
             <th>Final Rank</th>
@@ -38,12 +32,14 @@ Show a team's schedule here.
         <tbody>
           <% @duals.each do |dual|%>
             <tr>
-              <td><%=dual.date.strftime("%a %b %d, %y") %></td>
-              <% if dual.team1 == @team %>
-              <td><%=dual.team2.name %></td>
-              <% else %>
-              <td><%=dual.team1.name %></td>
-              <% end %>
+              <td><%=dual.try(:date).try(:strftime, "%a %b %d, %Y")%></td>
+              
+              <td><%= link_to "#{dual.location(@team)} #{dual.opp(@team).name}", school_season_path(dual.opp(@team), dual.season_id)  %></td>
+
+              <td><%=dual.result(@team)%></td>
+              <td><%= dual.id%></td>
+
+              
              
             </tr>
           <%end%>

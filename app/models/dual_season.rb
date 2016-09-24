@@ -2,12 +2,14 @@ class DualSeason < ActiveRecord::Base
 	belongs_to :school
 	belongs_to :coach
 	belongs_to :season, :foreign_key => "season"
+	has_many :teams
 	# has_many :matches, source :duals
 
 
 
 # Method that returns the team's ranking, if they were ranked in the final dual ranking of the season.
 	def rank_it
+		# @tr = TeamRankingRelease.reject { |x|  x.nwca == false }
 		@trr = TeamRankingRelease.where(season_id: self.season_id).order(:date).last 
 		if @trr != nil
 			@new_record = @trr.team_rankings.where(school_id: self.school_id)
@@ -20,6 +22,14 @@ class DualSeason < ActiveRecord::Base
 
 	def poll
 		TeamRankingRelease.where(season_id: self.season_id).order(:date).last 
+	end
+
+	def clean_record
+		if ties && ties != 0
+			"#{wins}-#{losses}-#{ties}"
+		else
+			"#{wins}-#{losses}"
+		end
 	end
 
 

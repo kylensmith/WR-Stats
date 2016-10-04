@@ -1,30 +1,24 @@
-<h1>School#show</h1>
-<p>Find me in app/views/school/new.html.erb</p>
+<h1>Coaches#show</h1>
+<p>Find me in app/views/coaches/show.html.erb</p>
 
-<h1><%=link_to @team.name, school_path(@team)%></h1>
+<h1><%="#{@coach.fname} #{@coach.lname}"%></h1>
 
-
-<!-- comment out the city until reseed with attribute 
-will addd = to show
-<%=@team.try(:city)%>
--->
+<div class="row">
+  <div class="col-xs-6 col-sm-3"><h5><%="Record: #{@coach.total_wins}-#{@coach.total_losses}-#{@coach.total_ties}"%></h5></div>
+  <div class="col-xs-6 col-sm-3"><h5><%="Win %: #{sprintf('%#.3g', @coach.win_percentage)}"%></h5></div>
 
 
-
-
-
+  <div class="col-xs-6 col-sm-3"><%="All-Americans: #{@coach.try(:total_aas)}"%></div>
+  <div class="col-xs-6 col-sm-3"><%="Individual Champions: #{@coach.try(:total_champs)}"%></div>
+</div>
 
 
 
 
 
-
-
-
-<br>
 
 <!-- bootstrap tab panes -->
-<div class="container">
+<div>
   <!-- nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#team" aria-controls="team" role="tab" data-toggle="tab">Team</a></li>
@@ -39,7 +33,7 @@ will addd = to show
           <tr>
             <th>Season</th>
             <th>Record</th>
-            <th>Coach</th>
+            <th>School</th>
             <th>Final Rank</th>
           </tr>
         </thead>
@@ -47,10 +41,10 @@ will addd = to show
           <% @ds.each do |dual|%>
             <tr>
               <td><%=dual.season_id %></td>
-              <td><%= link_to dual.clean_record, school_season_path(@team, dual.season_id) %></td>
-              <% if dual.coach != nil%>
-                <td><%= link_to "#{dual.coach.fname.first}. #{dual.coach.lname} ", coach_path(dual.coach)%></td>
-              <%end%>
+              <td><%= link_to dual.clean_record, school_season_path(dual.school, dual.season_id) %></td>
+              
+                <td><%= dual.school.name%></td>
+             
               
               <td><%= link_to_if dual.poll, "#{dual.rank_it}", :controller => 'team_ranking_releases',
   :action => 'show', :id => dual.poll %></td>
@@ -67,9 +61,8 @@ will addd = to show
           <tr>
             <th>Season</th>
             <th>National Championship</th>
-            <th>Head Coach</th>
+            <th>Team Coached</th>
             <th>National Finish</th>
-            <th>All-Americans</th>
           </tr>
         </thead>
         <tbody>
@@ -78,26 +71,9 @@ will addd = to show
             <tr>
               <td><%= national.season.year %></td>
               <td><%= "#{national.try(:event).try(:ordinal)} #{national.event.name}" %></td>
-              <td><%= link_to "#{national.try(:coach).try(:fname).try(:first)}. #{national.try(:coach).try(:lname)}", coach_path(national.coach)%></td>
+              <td><%= "#{national.try(:school).try(:name)}"%></td>
               <td><%= "#{national.try(:standing)}"%></td>
-            
-              <td>
-                <span class ="small" >
-                
-                <% 5.times do%>
-                Athlete <br>
-                <%end%>
-                </span>
-              </td>
-              <td>
-                <span class = "badge pull-right">42</span>
-              </td>
-          </tr>
-
-
-
-
-
+            </tr>
           <% end %>
         </tbody>
 
@@ -107,11 +83,3 @@ will addd = to show
 
   </div>
 </div>
-
-
-
-
-
-
-
-

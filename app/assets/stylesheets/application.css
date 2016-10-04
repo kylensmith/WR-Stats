@@ -13,3 +13,35 @@
  *= require_tree .
  *= require_self
  */
+
+body{
+  margin: 10px;
+  background: white;
+}
+
+@text-color: @black-50;
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1{
+  color: purple;
+}
+
+
+
+
+ .centerer > li, .nav-pills > li {
+    float:none;
+    display:inline-block;
+}
+
+.centerer {
+    text-align:center;
+} 

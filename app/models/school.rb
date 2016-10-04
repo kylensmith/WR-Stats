@@ -23,6 +23,7 @@ class School < ActiveRecord::Base
 
 	has_many :dual_meets
 	# belongs_to :team_ranking
+	belongs_to :state
 
 	has_many :season_duals, -> { select("duals.*, dual_seasons.division_id AS division_id") }, through: :dual_seasons, source: :dual
 	

@@ -4,6 +4,28 @@ Rails.application.routes.draw do
   
 
 
+  get 'events/new'
+
+  get 'events/show'
+
+  get 'events/index'
+
+  get 'events/edit'
+
+  get 'coaches/new'
+
+  get 'coaches/create'
+
+  get 'coaches/index'
+
+  get 'coaches/show'
+
+  get 'coaches/edit'
+
+  get 'coaches/update'
+
+  get 'coaches/destroy'
+
   devise_for :users
   # get 'schedules/index,'
 
@@ -44,8 +66,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'schedules#index'
   resources :seasons, param: :year
-  resources :outstanding_wrestlers, :team_ranking_releases, :wrestlers, :schedules
+  resources :outstanding_wrestlers, :events, :team_ranking_releases, :wrestlers, :schedules, :coaches
   resources :schools, param: :name
+  resources :polls, :controller=>"team_ranking_releases", :path => "poll"
 
   resources :schools, param: :name, :key => :name do
     resources :seasons, path: 'schedules', controller: 'schedules'

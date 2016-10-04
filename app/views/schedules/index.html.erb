@@ -6,6 +6,125 @@ List recent matches and past results
 <br>
 <br>
 
+<!-- bootstrap tab panes -->
+<div>
+  <!-- nav tabs -->
+  <ul class="nav nav-tabs centerer">
+                <li class=""><a class="" href="#yesterday" data-toggle="tab">Yesterday <span class="badge"><%=@yduals.count%></span></a>
+                </li>
+                <li class="active"><a class="" href="#today" data-toggle="tab">Today <span class="badge"><%=@duals.count%></span></a>
+                </li>
+                <li><a class="" href="#tomorrow" data-toggle="tab">Tomorrow <span class="badge"><%=@tduals.count%></span></a>
+                </li>
+            </ul>
+
+  <!-- tab panes -->
+   <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="today">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Record</th>
+            <th>Coach</th>
+            <th>Final Rank</th>
+          </tr>
+        </thead>
+        <tbody>
+         
+            <tr>
+              <td>today's date</td>
+              <td><%= @duals.count%></td>
+              
+                <td><%= @date%></td>
+            
+              <td><%= @date-1%></td>
+              
+            </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="yesterday">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>National Championship</th>
+            <th>Head Coach</th>
+            <th>National Finish</th>
+            <th>All-Americans</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- individual stats go here -->
+          
+            <tr>
+              <td>test</td>
+              
+              <td>redo</td>
+              <td></td>
+            
+              <td>
+                
+              </td>
+              <td>
+                <span class = "badge pull-right">42</span>
+              </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+     <div role="tabpanel" class="tab-pane" id="tomorrow">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>National Championship</th>
+            <th>Head Coach</th>
+            <th>National Finish</th>
+            <th>All-Americans</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- individual stats go here -->
+          
+            <tr>
+              <td>test2</td>
+              
+              <td>redo</td>
+              <td></td>
+            
+              <td>
+                
+              </td>
+              <td>
+                <span class = "badge pull-right">42</span>
+              </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 
 <%if user_signed_in?%>
 

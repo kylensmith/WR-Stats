@@ -253,23 +253,8 @@ ActiveRecord::Schema.define(version: 20160824181958) do
   end
 
   create_table "dual_meets", force: :cascade do |t|
-    t.integer  "season_id"
-    t.date     "date"
-    t.time     "time"
-    t.string   "site"
-    t.integer  "team1"
-    t.integer  "team2"
-    t.float    "team1_score"
-    t.float    "team2_score"
-    t.boolean  "tie_break"
-    t.integer  "w"
-    t.integer  "l"
-    t.boolean  "t"
-    t.integer  "attendance"
-    t.boolean  "complete"
-    t.boolean  "estimated"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "dual_seasons", force: :cascade do |t|

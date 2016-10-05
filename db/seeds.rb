@@ -44,7 +44,7 @@ for i in 1..534
 	t.save
 end
 sc.each do |row|
-  School.find(row[0]).update(hof_id: row[1], name: row[2], current_division: row[3], city: wr[5], state_id: wr[6])
+  School.find(row[0]).update(hof_id: row[1], name: row[2], current_division: row[3], city: row[5], state_id: row[6])
 end
 p "School Created"
 
@@ -434,6 +434,101 @@ wrsc1.each do |wr|
   Event.create(division_id: wr[0], season_id: wr[1], hofeventid: wr[2], ordinal: wr[3], start_date: @started, end_date: @ended, location: wr[6], team_champion: wr[7], champs: wr[8], winners_points: wr[9], outstanding_wrestler: wr[10], ow_wrestler_id: @athlete, ow_school_id: wr[11], total_schools: wr[12], total_participants: wr[13], total_points: wr[14], weight_classes: wr[15], places: wr[16])
 end
 p "D1Event Created"
+
+csv2_text = File.read(Rails.root.join('lib', 'seeds', 'D2Event.csv'))
+wrsc1 = CSV.parse(csv2_text, :headers => true)
+
+
+wrsc1.each do |wr|
+	started = wr[4].split('/')
+	ended = wr[5].split('/')
+	def add_zero(date)
+		if date.length == 1
+			"0#{date}"
+		else
+			 date.to_s
+		end
+	end
+
+	def yearize(form, seas)
+		num = form.to_i
+		if num.between?(0, 20)	
+			"20#{form}"
+		else 
+			
+			"19#{form}"
+		end
+		
+	end
+	mon1 = add_zero(started[0])
+	day1 = add_zero(started[1])
+	yr1 = yearize(started[2], wr[1])
+	mon2 = add_zero(ended[0])
+	day2 = add_zero(ended[1])
+	yr2 = yearize(ended[2], wr[1])
+
+
+
+	@ended = Date.parse("#{yr2}-#{mon2}-#{day2}")
+	@started = Date.parse("#{yr1}-#{mon1}-#{day1}")
+	# @athlete = Wrestler.find_by_name(wr[10])
+	@div = Division.find(wr[0])
+	@season = Season.find(wr[1])
+
+# This helper is failing
+	@namer = ApplicationHelper.find_event(@div, @season.id)
+# This helper is failing
+  Event.create(division_id: wr[0], season_id: wr[1], hofeventid: wr[2], ordinal: wr[3], start_date: @started, end_date: @ended, location: wr[6], team_champion: wr[7], weight_classes: wr[10], places: wr[11])
+end
+
+p "D2Event Created"
+
+csv2_text = File.read(Rails.root.join('lib', 'seeds', 'D3Event.csv'))
+wrsc1 = CSV.parse(csv2_text, :headers => true)
+
+
+wrsc1.each do |wr|
+	started = wr[4].split('/')
+	ended = wr[5].split('/')
+	def add_zero(date)
+		if date.length == 1
+			"0#{date}"
+		else
+			 date.to_s
+		end
+	end
+
+	def yearize(form, seas)
+		num = form.to_i
+		if num.between?(0, 20)	
+			"20#{form}"
+		else 
+			
+			"19#{form}"
+		end
+		
+	end
+	mon1 = add_zero(started[0])
+	day1 = add_zero(started[1])
+	yr1 = yearize(started[2], wr[1])
+	mon2 = add_zero(ended[0])
+	day2 = add_zero(ended[1])
+	yr2 = yearize(ended[2], wr[1])
+
+
+
+	@ended = Date.parse("#{yr2}-#{mon2}-#{day2}")
+	@started = Date.parse("#{yr1}-#{mon1}-#{day1}")
+	# @athlete = Wrestler.find_by_name(wr[10])
+	@div = Division.find(wr[0])
+	@season = Season.find(wr[1])
+
+# This helper is failing
+	@namer = ApplicationHelper.find_event(@div, @season.id)
+# This helper is failing
+  Event.create(division_id: wr[0], season_id: wr[1], hofeventid: wr[2], ordinal: wr[3], start_date: @started, end_date: @ended, location: wr[6], team_champion: wr[7], weight_classes: wr[10], places: wr[11])
+end
+p "D3Event Created"
 
 
 

@@ -4,6 +4,9 @@ class CreateSchools < ActiveRecord::Migration
     	t.integer :hof_id	
     	t.string :name	
     	t.integer :current_division
+    	t.string :city
+    	t.integer :state_id
+
 
     	# Needs to add more fields.
 

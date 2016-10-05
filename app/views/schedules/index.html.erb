@@ -7,15 +7,16 @@ List recent matches and past results
 <br>
 
 <!-- bootstrap tab panes -->
-<div>
+<div class="container">
   <!-- nav tabs -->
   <ul class="nav nav-tabs centerer">
-                <li class=""><a class="" href="#yesterday" data-toggle="tab">Yesterday <span class="badge"><%=@yduals.count%></span></a>
+                
+                 <li class=""><a class="" href="#yesterday" data-toggle="tab">Yesterday <span class="badge"><%=@yduals.count%></span></a>
+                </li><li class="active"><a class="" href="#today" data-toggle="tab"><%=@date.strftime("%A %b %d, %Y")%> <span class="badge"><%=@duals.count%></span></a>
                 </li>
-                <li class="active"><a class="" href="#today" data-toggle="tab">Today <span class="badge"><%=@duals.count%></span></a>
+                <li><a class="" href="#tmr" data-toggle="tab">Tomorrow <span class="badge"><%=@tduals.count%></span></a>
                 </li>
-                <li><a class="" href="#tomorrow" data-toggle="tab">Tomorrow <span class="badge"><%=@tduals.count%></span></a>
-                </li>
+               
             </ul>
 
   <!-- tab panes -->
@@ -25,22 +26,43 @@ List recent matches and past results
         <thead>
           <tr>
             <th>Time</th>
-            <th>Record</th>
-            <th>Coach</th>
-            <th>Final Rank</th>
+            <th>Dual</th>
+            <th>Result</th>
+            
           </tr>
         </thead>
         <tbody>
-         
+         <% @duals.each do |dual| %>
             <tr>
-              <td>today's date</td>
-              <td><%= @duals.count%></td>
-              
-                <td><%= @date%></td>
-            
-              <td><%= @date-1%></td>
+              <td><%= "#{dual.clean_time}"%></td>
+              <!-- Check location of dual to determine how to list -->
+              	<% if dual.site == 1 %>
+              		<td><%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %> at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
+              		
+              		
+              		<% elsif dual.site == 2%>
+              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> at <%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %></td>
+              		
+              		<% else%>
+              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> vs <%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %></td>
+              		
+              		<% end%>
+
+              		<% if dual.t? %>
+              		<td><%=  "Tie #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)}"%></td> 
+              		
+              		
+              		<% elsif dual.w == dual.team1.id%>
+              		<td><%= "#{dual.team1.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
+              		
+              		<% elsif dual.w == dual.team2.id%>
+              		<td><%= "#{dual.team2.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
+              		
+              		<% end%>
+              		
               
             </tr>
+            <%end%>
         </tbody>
       </table>
     </div>
@@ -49,64 +71,91 @@ List recent matches and past results
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Season</th>
-            <th>National Championship</th>
-            <th>Head Coach</th>
-            <th>National Finish</th>
-            <th>All-Americans</th>
+            <th>Time</th>
+            <th>Dual</th>
+            <th>Result</th>
+            
           </tr>
         </thead>
         <tbody>
-          <!-- individual stats go here -->
-          
+         <% @yduals.each do |dual| %>
             <tr>
-              <td>test</td>
+              <td><%= "#{dual.clean_time}"%></td>
+              <!-- Check location of dual to determine how to list -->
+              	<% if dual.site == 1 %>
+              		<td><%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %> at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
+              		
+              		
+              		<% elsif dual.site == 2%>
+              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> at <%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %></td>
+              		
+              		<% else%>
+              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> vs <%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %></td>
+              		
+              		<% end%>
+
+              		<% if dual.t? %>
+              		<td><%=  "Tie #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)}"%></td> 
+              		
+              		
+              		<% elsif dual.w == dual.team1.id%>
+              		<td><%= "#{dual.team1.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
+              		
+              		<% elsif dual.w == dual.team2.id%>
+              		<td><%= "#{dual.team2.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
+              		
+              		<% end%>
+              		
               
-              <td>redo</td>
-              <td></td>
-            
-              <td>
-                
-              </td>
-              <td>
-                <span class = "badge pull-right">42</span>
-              </td>
-          </tr>
-
+            </tr>
+            <%end%>
         </tbody>
-
       </table>
 
     </div>
 
-     <div role="tabpanel" class="tab-pane" id="tomorrow">
+     <div role="tabpanel" class="tab-pane" id="tmr">
       <table class="table table-striped">
-        <thead>
+       <thead>
           <tr>
-            <th>Season</th>
-            <th>National Championship</th>
-            <th>Head Coach</th>
-            <th>National Finish</th>
-            <th>All-Americans</th>
+            <th>Time</th>
+            <th>Dual</th>
+            <th>Result</th>
+            
           </tr>
         </thead>
         <tbody>
-          <!-- individual stats go here -->
-          
+         <% @tduals.each do |dual| %>
             <tr>
-              <td>test2</td>
-              
-              <td>redo</td>
-              <td></td>
-            
-              <td>
-                
-              </td>
-              <td>
-                <span class = "badge pull-right">42</span>
-              </td>
-          </tr>
+              <td><%= "#{dual.clean_time}"%></td>
+              <!-- Check location of dual to determine how to list -->
+              	<% if dual.site == 1 %>
+              		<td><%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %> at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
+              		
+              		
+              		<% elsif dual.site == 2%>
+              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> at <%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %></td>
+              		
+              		<% else%>
+              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> vs <%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %></td>
+              		
+              		<% end%>
 
+              		<% if dual.t? %>
+              		<td><%=  "Tie #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)}"%></td> 
+              		
+              		
+              		<% elsif dual.w == dual.team1.id%>
+              		<td><%= "#{dual.team1.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
+              		
+              		<% elsif dual.w == dual.team2.id%>
+              		<td><%= "#{dual.team2.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
+              		
+              		<% end%>
+              		
+              
+            </tr>
+            <%end%>
         </tbody>
 
       </table>
@@ -120,7 +169,7 @@ List recent matches and past results
 
 
 
-
+<br>
 
 
 

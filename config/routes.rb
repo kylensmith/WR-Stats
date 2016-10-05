@@ -65,6 +65,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'schedules#index'
+  namespace :admin do
+    resources :duals, :dual_seasons, :team_scores
+  end
   resources :seasons, param: :year
   resources :outstanding_wrestlers, :events, :team_ranking_releases, :wrestlers, :schedules, :coaches
   resources :schools, param: :name

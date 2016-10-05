@@ -58,10 +58,34 @@ class Dual < ActiveRecord::Base
 		end
 
 	end
+# try(:time).strftime.try("%I:%M%p")}
+	def clean_time
+		if time?
+			self.time.strftime("%I:%M%p")
+		else
+		end
+	end
 
+	# sprintf('%g', dual.try(:team1_score))
+	def check_score1
+		if team1_score?
+		" (#{sprintf('%g', self.team1_score)})" 
+		else
+		end
+	end
 
+	def check_score2
+		if team2_score?
+		" (#{sprintf('%g', self.team2_score)})" 
+		else
+		end
+	end
 
-
+	def tb
+		if tie_break
+			"TB"
+		end
+	end
 
 
 end

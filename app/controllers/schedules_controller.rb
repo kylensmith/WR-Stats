@@ -2,8 +2,9 @@ class SchedulesController < ApplicationController
   def index
   	@user = current_user
     @date = Time.now.to_date
-    @ydate = @date -= 1
-    @tdate = @date += 1
+    @date = @date - 3882
+    @ydate = @date - 1
+    @tdate = @date + 1
     @yduals = Dual.where(date: @ydate)
     @duals = Dual.where(date: @date)
     @tduals = Dual.where(date: @tdate)

@@ -520,6 +520,8 @@ ActiveRecord::Schema.define(version: 20160824181958) do
     t.integer  "hof_id"
     t.string   "name"
     t.integer  "current_division"
+    t.string   "city"
+    t.integer  "state_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end

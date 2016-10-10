@@ -1,0 +1,14 @@
+<h1>Search: <%= @search_key%></h1>
+<p>For best search result, use short search values</p>
+
+<%= @return.count%>
+<br>
+<br>
+
+<% @return.each do |record|%>
+<% if record.name%>
+<%= link_to_if record.name, "#{record.class}: #{record.try(:season_id)} #{record.name}", polymorphic_path(record) %>
+<br>
+<% end %>
+
+<% end %>

@@ -3,6 +3,8 @@ class AaPlaceWinner < ActiveRecord::Base
 	belongs_to :wrestler
 	belongs_to :school
 	belongs_to :season, :foreign_key => "season"
+	belongs_to :event
+	belongs_to :division
 
 	# Using this to find discrepencies in the AaPlaceWinner and AllAmerican tables.
 	def self.sort_data

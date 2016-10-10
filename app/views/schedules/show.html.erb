@@ -1,23 +1,18 @@
-<h1>Schedules#show</h1>
-<p>Find me in app/views/schedules/show.html.erb</p>
+<div class="container">
+<h1><%=link_to @team.name, school_path(@team)%> - <%= @season.year%></h1>
 
+<div class="row" style="">
+  <div class="col-sm-3"><h5>Head Coach: <%= link_to "#{@ds.coach.fname} #{@ds.coach.lname}", coach_path(@ds.coach)%></h5></div>
+  <div class="col-sm-3"><h5><%="Classification: #{@ds.division.event}"%></h5></div>
 
-Show a team's schedule here.
+  <div class="col-sm-3"><h5><%="Record: #{@ds.wins}-#{@ds.losses}-#{@ds.ties}"%></h5></div>
 
-<h1><%=link_to @team.name, school_path(@team)%></h1>
-<%=@team.name%>'s schedule for <%= @season.year%>
+             
 
-<br>
-
-
-
- 
-           
-
-          <div class="container">
 
 
   <!-- tab panes -->
+
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="team">
       <table class="table table-striped">
@@ -27,7 +22,6 @@ Show a team's schedule here.
             <th>Opponent</th>
             <th>Result</th>
             <th>Record</th>
-            <th>Final Rank</th>
           </tr>
         </thead>
         <tbody>
@@ -49,7 +43,7 @@ Show a team's schedule here.
 
               <td><%="#{dual.result(@team)} #{dual.try(:tie_breaker) ? "TB" : ""}"%></td>
               <td><%= "#{winner}-#{loser}-#{draw}"%></td>
-              <td><%= dual.id%></td>
+              
 
               
              

@@ -7,6 +7,13 @@ class Event < ActiveRecord::Base
 	has_one :ow_school, through: :outstandingwrestler, source: :school
 
 	has_many :team_scores
+	has_many :all_americans
+
+	searchable do 
+		text :name
+		text :season_id
+	end
+
 
 	 # could connect to outstandingwrestlers
 

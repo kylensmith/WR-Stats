@@ -5,6 +5,7 @@ class Wrestler < ActiveRecord::Base
 	has_many :schools, through: :wrestler_schools, source: :school
 	has_many :wrestler_schools
 	belongs_to :school
+	belongs_to :state
 
 	has_many :aa_place_winners
 	has_many :outstanding_wrestlers
@@ -36,6 +37,9 @@ class Wrestler < ActiveRecord::Base
 	# 	Division.find(division_id)
 	# end
 	
+	searchable do 
+		text :name
+	end
 
 
 	def all_matches
@@ -104,6 +108,16 @@ class Wrestler < ActiveRecord::Base
 			it
 		end
 	end
+
+	def clean_name
+		if name.include?(',')
+			name = self.name.split(',')
+			"#{name[1][1..-1]} #{name[0]}"
+		else
+			name
+		end
+	end
+
 
 
 

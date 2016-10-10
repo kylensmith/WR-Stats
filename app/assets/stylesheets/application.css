@@ -15,14 +15,18 @@
  */
 
 body{
-  margin: 10px;
+  /*margin: 10px;*/
   background: white;
 }
+
+/*.form-control {
+	width: 20%;
+}*/
 
 @text-color: @black-50;
 
 a {
-    color: black;
+    color: inherit;
     text-decoration: none;
 }
 
@@ -34,7 +38,22 @@ h1{
   color: purple;
 }
 
+.table tbody>tr>td.vert-align{
+    vertical-align: middle;
+}
 
+/*.vert_center{
+top: 50%;
+}*/
+
+ul.aa_list {
+    list-style-type: circle;
+}
+
+ul.aa_list {
+    padding: 0;
+    margin: 0;
+}
 
 
  .centerer > li, .nav-pills > li {

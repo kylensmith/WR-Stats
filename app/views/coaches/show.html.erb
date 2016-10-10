@@ -1,15 +1,11 @@
-<h1>Coaches#show</h1>
-<p>Find me in app/views/coaches/show.html.erb</p>
-
 <h1><%="#{@coach.fname} #{@coach.lname}"%></h1>
 
 <div class="row">
-  <div class="col-xs-6 col-sm-3"><h5><%="Record: #{@coach.total_wins}-#{@coach.total_losses}-#{@coach.total_ties}"%></h5></div>
-  <div class="col-xs-6 col-sm-3"><h5><%="Win %: #{sprintf('%#.3g', @coach.win_percentage)}"%></h5></div>
+  <div class="col-sm-3"><h5><%="Record: #{@coach.total_wins}-#{@coach.total_losses}-#{@coach.total_ties}"%></h5></div>
+  <div class="col-sm-3"><h5><%="Win %: #{sprintf('%#.3g', @coach.win_percentage)}"%></h5></div>
 
-
-  <div class="col-xs-6 col-sm-3"><%="All-Americans: #{@coach.try(:total_aas)}"%></div>
-  <div class="col-xs-6 col-sm-3"><%="Individual Champions: #{@coach.try(:total_champs)}"%></div>
+  <div class="col-sm-3"><h5><%="All-Americans: #{@coach.try(:total_aas)}"%></h5></div>
+  <div class="col-sm-3"><h5><%="Individual Champions: #{@coach.try(:total_champs)}"%></h5></div>
 </div>
 
 

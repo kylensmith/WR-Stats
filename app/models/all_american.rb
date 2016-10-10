@@ -2,6 +2,9 @@ class AllAmerican < ActiveRecord::Base
 	belongs_to :wrestler
 	belongs_to :school
 	belongs_to :season, :foreign_key => "season"
+	belongs_to :event
+	belongs_to :division
+
 
 	# delegate :season, :to => :school, prefix: true
 

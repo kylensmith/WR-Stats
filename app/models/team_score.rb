@@ -22,4 +22,9 @@ class TeamScore < ActiveRecord::Base
 		else
 		end
 	end
+
+	def team_aa
+		self.event.all_americans.where(school_id: self.school_id) 
+	end
+
 end

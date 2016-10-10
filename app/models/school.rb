@@ -33,6 +33,11 @@ class School < ActiveRecord::Base
 	# end
 
 
+
+	searchable do 
+		text :name
+	end
+
 	def to_param
 		name.tr(' ', '_') 
 	end

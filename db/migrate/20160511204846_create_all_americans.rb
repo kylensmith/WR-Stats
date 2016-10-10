@@ -7,6 +7,7 @@ class CreateAllAmericans < ActiveRecord::Migration
     	t.integer :place	
     	t.integer :wrestler_id	
     	t.integer :school_id
+      t.integer :event_id
 
       t.timestamps null: false
     end

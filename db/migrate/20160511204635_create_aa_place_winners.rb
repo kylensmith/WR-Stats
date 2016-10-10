@@ -8,6 +8,7 @@ class CreateAaPlaceWinners < ActiveRecord::Migration
     	t.string :weight
     	t.integer :place
     	t.string :ordinal
+      t.integer :event_id
 
       t.timestamps null: false
     end

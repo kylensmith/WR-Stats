@@ -1,16 +1,22 @@
-<h1>School#show</h1>
-<p>Find me in app/views/school/new.html.erb</p>
-
-<h1><%=link_to @team.name, school_path(@team)%></h1>
-
-
-<!-- comment out the city until reseed with attribute 
-will addd = to show
-<%=@team.try(:city)%>
--->
+<!-- <h1>School#show</h1>
+<p>Find me in app/views/school/new.html.erb</p> -->
 
 
 
+<!-- 
+ comment out the city until reseed with attribute 
+will addd = to show -->
+
+
+<div class="container">
+<h1 style="display: inline-block"><%=link_to @team.name, school_path(@team)%></h1>
+
+<div class="row" style="display: inline-block">
+  <div class="col-sm-3"><h5><%= "#{@team.try(:city)}, #{@team.try(:state).try(:abv)}"%></h5></div>
+</div>
+
+<br>
+<%= @team.class.name%>
 
 
 
@@ -76,21 +82,22 @@ will addd = to show
           <!-- individual stats go here -->
           <% @indy.each do |national| %>
             <tr>
-              <td><%= national.season.year %></td>
-              <td><%= "#{national.try(:event).try(:ordinal)} #{national.event.name}" %></td>
-              <td><%= link_to "#{national.try(:coach).try(:fname).try(:first)}. #{national.try(:coach).try(:lname)}", coach_path(national.coach)%></td>
-              <td><%= "#{national.try(:standing)}"%></td>
+              <td class="vert-align"><%= national.season.year %></td>
+              <td class="vert-align"><%= "#{national.try(:event).try(:ordinal)} #{national.event.name}" %></td>
+              <td class="vert-align"><% if national.coach %>
+                <%= link_to "#{national.try(:coach).try(:fname).try(:first)}. #{national.try(:coach).try(:lname)}", coach_path(national.coach)%>
+                <%else%>
+                  <%= "#{national.try(:coach).try(:fname).try(:first)}. #{national.try(:coach).try(:lname)}"%>
+                <%end%>
+                  </td>
+              <td class="vert-align"><%= "#{national.try(:standing)}"%></td>
             
               <td>
-                <span class ="small" >
-                
-                <% 5.times do%>
-                Athlete <br>
-                <%end%>
-                </span>
-              </td>
-              <td>
-                <span class = "badge pull-right">42</span>
+                <ul class="aa_list">
+                  <% national.team_aa.each do |aa|%>
+                  <li><%= link_to aa.wrestler.name, wrestler_path(aa.wrestler)%></li>
+                  <%end%>
+                </ul>
               </td>
           </tr>
 

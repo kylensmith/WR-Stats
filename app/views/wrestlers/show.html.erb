@@ -1,0 +1,44 @@
+<div class="container">
+<h1><%= @wrestler.clean_name%></h1>
+
+<div class="row" style="">
+  <div class="col-sm-3"><h5>High School: <%= "#{@wrestler.high_school} #{ }"%></h5></div>
+ </div>
+
+             
+
+
+
+  <!-- tab panes -->
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="team">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>Weight</th>
+            <th>School</th>
+            <th>Event</th>
+            <th>Place</th>
+          </tr>
+        </thead>
+        <tbody>
+        	<%@place.each do |place|%>
+          
+              <td><%= place.season_id%></td>
+              <td><%= place.weight%></td>
+              <td><%= place.school ? place.school.name : "Unattached" %></td>
+              <td><%= place.event ? place.event.name : place.division.event %></td>
+              <td><%= place.place%></td>
+              
+
+              
+             
+            </tr>
+            <%end%>
+         
+        </tbody>
+      </table>
+    </div>
+

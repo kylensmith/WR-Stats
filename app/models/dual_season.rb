@@ -3,6 +3,7 @@ class DualSeason < ActiveRecord::Base
 	belongs_to :coach
 	belongs_to :season, :foreign_key => "season"
 	has_many :teams
+	belongs_to :division
 	# has_many :matches, source :duals
 
 

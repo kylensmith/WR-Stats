@@ -3,6 +3,12 @@ source 'https://rubygems.org'
 #used to help create database views in PostgresSQL
 gem 'rails_db_views', github: 'anykeyh/rails_db_views'
 
+# Search Solution - need to run: 
+# 'rails g sunspot_rails:install'
+# rake sunspot:solr:start
+gem 'sunspot_rails'
+
+gem 'sunspot_solr'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -21,6 +27,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # devise login system
 gem 'devise', git: 'https://github.com/plataformatec/devise'
 
+# used for easier searching (like)
 gem 'squeel', git: 'https://github.com/activerecord-hackery/squeel'
 
 

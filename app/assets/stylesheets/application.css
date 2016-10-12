@@ -17,12 +17,15 @@
 body{
   /*margin: 10px;*/
   background: white;
+  /*<%= is_admin? ? (link_to "edit",edit_dual_path(dual)) : "#{dual.clean_time}"%> */
+
 }
 
 /*.form-control {
 	width: 20%;
 }*/
 
+<%= is_admin? ? (link_to "edit",edit_dual_path(dual)) : "#{dual.clean_time}"%> 
 @text-color: @black-50;
 
 a {

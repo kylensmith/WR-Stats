@@ -1,3 +1,4 @@
+<!-- Schedule Index -->
 
 <!-- bootstrap tab panes -->
 <div class="container">
@@ -27,7 +28,7 @@
         <tbody>
          <% @duals.each do |dual| %>
             <tr>
-              <td><%= "#{dual.clean_time}"%></td>
+             <td><%= is_admin? ? (link_to "edit",edit_dual_path(dual)) : "#{dual.clean_time}"%> </td>
               <!-- Check location of dual to determine how to list -->
               	<% if dual.site == 1 %>
               		<td><%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %> at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
@@ -53,6 +54,9 @@
               		
 
               		
+              		
+
+
               		<% end%>
               		
               
@@ -75,7 +79,7 @@
         <tbody>
          <% @yduals.each do |dual| %>
             <tr>
-              <td><%= "#{dual.clean_time}"%></td>
+              <td><%= is_admin? ? (link_to "edit",edit_dual_path(dual)) : "#{dual.clean_time}"%> </td>
               <!-- Check location of dual to determine how to list -->
               	<% if dual.site == 1 %>
               		<td><%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %> at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
@@ -100,7 +104,7 @@
               		<td><%= "#{dual.team2.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
               		
               		<% end%>
-              		
+              		 
               
             </tr>
             <%end%>
@@ -122,7 +126,7 @@
         <tbody>
          <% @tduals.each do |dual| %>
             <tr>
-              <td><%= "#{dual.clean_time}"%></td>
+              <td><%= is_admin? ? (link_to "edit",edit_dual_path(dual)) : "#{dual.clean_time}"%> </td>
               <!-- Check location of dual to determine how to list -->
               	<% if dual.site == 1 %>
               		<td><%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %> at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
@@ -147,6 +151,7 @@
               		<td><%= "#{dual.team2.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
               		
               		<% end%>
+              		
               		
               
             </tr>

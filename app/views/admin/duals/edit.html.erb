@@ -1,0 +1,41 @@
+<h1>Admins#Duals#Edit</h1>
+<p>Find me in app/views/admins/duals/edit.html.erb</p>
+
+<%= form_for @dual do |f| %>
+
+
+
+<!-- select_tag 'person', options_from_collection_for_select(@people, 'id', 'name') -->
+<%=select_tag :season_id, options_from_collection_for_select(@seasons, "id", "id"), {include_blank: "#{@dual.season_id}"} %>
+
+
+
+  <%= f.label :team1_id %>:
+  <%= f.text_field :team1_id %><br />
+
+  <%=select_tag :team1_id, options_from_collection_for_select(@schools, 'name', "id"), {include_blank: "#{@dual.team1_id}"} %>
+
+  <%= f.label :team2_id %>:
+  <%= f.text_field :team2_id %><br />
+
+  <%= f.submit %>
+<% end %>
+
+        :id => :integer,
+      :season_id => :integer,
+           :date => :date,
+           :time => :time,
+           :site => :integer,
+       :team1_id => :integer,
+       :team2_id => :integer,
+    :team1_score => :float,
+    :team2_score => :float,
+      :tie_break => :boolean,
+              :w => :integer,
+              :l => :integer,
+              :t => :boolean,
+     :attendance => :integer,
+       :complete => :boolean,
+      :estimated => :boolean,
+     :created_at => :datetime,
+     :updated_at => :datetime

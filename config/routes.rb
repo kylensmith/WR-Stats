@@ -4,6 +4,12 @@ Rails.application.routes.draw do
   
 
 
+  get 'duals/show'
+
+  get 'duals/edit'
+
+  get 'duals/index'
+
   get 'searches/index'
 
   get 'searches/new'
@@ -75,7 +81,7 @@ Rails.application.routes.draw do
     resources :duals, :dual_seasons, :team_scores
   end
   resources :seasons, param: :year
-  resources :outstanding_wrestlers, :searches, :events, :team_ranking_releases, :wrestlers, :schedules, :coaches
+  resources :outstanding_wrestlers, :searches, :duals, :events, :team_ranking_releases, :wrestlers, :schedules, :coaches
   resources :schools, param: :name
   resources :polls, :controller=>"team_ranking_releases", :path => "poll"
 

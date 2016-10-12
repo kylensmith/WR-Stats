@@ -2,14 +2,14 @@ class SchedulesController < ApplicationController
   def index
   	@user = current_user
     @date = Time.now.to_date
-    @date = @date
+    @date = @date - 3887
     @ydate = @date - 1
     @tdate = @date + 1
     @yduals = Dual.where(date: @ydate)
     @duals = Dual.where(date: @date)
     @tduals = Dual.where(date: @tdate)
-    # flash.notice = 
-    # flash.alert = 
+    # flash.notice = "Welcome to the Sample App!"
+    # flash.alert = "You can't do that son!?"
   end
 
   def show

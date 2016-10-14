@@ -4,39 +4,39 @@ Rails.application.routes.draw do
   
 
 
-  get 'duals/show'
+  # # get 'duals/show'
 
-  get 'duals/edit'
+  # # get 'duals/edit'
 
-  get 'duals/index'
+  # get 'duals/index'
 
-  get 'searches/index'
+  # get 'searches/index'
 
-  get 'searches/new'
+  # get 'searches/new'
 
-  get 'searches/show'
+  # get 'searches/show'
 
-  get 'events/new'
+  # get 'events/new'
 
-  get 'events/show'
+  # get 'events/show'
 
-  get 'events/index'
+  # get 'events/index'
 
-  get 'events/edit'
+  # get 'events/edit'
 
-  get 'coaches/new'
+  # get 'coaches/new'
 
-  get 'coaches/create'
+  # get 'coaches/create'
 
-  get 'coaches/index'
+  # get 'coaches/index'
 
-  get 'coaches/show'
+  # get 'coaches/show'
 
-  get 'coaches/edit'
+  # get 'coaches/edit'
 
-  get 'coaches/update'
+  # get 'coaches/update'
 
-  get 'coaches/destroy'
+  # get 'coaches/destroy'
 
   devise_for :users
   # get 'schedules/index,'
@@ -78,11 +78,14 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'schedules#index'
   namespace :admin do
-    resources :duals, :dual_seasons, :team_scores
+    # match '/duals/:id' => 'duals#updat', :as => 'admin/duals#update'
+    resources :duals, only: [:update, :new, :create, :edit]
+    # , :dual_seasons, :team_scores
   end
   resources :seasons, param: :year
-  resources :outstanding_wrestlers, :searches, :duals, :events, :team_ranking_releases, :wrestlers, :schedules, :coaches
+  resources :outstanding_wrestlers, :searches, :events, :team_ranking_releases, :wrestlers, :schedules, :coaches
   resources :schools, param: :name
+  resources :duals, only: [:index, :show]
   resources :polls, :controller=>"team_ranking_releases", :path => "poll"
 
   resources :schools, param: :name, :key => :name do

@@ -588,6 +588,8 @@ ActiveRecord::Schema.define(version: 20160824181958) do
   end
 
   create_table "states", force: :cascade do |t|
+    t.string   "name"
+    t.string   "abv"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -686,7 +688,7 @@ ActiveRecord::Schema.define(version: 20160824181958) do
     t.boolean  "big_10"
     t.boolean  "big_12"
     t.string   "high_school"
-    t.integer  "state"
+    t.integer  "state_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

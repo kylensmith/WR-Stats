@@ -26,7 +26,8 @@ module ApplicationHelper
     @team = School.where{ name =~ @school_name }
     @team[0]
     end
-	# checks to see if user is a an admin.  can be called anywhere
+
+    	# checks to see if user is a an admin.  can be called anywhere
      def is_admin?
        # current_user.admin 
        current_user.try(:admin?)
@@ -36,7 +37,8 @@ module ApplicationHelper
        # current_user.admin 
        current_user.try(:super_admin?)
      end
-  
+	
+  	
 
 	
 

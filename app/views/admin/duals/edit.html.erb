@@ -1,25 +1,42 @@
 <h1>Admins#Duals#Edit</h1>
 <p>Find me in app/views/admins/duals/edit.html.erb</p>
 
-<%= form_for @dual do |f| %>
+
+<div class="container">
+<%=simple_form_for @dual, :url => {:controller => "admin/duals", :action => "update"}, html: { class: 'form-inline' } do |f|%>
+<%= f.input :season_id%><br>
+<%= f.input :date%>
+<%= f.input :time%><br>
+ <%= f.collection_check_boxes :site, [[1, "#{@dual.team1.name}"], [0, 'Neutral'],  [2, "#{@dual.team2.name}"] ], :first, :last%>
+ <%= f.hint 'Location of dual' %> 
+<br>
+<%= f.association :team1, collection: School.all.order(:name)%>
+<%= f.input :team1_score, required: false, prompt: "Choose a Company"%>
+<%= f.association :team2, collection: School.all.order(:name), required: false %>
+<%= f.input :team2_score, required: false  %>
+
+
+Result:
+
+<!-- f.inpur :result, as: :radio_buttons, [[1, "Team 1"], [0, 'Team 2'],  [true, "Tie"] ], :first, :last, {:item_wrapper_class => ''} -->
 
 
 
-<!-- select_tag 'person', options_from_collection_for_select(@people, 'id', 'name') -->
-<%=select_tag :season_id, options_from_collection_for_select(@seasons, "id", "id"), {include_blank: "#{@dual.season_id}"} %>
 
 
+<%= f.input :tie_break %>
+<br>
+<%= f.input :attendance %>
+<%= f.input :complete %>
+<%= f.input :estimated %>
 
-  <%= f.label :team1_id %>:
-  <%= f.text_field :team1_id %><br />
+<br>
 
-  <%=select_tag :team1_id, options_from_collection_for_select(@schools, 'name', "id"), {include_blank: "#{@dual.team1_id}"} %>
+  <%= f.button :submit %>
+<%end%>
 
-  <%= f.label :team2_id %>:
-  <%= f.text_field :team2_id %><br />
+</div>
 
-  <%= f.submit %>
-<% end %>
 
         :id => :integer,
       :season_id => :integer,

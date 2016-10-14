@@ -1,5 +1,6 @@
 class DualsController < ApplicationController
   def show
+  	
   end
 
   def edit
@@ -7,4 +8,11 @@ class DualsController < ApplicationController
 
   def index
   end
+
+  def update
+  	flash.notice = "Failure"
+	  	
+	  	redirect_to root_path
+	  end
+ 
 end

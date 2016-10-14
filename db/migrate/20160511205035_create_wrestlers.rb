@@ -14,7 +14,7 @@ class CreateWrestlers < ActiveRecord::Migration
     	t.boolean :big_10	
     	t.boolean :big_12	
     	t.string :high_school	
-    	t.integer :state
+    	t.integer :state_id
 
       t.timestamps null: false
     end

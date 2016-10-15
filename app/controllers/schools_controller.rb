@@ -15,11 +15,13 @@ class SchoolsController < ApplicationController
   end
 
   def show
-  	school_name =  params[:name].tr('_', ' ') 
+  	school_name =  params[:name].tr('_', ' ').tr('.','%')
+    p school_name
+    p "********************" 
     @team = School.where{ name =~ school_name }
     @team = @team[0]
-    @ds = @team.dual_seasons.sort { |a, b| b.season_id <=> a.season_id }
-    @indy = @team.team_scores.sort { |a, b| b.season_id <=> a.season_id }
+    @ds = @team.dual_seasons.sort { |a,b| b.season_id <=> a.season_id || (b && 1) || -1 }
+    @indy = @team.team_scores.sort { |a,b| b.season_id <=> a.season_id || (b && 1) || -1 }
 
   AaPlaceWinner.group(:season_id).count
 

@@ -1,0 +1,52 @@
+<h1>Admins#Duals#NEW</h1>
+<p>Find me in app/views/admins/duals/NEW.html.erb</p>
+
+
+<div class="container">
+<%=simple_form_for @dual, :url => {:controller => "admin/duals", :action => "create"}, html: { class: 'form-inline' } do |f|%>
+<%= f.input :season_id, collection: Season.all.order(:year).reverse, label_method: :year, required: true %><br>
+<%= f.input :date, required: true %>
+<br>
+<%= f.input :time%>
+<br>
+ <p class='form-control-static'>Location of dual: </p>
+ <%= f.collection_check_boxes :site, [[1,"Team 1  "], [0, 'Neutral  .'],  [2, "Team 2  "] ], :first, :last, input_html: { class: 'form-check' }%>
+
+
+<br>
+<%= f.association :team1, collection: School.all.order(:name), required: true, prompt: "Choose a School" %>
+<%= f.input :team1_score, required: false%>
+<br>
+<%= f.association :team2, collection: School.all.order(:name), required: false, prompt: "Choose a School" %>
+<%= f.input :team2_score, required: false  %>
+
+<br><br>
+<p class='form-control-static'>Result: </p> 
+  <%= f.collection_check_boxes :dual_result, [[1, "Team 1 Won  "],  [2, "Team 1 Won  "], [3, "Tie"]], :first, :last, wrapper_html: { class: 'form-check-input' }, label_html: { label: 'form-check-input' }%>
+
+
+
+
+
+
+
+
+
+<%= f.input :tie_break%>
+<br>
+<%= f.input :attendance %>
+
+<%= f.input :estimated %>
+
+<br>
+<%= f.input :complete %>
+<%= f.hint "If COMPLETE is selected, the record will be considered completed and will not be reserved for updating."%>
+
+<br>
+  <%= f.button :submit %>
+
+
+<%end%>
+
+</div>
+

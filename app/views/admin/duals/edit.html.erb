@@ -6,53 +6,44 @@
 <%=simple_form_for @dual, :url => {:controller => "admin/duals", :action => "update"}, html: { class: 'form-inline' } do |f|%>
 <%= f.input :season_id%><br>
 <%= f.input :date%>
-<%= f.input :time%><br>
- <%= f.collection_check_boxes :site, [[1, "#{@dual.team1.name}"], [0, 'Neutral'],  [2, "#{@dual.team2.name}"] ], :first, :last%>
- <%= f.hint 'Location of dual' %> 
+<br>
+<%= f.input :time%>
+<br>
+ <p class='form-control-static'>Location of dual: </p>
+ <%= f.collection_check_boxes :site, [[1, @dual.team1.name ? "#{@dual.team1.name}" : "Team 1"], [0, 'Neutral'],  [2, @dual.team2.name ? "#{@dual.team2.name}" : "Team 2"] ], :first, :last, input_html: { class: 'form-check' }%>
+
+
 <br>
 <%= f.association :team1, collection: School.all.order(:name)%>
 <%= f.input :team1_score, required: false, prompt: "Choose a Company"%>
 <%= f.association :team2, collection: School.all.order(:name), required: false %>
 <%= f.input :team2_score, required: false  %>
 
-
-Result:
-
-<!-- f.inpur :result, as: :radio_buttons, [[1, "Team 1"], [0, 'Team 2'],  [true, "Tie"] ], :first, :last, {:item_wrapper_class => ''} -->
-
+<br><br>
+<p class='form-control-static'>Result: </p> 
+  <%= f.collection_check_boxes :dual_result, [[1, @dual.team1.name ? "#{@dual.team1.name} Won  " : "Team 1 Won  "],  [2, @dual.team2.name ? "#{@dual.team2.name} Won  " : "Team 1 Won  "], [3, "Tie"]], :first, :last, wrapper_html: { class: 'form-check-input' }, label_html: { label: 'form-check-input' }%>
 
 
 
 
-<%= f.input :tie_break %>
+
+
+
+
+
+<%= f.input :tie_break%>
 <br>
 <%= f.input :attendance %>
-<%= f.input :complete %>
+
 <%= f.input :estimated %>
 
 <br>
-
+<%= f.input :complete %>
+<br>
   <%= f.button :submit %>
+
+
 <%end%>
 
 </div>
 
-
-        :id => :integer,
-      :season_id => :integer,
-           :date => :date,
-           :time => :time,
-           :site => :integer,
-       :team1_id => :integer,
-       :team2_id => :integer,
-    :team1_score => :float,
-    :team2_score => :float,
-      :tie_break => :boolean,
-              :w => :integer,
-              :l => :integer,
-              :t => :boolean,
-     :attendance => :integer,
-       :complete => :boolean,
-      :estimated => :boolean,
-     :created_at => :datetime,
-     :updated_at => :datetime

@@ -50,6 +50,7 @@ will addd = to show -->
           </tr>
         </thead>
         <tbody>
+          
           <% @ds.each do |dual|%>
             <tr>
               <td><%=dual.season_id %></td>
@@ -62,6 +63,7 @@ will addd = to show -->
   :action => 'show', :id => dual.poll %></td>
               
             </tr>
+            
           <%end%>
         </tbody>
       </table>

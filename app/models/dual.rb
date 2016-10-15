@@ -1,4 +1,5 @@
 class Dual < ActiveRecord::Base
+	attr_accessor :dual_result
 	belongs_to :season, :foreign_key => "season"
 	belongs_to :wrestler
 	# has_many :team1, foreign_key: :id, class_name: 'School'

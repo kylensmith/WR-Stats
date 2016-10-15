@@ -84,7 +84,8 @@ Rails.application.routes.draw do
   end
   resources :seasons, param: :year
   resources :outstanding_wrestlers, :searches, :events, :team_ranking_releases, :wrestlers, :schedules, :coaches
-  resources :schools, param: :name
+  # Searches the name rather than the ID and uses Regex to allow for a period to work in the name
+  resources :schools, param: :name, :constraints => { :name => /[^\/]*/ }
   resources :duals, only: [:index, :show]
   resources :polls, :controller=>"team_ranking_releases", :path => "poll"
 

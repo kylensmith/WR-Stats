@@ -4,7 +4,7 @@ class Coach < ActiveRecord::Base
 
 
 	searchable do 
-		text :name
+		text :name 
 	end
 
 	def self.init_name

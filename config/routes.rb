@@ -55,11 +55,11 @@ Rails.application.routes.draw do
   # get 'wrestler/new'
 
   # get 'wrestler/create'
-  get 'admin/schools/status', to: :status, controller: 'admin/schools'
-  post 'admin/schools/change', to: :changes, controller: 'admin/schools'
+  get 'admin/schools/status', action: :status, controller: 'admin/schools'
+  post 'admin/schools/change', action: :changes, controller: 'admin/schools'
   # get 'profile', to: :show, controller: 'users'
   # get 'wrestler/edit'
-match 'admin/schools/change', to: :changes, controller: 'admin/schools', via: [:get, :post]
+match 'admin/schools/change', action: :changes, controller: 'admin/schools', via: [:get, :post]
   # get 'wrestler/index'
 
   # get 'school/new'
@@ -82,6 +82,8 @@ match 'admin/schools/change', to: :changes, controller: 'admin/schools', via: [:
   namespace :admin do
     # match '/duals/:id' => 'duals#updat', :as => 'admin/duals#update'
     resources :duals, only: [:update, :new, :create, :edit]
+    resources :users, only: [:index, :update, :edit]
+    resources :schools, param: :name, :constraints => { :name => /[^\/]*/ }, only: [:update, :new, :create, :edit]
     # , :dual_seasons, :team_scores
   end
   resources :seasons, param: :year

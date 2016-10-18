@@ -1,0 +1,34 @@
+<!-- Admin users -->
+
+
+
+<div class="container">
+
+	<h1>Update Admin Rights</h1>
+
+<%=simple_form_for @user, :url => {:controller => "admin/users", :action => "update"}, html: { class: 'form-inline' } do |f|%>
+
+
+<br>
+
+
+
+
+
+ <h3><%= @user.email%></h3>
+ <p>Select user rights</p>
+<br>
+<%= f.input :admin %>
+<br>
+<%= f.input :super_admin %>
+<br>
+<br>
+
+
+
+  <%= f.button :submit %>
+
+
+<%end%>
+
+</div>

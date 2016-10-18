@@ -1,0 +1,36 @@
+<h1>Admins#Schools#NEW</h1>
+<p>Find me in app/views/admins/schools/new.html.erb</p>
+
+
+
+<div class="container">
+<%=simple_form_for @school, :url => {:controller => "admin/schools", :action => "create"}, html: { class: 'form-inline' } do |f|%>
+<%= f.input :name, label: "School Name"  %><br>
+
+<br>
+
+
+
+<br>
+
+<%= f.input :city, required: false, prompt: "City"  %>
+<%= f.association :state, collection: State.all.order(:name), required: false, prompt: "Choose a State"  %>
+<br><br>
+<%= f.association :division, label_method: :event, prompt: "Choose a Division"  %>
+
+
+<br><br>
+
+
+
+
+
+
+<br>
+  <%= f.button :submit %>
+
+
+<%end%>
+
+</div>
+

@@ -11,23 +11,12 @@ will addd = to show -->
 <div class="container">
 <h1 style="display: inline-block"><%=link_to @team.name, school_path(@team)%></h1>
 
-<div class="row" style="display: inline-block">
-  <div class="col-sm-3"><h5><%= "#{@team.try(:city)}, #{@team.try(:state).try(:abv)}"%></h5></div>
+<div class="row">
+  <div class="col-xs-6 col-sm-4"><h5><%= "#{@team.try(:city)}, #{@team.try(:state).try(:abv)}"%></h5></div>
 </div>
 
-<br>
-<%= @team.class.name%>
 
 
-
-
-
-
-
-
-
-
-<br>
 
 <!-- bootstrap tab panes -->
 <div class="container">

@@ -1,4 +1,5 @@
-class CoachesController < ApplicationController
+module Admin
+	class CoachesController < ApplicationController
   
 
   def index
@@ -13,4 +14,5 @@ class CoachesController < ApplicationController
   end
 
 
+end
 end

@@ -4,6 +4,9 @@ class School < ActiveRecord::Base
 	
 	has_many :championship_seasons, through: :wrestler_schools, source: :season
 
+	belongs_to :division, :foreign_key => 'current_division'
+	# , :foreign_key => "division_id"
+	
 	has_many :all_americans
 	has_many :aa_wrestlers, -> { select("wrestlers.*, all_americans.season_id AS season_id") }, through: :all_americans, source: :wrestler
 
@@ -35,7 +38,7 @@ class School < ActiveRecord::Base
 
 
 	searchable do 
-		text :name
+		text :name, :boost => 5.0
 	end
 
 	def to_param

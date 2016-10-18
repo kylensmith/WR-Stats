@@ -19,9 +19,6 @@ class SchedulesController < ApplicationController
     @ds = DualSeason.find_by(season_id: params[:id], school_id: @team)
     @season = Season.find(params[:id])
     @alldual = @team.all_duals
-    p "%%%%%%%%%%%%%%%%%%%%%"
-    p @ds.inspect
-    p "%%%%%%%%%%%%%%%%%%%%%"
     # This will sort while also accepting nil values
     @duals = @alldual.select {|x| x['season_id'] == @season.year }.sort { |a,b| a <=> b || (b && 1) || -1 }
     # .sort { |a, b| a.date <=> b.date }

@@ -6,6 +6,9 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.1.0.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.js" defer></script>
+
+  
   
   <!-- Optional theme -->
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
@@ -21,31 +24,105 @@
 <body>
 <!-- Start body -->
 
+<%if current_user && current_user.admin? %>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
 
-<!-- <nav class="navbar navbar-default"> -->
-  
-  <div class="container-fluid">
+        <!-- <a class="navbar-brand" href="#">Brand</a> -->
+      </div>
 
-   
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <!-- <li class="active">Link <span class="sr-only">(current)</span></li> -->
+          <li><a href="#">Link</a></li>
+          <li class="dropdown">
+            <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Duals <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+
+              <!-- Duals -->
+              <li><%= link_to "New", new_admin_dual_path%></li>
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+          <!-- Schools -->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Schools<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "New", new_admin_dual_path%></li>
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Status</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="col-lg-6 navbar-form navbar-right">
+          <%= form_tag searches_path, :method => :get do  %>
+          <div class="input-group">
+
+           <%= text_field_tag :search, params[:search], :class => 'form-control', placeholder: "Search" %>
+           <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div><!-- /input-group -->
+        <% end %>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+     </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+<%else%>
+  <!-- Regular navigation bar -->
+    <nav class="navbar">  
+      <div class="container-fluid">
+       <div class="col-lg-6 navbar-form navbar-right">
+        <%= form_tag searches_path, :method => :get do  %>
+        <div class="input-group">    
+         <%= text_field_tag :search, params[:search], :class => 'form-control', placeholder: "Search" %>
+         <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Go!</button>
+        </span>
+      </div><!-- /input-group -->
+      <% end %>
+    </div><!-- /.col-lg-6 -->
+    <%end%>    
+    </div><!-- /.container-fluid -->
+  </nav>
 
 
-   <div class="col-lg-6 navbar-form navbar-right">
-    <%= form_tag searches_path, :method => :get do  %>
-    <div class="input-group">
-      
-     <%= text_field_tag :search, params[:search], :class => 'form-control', placeholder: "Search" %>
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
-    </div><!-- /input-group -->
-  <% end %>
-  </div><!-- /.col-lg-6 -->
 
-
-     
-     
-  </div><!-- /.container-fluid -->
-</nav>
 
 
 

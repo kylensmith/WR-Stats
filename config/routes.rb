@@ -55,9 +55,11 @@ Rails.application.routes.draw do
   # get 'wrestler/new'
 
   # get 'wrestler/create'
-
+  get 'admin/schools/status', to: :status, controller: 'admin/schools'
+  post 'admin/schools/change', to: :changes, controller: 'admin/schools'
+  # get 'profile', to: :show, controller: 'users'
   # get 'wrestler/edit'
-
+match 'admin/schools/change', to: :changes, controller: 'admin/schools', via: [:get, :post]
   # get 'wrestler/index'
 
   # get 'school/new'

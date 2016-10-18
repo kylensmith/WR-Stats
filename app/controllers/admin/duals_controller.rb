@@ -7,7 +7,12 @@ module Admin
 	  end
 
 	  def create
-	  	@dual.create(dual_info)
+	  	@dual = Dual.new(dual_info)
+	  	if @dual
+	  		p "************** Passed object *******"
+	  	end
+
+	  	# @dual.create(dual_info)
 	  	case params[:dual][:dual_result][0].to_i
 	  	when 1
 	  		if @dual.team1.present?
@@ -25,9 +30,9 @@ module Admin
 	  		@dual.t = true
 	  	end
 	  	if @dual.save
-	  		flash.notice = "Dual results updated."
+	  		flash.notice = "Dual scheduled."
 	  	else
-	  		flash.alert = "Error: Dual not updated"
+	  		flash.alert = "Error: Dual not created"
 	  	end 
 	  	redirect_to edit_admin_dual_path(@dual)
 

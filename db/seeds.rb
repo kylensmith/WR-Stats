@@ -44,7 +44,7 @@ for i in 1..534
 	t.save
 end
 sc.each do |row|
-  School.find(row[0]).update(hof_id: row[1], name: row[2], current_division: row[3], city: row[5], state_id: row[6])
+  School.find(row[0]).update(hof_id: row[1], name: row[2], current_division: row[3], city: row[5], state_id: row[6], active: row[4])
 end
 p "School Created"
 

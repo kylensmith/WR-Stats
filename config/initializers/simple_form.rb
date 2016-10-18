@@ -2,9 +2,9 @@
 SimpleForm.setup do |config|
 
 
-  
 
-  
+
+
   # Wrappers are used by the form builder to generate a
   # complete input. You can remove any component from the
   # wrapper, change the order or even add your own to the
@@ -55,6 +55,19 @@ SimpleForm.setup do |config|
     #
     # b.use :full_error, wrap_with: { tag: :span, class: :error }
   end
+
+
+
+## Wrapper for checkbex?
+
+  # config.wrappers :inline_checkbox, :tag => 'div', :class => 'control-group', :error_class => 'error' do |b|
+  # b.use :html5
+  # b.wrapper :tag => 'div', :class => 'controls' do |ba|
+  #   ba.use :label_input, :wrap_with => { :class => 'checkbox-inline' }
+  #   ba.use :error, :wrap_with => { :tag => 'span', :class => 'help-inline' }
+  #   ba.use :hint,  :wrap_with => { :tag => 'p', :class => 'help-block' }
+  #   end
+  # end
 
   # The default wrapper to be used by the FormBuilder.
   config.default_wrapper = :default

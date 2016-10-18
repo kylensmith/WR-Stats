@@ -14,6 +14,7 @@
  *= require_self
  */
 
+
 body{
   /*margin: 10px;*/
   background: white;
@@ -27,6 +28,18 @@ body{
 
 /*<%= is_admin? ? (link_to "edit",edit_dual_path(dual)) : "#{dual.clean_time}"%> */
 @text-color: @black-50;
+
+/*input[type="checkbox"] {
+ // i just remove this part..
+}*/
+/*.collection_check_boxes {
+  margin: 30 0 0 0;
+}
+
+.radio-inline, .checkbox-inline {
+    margin: 3;
+}*/
+
 
 a {
     color: inherit;

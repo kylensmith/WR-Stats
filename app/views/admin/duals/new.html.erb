@@ -1,12 +1,19 @@
 <h1>Admins#Duals#NEW</h1>
 <p>Find me in app/views/admins/duals/NEW.html.erb</p>
 
+<%= params[:controller]%>
+
+
 
 <div class="container">
-<%=simple_form_for @dual, :url => {:controller => "admin/duals", :action => "create"}, html: { class: 'form-inline' } do |f|%>
+<%=simple_form_for @dual, :url => {:controller => params[:controller], :action => "create"}, html: { class: 'form-inline' } do |f|%> 
 <%= f.input :season_id, collection: Season.all.order(:year).reverse, label_method: :year, required: true %><br>
 <%= f.input :date, required: true %>
 <br>
+link?
+<%= link_to "Remove", @dual, method: :delete, data: { confirm: "Are you sure?" } %>
+
+
 <%= f.input :time%>
 <br>
  <p class='form-control-static'>Location of dual: </p>
@@ -49,4 +56,3 @@
 <%end%>
 
 </div>
-

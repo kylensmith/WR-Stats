@@ -1,0 +1,51 @@
+
+
+
+
+<div class="container">
+
+	<h1>School Status</h1>
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="team">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>School</th>
+            <th>City</th>
+            <th>State</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @schools.each do |school|%>
+        
+            <tr>
+             <td>
+             <input type="checkbox" name="my-checkbox" checked></td>
+              
+             
+
+                        <td><%= link_to (school.active ? "Active" : "Inactive"), admin_schools_change_path(:school_id => school.id), method: :post, remote: true, id: "change_status"%></td>
+
+                      
+
+
+
+
+              <td><%="#{school.try(:name)}"%></td>
+              <td><%="#{school.try(:city)}"%></td>
+              <td><%="#{school.state.try(:name)}"%></td>
+              
+             
+              
+
+              
+             
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+

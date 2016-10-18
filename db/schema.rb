@@ -524,8 +524,10 @@ ActiveRecord::Schema.define(version: 20160824181958) do
     t.integer  "current_division"
     t.string   "city"
     t.integer  "state_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.boolean  "active"
+    t.integer  "current_conference"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "score_types", force: :cascade do |t|

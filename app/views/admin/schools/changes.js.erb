@@ -1,0 +1,18 @@
+
+
+
+
+function check(status){
+	if (status == "Active"){
+		console.log("passed")
+		$("#change_status").text("Inactive")
+	}
+	else if ( status == "Inactive"){
+		$("#change_status").text("Active")
+	}
+	else {
+		$("#change_status").text("Unknown")
+	}
+
+};
+check($("#change_status").text());

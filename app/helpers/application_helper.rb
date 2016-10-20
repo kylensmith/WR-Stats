@@ -11,12 +11,16 @@ module ApplicationHelper
 
 	# Returns the weight class wrestled when all american honors were earned
 	def self.find_weight(wr_id, season_id, event_id)
-		puts " wr_id ************* #{wr_id} ************* "
-		puts " season_id ************* #{season_id} ************* "
-		puts " event_id ************* #{event_id} ************* "
-		puts " ************* ************* "
 		 value = AllAmerican.find_by(wrestler_id: wr_id, season: season_id, division_id: event_id)
 		 value.present? ? value.weight : nil
+	end
+
+	def check_season(month, year)
+		if month > 6 
+			year + 1
+		else
+			year
+		end
 	end
 
 

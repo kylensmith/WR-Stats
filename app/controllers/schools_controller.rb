@@ -14,10 +14,6 @@ class SchoolsController < ApplicationController
     @indy = @team.team_scores.sort { |a,b| b.season_id <=> a.season_id || (b && 1) || -1 }
     @all_americans = @team.all_americans.order(:season_id, :weight)
    
-    
-
-
-
-
   end
+
 end

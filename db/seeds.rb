@@ -174,7 +174,8 @@ wrsc1.each do |wr|
 		
 	# p "++++++++++++++++++++++++++"
 	# p "#{yr}-#{mon}-#{day} is in #{wr[1]} season"
-		dater = Date.parse("#{yr}-#{mon}-#{day}")
+		# dater = Date.parse("#{yr}-#{mon}-#{day}")
+		dater = DateTime.new(yr, mon, day)
 	# 	p dater
 	# 	p "++++++++++++++++++++++++++"
 		if Dual.find_by(team2_id: wr[0], season_id: wr[1], team1_id: wr[6], team2_score: wr[7], team1_score: wr[8])
@@ -255,9 +256,9 @@ wrsc1.each do |wr|
 	else	
 	dualer = Dual.create(team1_id: wr[0], team2_id: wr[1], season_id: wr[2], team1_score: score[0], team2_score: score[1], t: wr[6])
 		if wr[4] 
-			 dualer.update(w: wr[0], l: wr[1])		
+			 dualer.update(w: wr[0], l: wr[1], complete: true)		
 		elsif wr[5]
-			dualer.update(w: wr[1], l: wr[0])
+			dualer.update(w: wr[1], l: wr[0], complete: true)
 		end
 	end
   
@@ -299,7 +300,8 @@ wrsc1.each do |wr|
 
 
 
-	@ndate = Date.parse("#{yr}-#{mon}-#{day}")
+	@ndate = DateTime.new(yr, mon, day)
+	# @ndate = Date.parse("#{yr}-#{mon}-#{day}")
 	# '#{yr}-#{mon}-#{day}'
 	#  
 
@@ -348,7 +350,8 @@ wrsc1.each do |wr|
 
 
 
-	@ndate = Date.parse("#{yr}-#{mon}-#{day}")
+	@ndate = DateTime.new(yr, mon, day)
+	# @ndate = Date.parse("#{yr}-#{mon}-#{day}")
 
 	@tie = TeamRankingRelease.find_or_create_by(season_id: wr[0], date: @ndate, date_text: wr[1], division_id: 1)
 
@@ -421,9 +424,10 @@ wrsc1.each do |wr|
 	yr2 = yearize(ended[2], wr[1])
 
 
-
-	@ended = Date.parse("#{yr2}-#{mon2}-#{day2}")
-	@started = Date.parse("#{yr1}-#{mon1}-#{day1}")
+	@ended = DateTime.new(yr2, mon2, day2)
+	# @ended = Date.parse("#{yr2}-#{mon2}-#{day2}")
+	@started = DateTime.new(yr1, mon1, day1)
+	# @started = Date.parse("#{yr1}-#{mon1}-#{day1}")
 	@athlete = Wrestler.find_by_name(wr[10])
 	@div = Division.find(wr[0])
 	@season = Season.find(wr[1])
@@ -469,8 +473,10 @@ wrsc1.each do |wr|
 
 
 
-	@ended = Date.parse("#{yr2}-#{mon2}-#{day2}")
-	@started = Date.parse("#{yr1}-#{mon1}-#{day1}")
+	@ended = DateTime.new(yr2, mon2, day2)
+	# @ended = Date.parse("#{yr2}-#{mon2}-#{day2}")
+	@started = DateTime.new(yr1, mon1, day1)
+	# @started = Date.parse("#{yr1}-#{mon1}-#{day1}")
 	# @athlete = Wrestler.find_by_name(wr[10])
 	@div = Division.find(wr[0])
 	@season = Season.find(wr[1])
@@ -517,8 +523,10 @@ wrsc1.each do |wr|
 
 
 
-	@ended = Date.parse("#{yr2}-#{mon2}-#{day2}")
-	@started = Date.parse("#{yr1}-#{mon1}-#{day1}")
+	@ended = DateTime.new(yr2, mon2, day2)
+	# @ended = Date.parse("#{yr2}-#{mon2}-#{day2}")
+	@started = DateTime.new(yr1, mon1, day1)
+	# @started = Date.parse("#{yr1}-#{mon1}-#{day1}")
 	# @athlete = Wrestler.find_by_name(wr[10])
 	@div = Division.find(wr[0])
 	@season = Season.find(wr[1])

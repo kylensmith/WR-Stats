@@ -1,0 +1,59 @@
+
+
+<%= params[:controller]%>
+
+<div class="container">
+
+	<h1>Duals: This Week</h1>
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="team">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Team 1</th>
+            <th>Team 2</th>
+            <th>Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @duals.each do |dual|%>
+        
+            <tr>
+             
+              
+             <td><%= dual.complete ? "Complete" : ""%></td>
+
+                <td><%= dual.this_date %></td>
+                <td><%="#{dual.try(:clean_time)}"%></td>
+
+                      
+
+
+
+
+              <td><%= link_to_if dual.team1, "#{dual.try(:team1).try(:name)}", school_path(dual.team1)%></td>
+              <td><%= link_to_if dual.team2, "#{dual.try(:team2).try(:name)}", dual.team2 %></td>
+
+
+
+              <td><%= link_to "edit", edit_admin_dual_path(dual)%></td>
+
+              
+          
+              
+             
+              
+
+              
+             
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+

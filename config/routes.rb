@@ -55,6 +55,9 @@ Rails.application.routes.draw do
   # get 'wrestler/new'
 
   # get 'wrestler/create'
+    get 'admin/duals/this_week_complete', action: :this_week_complete, controller: 'admin/duals'
+  
+    get 'admin/duals/this_week', action: :this_week, controller: 'admin/duals'
   get 'admin/schools/status', action: :status, controller: 'admin/schools'
   post 'admin/schools/change', action: :changes, controller: 'admin/schools'
   # get 'profile', to: :show, controller: 'users'
@@ -81,7 +84,7 @@ match 'admin/schools/change', action: :changes, controller: 'admin/schools', via
   root 'schedules#index'
   namespace :admin do
     # match '/duals/:id' => 'duals#updat', :as => 'admin/duals#update'
-    resources :duals, only: [:update, :new, :create, :edit]
+    resources :duals, only: [:update, :new, :create, :edit, :destroy]
     resources :users, only: [:index, :update, :edit]
     resources :schools, param: :name, :constraints => { :name => /[^\/]*/ }, only: [:update, :new, :create, :edit]
     # , :dual_seasons, :team_scores

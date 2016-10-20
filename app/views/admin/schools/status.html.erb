@@ -1,6 +1,6 @@
 
 
-<%= params[:controller]%>
+<!-- Admin/Schools/Status -->
 
 <div class="container">
 
@@ -33,7 +33,7 @@
 
 
 
-              <td><%="#{school.try(:name)}"%></td>
+              <td><%= link_to "#{school.try(:name)}", school_path(school)%></td>
               <td><%="#{school.try(:city)}"%></td>
               <td><%="#{school.state.try(:name)}"%></td>
               <td><%="#{school.try(:division).try(:event)}"%></td>

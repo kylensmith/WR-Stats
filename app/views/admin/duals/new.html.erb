@@ -1,24 +1,24 @@
-<h1>Admins#Duals#NEW</h1>
-<p>Find me in app/views/admins/duals/NEW.html.erb</p>
-
-<%= params[:controller]%>
-
-
 
 <div class="container">
+	<h1>Create a new dual</h1>
 <%=simple_form_for @dual, :url => {:controller => params[:controller], :action => "create"}, html: { class: 'form-inline' } do |f|%> 
-<%= f.input :season_id, collection: Season.all.order(:year).reverse, label_method: :year, required: true %><br>
-<%= f.input :date, required: true %>
+
+
+
+
+
+
+<%= f.input :date%>
+
+        
+
 <br>
-link?
-<%= link_to "Remove", @dual, method: :delete, data: { confirm: "Are you sure?" } %>
-
-
-<%= f.input :time%>
+<br>
+<%= f.input :time,  {ampm: true} %>
 <br>
  <p class='form-control-static'>Location of dual: </p>
  <%= f.collection_check_boxes :site, [[1,"Team 1  "], [0, 'Neutral  .'],  [2, "Team 2  "] ], :first, :last, input_html: { class: 'form-check' }%>
-
+<br>
 
 <br>
 <%= f.association :team1, collection: School.all.order(:name), required: true, prompt: "Choose a School" %>

@@ -50,7 +50,7 @@
 
               <!-- Duals -->
               <li><%= link_to "New", new_admin_dual_path%></li>
-              <li><a href="#">Action</a></li>
+              <li><%= link_to "Schedule for this week", admin_duals_this_week_path %></li>
               <li><a href="#">Another action</a></li>
               <li><a href="#">Something else here</a></li>
               <li role="separator" class="divider"></li>
@@ -91,9 +91,9 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admins <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
+            <!-- <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="#">Something else here</a></li> -->
             <li role="separator" class="divider"></li>
             <li><%= link_to "Admin User List", admin_users_path%></li>
           </ul>

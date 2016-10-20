@@ -1,6 +1,9 @@
 class Dual < ActiveRecord::Base
-	attr_accessor :dual_result
-	belongs_to :season, :foreign_key => "season"
+	include ActiveModel::Validations
+	validates_presence_of :team1
+	attr_accessor :dual_result 
+	# :date
+	belongs_to :season, :foreign_key => "season_id"
 	belongs_to :wrestler
 	# has_many :team1, foreign_key: :id, class_name: 'School'
 	# has_many :team2, foreign_key: :id, class_name: 'School'
@@ -43,26 +46,27 @@ class Dual < ActiveRecord::Base
 	end
 
 	def result(input)
-		if input == team1
-			score = " #{sprintf("%g", team1_score)}-#{sprintf("%g", team2_score)}" 
-		elsif input == team2
-			score = " #{sprintf("%g", team2_score)}-#{sprintf("%g", team1_score)}" 
+		if w || t
+			if input == team1
+				score = " #{sprintf("%g", team1_score)}-#{sprintf("%g", team2_score)}" 
+			elsif input == team2
+				score = " #{sprintf("%g", team2_score)}-#{sprintf("%g", team1_score)}" 
+			end
+			if t
+				score = "T #{score}"
+			elsif w == input.id
+				# w
+				score = "W #{score}"
+			elsif l == input.id
+				score = "L #{score}"
+				# l
+			end
 		end
-		if t
-			score = "T #{score}"
-		elsif w == input.id
-			# w
-			score = "W #{score}"
-		elsif l == input.id
-			score = "L #{score}"
-			# l
-		end
-
 	end
 # try(:time).strftime.try("%I:%M%p")}
 	def clean_time
 		if time?
-			self.time.strftime("%I:%M%p")
+			self.time.strftime("%I:%M %p")
 		else
 		end
 	end
@@ -85,6 +89,13 @@ class Dual < ActiveRecord::Base
 	def tb
 		if tie_break
 			"TB"
+		end
+	end
+
+	def this_date
+		if date?
+			# @vacationrequest.try(:request_date).try(:strftime, '%B %e, %Y') 
+			"#{date.try(:strftime, '%A')}-#{date.try(:day).try(:ordinalize)}"
 		end
 	end
 

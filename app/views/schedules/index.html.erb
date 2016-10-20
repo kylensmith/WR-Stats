@@ -31,14 +31,24 @@
              <td><%= is_admin? ? (link_to "edit", edit_admin_dual_path(dual)) : "#{dual.try(:clean_time)}"%> </td>
               <!-- Check location of dual to determine how to list -->
               	<% if dual.site == 1 %>
-              		<td><%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %> at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
+              		<td><%if dual.team2%>
+                    <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
+                    <%else%>
+                    <%end%>at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
               		
               		
               		<% elsif dual.site == 2%>
-              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> at <%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %></td>
+              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> at <%if dual.team2%>
+                    <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
+                    <%else%>
+                    <%end%></td>
               		
               		<% else%>
-              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> vs <%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %></td>
+              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> vs <%if dual.team2%>
+                    <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
+                    <%else%>
+                    <%end%>
+                  </td>
               		
               		<% end%>
 
@@ -49,11 +59,13 @@
               		<% elsif dual.w == dual.team1.id%>
               		<td><%= "#{dual.team1.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
               		
-              		<% elsif dual.w == dual.team2.id%>
+              		<% elsif dual.team2 && dual.w == dual.try(:team2).try(:id)%>
               		<td><%= "#{dual.team2.name} #{sprintf('%g', dual.team2_score)}-#{sprintf('%g', dual.team1_score)} #{dual.tb}"%></td>
               		
 
-              		
+              		<% else %>
+                  <td>
+                  </td>
               		
 
 
@@ -82,14 +94,23 @@
               <td><%= is_admin? ? (link_to "edit", edit_admin_dual_path(dual)) : "#{dual.try(:clean_time)}"%> </td>
               <!-- Check location of dual to determine how to list -->
               	<% if dual.site == 1 %>
-              		<td><%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %> at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
+              		<td><%if dual.team2%>
+                    <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
+                    <%else%>
+                    <%end%> at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
               		
               		
               		<% elsif dual.site == 2%>
-              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> at <%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %></td>
+              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> at <%if dual.team2%>
+                    <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
+                    <%else%>
+                    <%end%></td>
               		
               		<% else%>
-              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> vs <%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %></td>
+              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> vs <%if dual.team2%>
+                    <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
+                    <%else%>
+                    <%end%></td>
               		
               		<% end%>
 
@@ -100,8 +121,12 @@
               		<% elsif dual.w == dual.team1.id%>
               		<td><%= "#{dual.team1.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
               		
-              		<% elsif dual.w == dual.team2.id%>
+              		<% elsif dual.team2 && dual.w == dual.team2.id%>
               		<td><%= "#{dual.team2.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
+
+                  <% else %>
+                  <td>
+                  </td>
               		
               		<% end%>
               		 
@@ -147,11 +172,17 @@
               		<% elsif dual.w == dual.team1.id%>
               		<td><%= "#{dual.team1.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
               		
-              		<% elsif dual.w == dual.team2.id%>
+              		<% elsif dual.team2 && dual.w == dual.team2.id%>
               		<td><%= "#{dual.team2.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
+
+                  <% else %>
+                  <td>
+                  </td>
+
               		
               		<% end%>
-              		
+                  <td>
+
               		
               
             </tr>

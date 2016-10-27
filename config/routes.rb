@@ -56,9 +56,12 @@ Rails.application.routes.draw do
 
   # get 'wrestler/create'
     get 'admin/duals/this_week_complete', action: :this_week_complete, controller: 'admin/duals'
-  
+    get 'admin/dual_seasons/new_all_active', action: :new_all_active, controller: 'admin/dual_seasons'
+    post 'admin/dual_seasons/create_all_active', action: :create_all_active, controller: 'admin/dual_seasons'
+   
     get 'admin/duals/this_week', action: :this_week, controller: 'admin/duals'
   get 'admin/schools/status', action: :status, controller: 'admin/schools'
+  # get 'admin/schools/create_dual_season', action: :create_dual_season, controller: 'admin/schools', 
   post 'admin/schools/change', action: :changes, controller: 'admin/schools'
   # get 'profile', to: :show, controller: 'users'
   # get 'wrestler/edit'
@@ -84,8 +87,14 @@ match 'admin/schools/change', action: :changes, controller: 'admin/schools', via
   root 'schedules#index'
   namespace :admin do
     # match '/duals/:id' => 'duals#updat', :as => 'admin/duals#update'
+    resources :coaches, only: [:update, :new, :create, :edit, :destroy]
     resources :duals, only: [:update, :new, :create, :edit, :destroy]
     resources :users, only: [:index, :update, :edit]
+    resources :dual_seasons, only: [:new, :edit, :create, :update, :destroy] do
+      # collection do
+      #   put :create_multiple
+      # end
+    end
     resources :schools, param: :name, :constraints => { :name => /[^\/]*/ }, only: [:update, :new, :create, :edit]
     # , :dual_seasons, :team_scores
   end

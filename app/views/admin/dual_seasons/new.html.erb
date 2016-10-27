@@ -1,0 +1,63 @@
+
+
+<!-- Admin/Schools/Create_Dual_Season -->
+
+<div class="container">
+
+	<h1>Create Dual Season</h1>
+  <p>This form will create Dual Seasons one at a time.  To create all schools for a season, use the mass creator under seasons.</p>
+  <p>Note: Only one record, per season for each school is permitted.</p>
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="team">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <!-- <th>Create?</th>
+            <th>School</th>
+            <th>Head Coach</th>
+            <th>City</th>
+            <th>State</th> -->
+            
+            
+          </tr>
+        </thead>
+        <tbody>
+          <%=simple_form_for @ds, method: :post, :url => {:controller => params[:controller], :action => "create"}, html: { class: 'form-inline' } do |f|%> 
+          
+        
+            <tr>
+             <td><%= f.association :season, collection: Season.all.order(:year).reverse, label_method: :year, value_method: :id, required: true, prompt: "Choose a Season" %>
+              <%= f.button :submit %>
+
+             </td>
+              <td><%= f.association :school, collection: School.all.order(:name), required: true, prompt: "Choose a School" %></td>
+              <td><%= f.association :coach, collection: Coach.all.order(:name), required: false, prompt: "Choose a Head Coach" %></td>
+
+               <td><%= f.association :division, collection: Division.all.order(:event), label_method: :event, required: false, prompt: "Choose a Division" %></td>
+
+             <!--  <td></td>
+              <td></td>
+              
+              
+              
+             
+              
+
+              
+             
+            </tr>
+            <tr>
+              <td>
+
+              </td> -->
+            </tr>
+
+      
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+
+

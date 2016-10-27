@@ -1,18 +1,22 @@
 
-
+ var divr = "#<%= @val %>";
 
 
 function check(status){
 	if (status == "Active"){
-		console.log("passed")
-		$("#change_status").text("Inactive")
+		$(divr).text("Inactive");
 	}
 	else if ( status == "Inactive"){
-		$("#change_status").text("Active")
+		$(divr).text("Active");
 	}
 	else {
-		$("#change_status").text("Unknown")
+		$(divr).text("Unknown");
 	}
 
 };
-check($("#change_status").text());
+
+check(
+	$(divr).text()
+	);
+
+

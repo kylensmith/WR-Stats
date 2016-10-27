@@ -1,7 +1,9 @@
 class DualSeason < ActiveRecord::Base
+	validates_uniqueness_of :season_id, :scope => :school_id
+	validates_presence_of :season, :school
 	belongs_to :school
 	belongs_to :coach
-	belongs_to :season, :foreign_key => "season"
+	belongs_to :season, :foreign_key => "season_id"
 	has_many :teams
 	belongs_to :division
 	# has_many :matches, source :duals

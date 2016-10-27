@@ -16,3 +16,15 @@
 //= require_tree .
 //= require jquery.turbolinks
 // form-check-inline
+
+
+// var divName = "";
+
+// function clicker(name) {
+// 	// this.id = namer
+// 	console.log($(divName).text());
+// divName = name; 
+// console.log($(divName).text()); 
+// };
+
+

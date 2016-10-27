@@ -1,0 +1,43 @@
+
+
+<!--  -->
+
+<div class="container">
+
+	<h1>Mass Creation of Dual Seasons</h1>
+  <p>This form will create Dual Seasons for all schools which are currently active.</p>
+  <p></p>
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="team">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+        
+            
+            
+          </tr>
+        </thead>
+        <tbody>
+          <%=simple_form_for @ds, method: :post, :url => {:controller => params[:controller], :action => "create_all_active"}, html: { class: 'form-inline' } do |f|%> 
+          
+        
+            <tr>
+             <td><%= f.association :season, collection: Season.all.order(:year).reverse, label_method: :year, value_method: :id, required: true, prompt: "Choose a Season" %>
+              
+
+            
+              <%= f.button :submit %>
+              </td> 
+
+
+            </tr>
+
+      
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+
+

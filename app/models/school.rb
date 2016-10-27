@@ -1,4 +1,5 @@
 class School < ActiveRecord::Base
+	attr_accessor :coach_id, :val
 	has_many :wrestlers, through: :wrestler_schools
 	has_many :wrestler_schools
 	

@@ -49,12 +49,20 @@ module Admin
 
   def changes
     @school = School.find(params[:school_id])
+    @val = params[:val]
     @school.toggle(:active)
     @school.save
     respond_to do |format|
       format.html { redirect_to admin_schools_status_path}
       format.js
     end
+  end
+
+  def new_dual_season
+    @schools = School.all.where(active: true).order(:name)
+  end
+
+  def create_dual_season
   end
 
 

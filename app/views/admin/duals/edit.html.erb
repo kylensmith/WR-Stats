@@ -20,6 +20,14 @@
 	<%= f.input :team2_score, required: false  %>
 	<br>
 	<br>
+
+	<%if @dual.w %>
+
+	<%= @dual.try(:w).try(:name)%>
+
+	<br>
+	<br>
+	<%end%>
 	
 <div class="row row-centered">
 		<div class="col-xs-4 col-centered"> 

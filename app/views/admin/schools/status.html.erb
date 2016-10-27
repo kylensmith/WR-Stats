@@ -19,14 +19,16 @@
           </tr>
         </thead>
         <tbody>
-          <% @schools.each do |school|%>
+          <% counter = 1 %>
+          <% @schools.each do |school, i|%>
         
             <tr>
              
               
              
 
-                        <td><%= link_to (school.active ? "Active" : "Inactive"), admin_schools_change_path(:school_id => school.id), method: :post, remote: true, id: "change_status", data: { confirm: "Are you sure you want to change the status of #{school.name}?" }%></td>
+                        <td><%= link_to (school.active ? "Active" : "Inactive"), admin_schools_change_path(:school_id => school.id, :val => "change_status-#{counter}"), method: :post, remote: true, id: "change_status-#{counter}", data: { confirm: "Are you sure you want to change the status of #{school.name}?" }%></td>
+                        
 
                       
 
@@ -45,10 +47,13 @@
               
              
             </tr>
+            <%counter += 1%>
           <%end%>
         </tbody>
       </table>
     </div>
 </div>
+
+<%= counter%>
 
 

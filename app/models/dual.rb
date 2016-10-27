@@ -12,6 +12,8 @@ class Dual < ActiveRecord::Base
 	# belongs_to :team2, class_name: 'School'
 	belongs_to :team2, class_name: "School"
 	belongs_to :team1, class_name: "School"
+	belongs_to :w, class_name: "School", :foreign_key => "w"
+	belongs_to :l, class_name: "School", :foreign_key => "l"
 
 	def opp(input)
 		if input == team1

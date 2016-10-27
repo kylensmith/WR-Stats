@@ -599,7 +599,7 @@ p "TeamScore Created"
 
 
 
-for i in 2010..2030 
+for i in 2010..2020 
  Season.find_or_create_by(year: i)
 end
 

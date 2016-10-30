@@ -63,6 +63,8 @@ Rails.application.routes.draw do
   get 'admin/schools/status', action: :status, controller: 'admin/schools'
   # get 'admin/schools/create_dual_season', action: :create_dual_season, controller: 'admin/schools', 
   post 'admin/schools/change', action: :changes, controller: 'admin/schools'
+  post 'admin/coaches/change_status', action: :change_status, controller: 'admin/coaches'
+  
   # get 'profile', to: :show, controller: 'users'
   # get 'wrestler/edit'
 match 'admin/schools/change', action: :changes, controller: 'admin/schools', via: [:get, :post]
@@ -87,7 +89,7 @@ match 'admin/schools/change', action: :changes, controller: 'admin/schools', via
   root 'schedules#index'
   namespace :admin do
     # match '/duals/:id' => 'duals#updat', :as => 'admin/duals#update'
-    resources :coaches, only: [:update, :new, :create, :edit, :destroy]
+    resources :coaches, only: [:index, :update, :new, :create, :edit, :destroy]
     resources :duals, only: [:update, :new, :create, :edit, :destroy]
     resources :users, only: [:index, :update, :edit]
     resources :dual_seasons, only: [:new, :edit, :create, :update, :destroy] do

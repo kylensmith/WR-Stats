@@ -2,7 +2,11 @@
 
 <div class="row">
   <div class="col-sm-3"><h5><%="Record: #{@coach.total_wins}-#{@coach.total_losses}-#{@coach.total_ties}"%></h5></div>
-  <div class="col-sm-3"><h5><%="Win %: #{sprintf('%#.3g', @coach.win_percentage)}"%></h5></div>
+  <div class="col-sm-3">
+    <% if @coach.win_percentage %>
+    <h5><%="Win %: #{sprintf('%#.3g', @coach.win_percentage)}"%></h5>
+    <%end%>
+  </div>  
 
   <div class="col-sm-3"><h5><%="All-Americans: #{@coach.try(:total_aas)}"%></h5></div>
   <div class="col-sm-3"><h5><%="Individual Champions: #{@coach.try(:total_champs)}"%></h5></div>
@@ -39,7 +43,7 @@
               <td><%=dual.season_id %></td>
               <td><%= link_to dual.clean_record, school_season_path(dual.school, dual.season_id) %></td>
               
-                <td><%= dual.school.name%></td>
+                <td><%= link_to dual.school.name, school_path(dual.school)%></td>
              
               
               <td><%= link_to_if dual.poll, "#{dual.rank_it}", :controller => 'team_ranking_releases',

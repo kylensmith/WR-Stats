@@ -55,7 +55,6 @@ module Admin
     else
       flash.alert = "You must select a year."
       redirect_to (:back)
-    
     end
     
 

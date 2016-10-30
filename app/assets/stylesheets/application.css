@@ -22,6 +22,12 @@ body{
 
 }
 
+
+
+input.radio {
+  margin-right: 5px;
+  vertical-align: -3px;
+}
 /*.form-control {
 	width: 20%;
 }*/

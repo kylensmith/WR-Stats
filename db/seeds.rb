@@ -646,7 +646,9 @@ School.where(name: nil).delete_all
 p "Killed all free floating school records"
 
 
+Coach.where(name: nil, fname: nil, lname: nil, active: nil).delete_all
 
+p "deleted any coaches that don't exist"
 
 
 

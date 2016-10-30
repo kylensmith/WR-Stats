@@ -1,0 +1,22 @@
+
+ var divr = "#<%= @val %>";
+
+
+function check(status){
+	if (status == "Active"){
+		$(divr).text("Inactive");
+	}
+	else if ( status == "Inactive"){
+		$(divr).text("Active");
+	}
+	else {
+		$(divr).text("Unknown");
+	}
+
+};
+
+check(
+	$(divr).text()
+	);
+
+

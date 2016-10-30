@@ -2,7 +2,7 @@
 <h1><%=link_to @team.name, school_path(@team)%> - <%= @season.year%></h1>
 <% if @ds%>
 <div class="row" style="">
-  <div class="col-sm-3"><h5>Head Coach: <%= link_to "#{@ds..try(:coach).try(:fname)} #{@ds.try(:coach).try(:lname)}", coach_path(@ds.coach)%></h5></div>
+  <div class="col-sm-3"><h5>Head Coach: <%= link_to "#{@ds.try(:coach).try(:fname)} #{@ds.try(:coach).try(:lname)}", coach_path(@ds.coach)%></h5></div>
   <div class="col-sm-3"><h5><%="Classification: #{@ds.try(:division).try(:event)}"%></h5></div>
 
   <div class="col-sm-3"><h5><%="Record: #{@ds.wins}-#{@ds.losses}-#{@ds.ties}"%></h5></div>
@@ -29,9 +29,9 @@
           <%loser = 0%>
           <%draw = 0%>
           <% @duals.each do |dual|%>
-          <%if @team.id == dual.w%>
+          <%if @team.id == dual.w.id%>
           <% winner = winner + 1%>
-          <%elsif @team.id == dual.l%>
+          <%elsif @team.id == dual.l.id%>
           <% loser = loser + 1%>
           <%elsif dual.t == true%>
           <% draw = draw + 1%>
@@ -43,8 +43,6 @@
 
               <td><%="#{dual.result(@team)} #{dual.try(:tie_breaker) ? "TB" : ""}"%></td>
               <td><%= "#{winner}-#{loser}-#{draw}"%></td>
-              
-
               
              
             </tr>

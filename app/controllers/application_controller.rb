@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 private
+
 # checks to see if user is a an admin.  can be called anywhere
      def is_admin?
      	# Authenticate_user

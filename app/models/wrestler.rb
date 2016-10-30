@@ -41,6 +41,10 @@ class Wrestler < ActiveRecord::Base
 		text :name
 	end
 
+	def to_param
+		"#{id} #{name}".parameterize
+	end
+
 
 	def all_matches
 		won + lost

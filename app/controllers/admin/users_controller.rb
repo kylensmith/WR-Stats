@@ -3,15 +3,19 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :is_admin?
   before_filter :is_super_admin?, only: [:edit, :update]
-  
 
   def edit
-  	@user = User.find(params[:id])
-
+    @user = User.find(params[:id])
+    if @user == User.first
+      redirect_to root_path
+    end
   end
 
   def update
   	@user = User.find(params[:id])
+    if @user == User.first
+      redirect_to root_path
+    end
   	@user.update(user_rights)
   	if @user.save
   		redirect_to admin_users_path

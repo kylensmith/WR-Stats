@@ -8,6 +8,9 @@ class SearchesController < ApplicationController
       paginate :per_page => 200
   	end
   	@return = @search.results
+    if @return.length == 1
+      redirect_to polymorphic_path(@return.first)
+    end
   end
 
   def new

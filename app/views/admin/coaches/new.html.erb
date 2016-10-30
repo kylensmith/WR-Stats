@@ -1,0 +1,47 @@
+
+
+
+
+<div class="container">
+	<h1>New Head Coach</h1>
+
+
+<%=simple_form_for @coach, :url => {:controller => "admin/coaches", :action => "create"}, html: { class: 'form-inline' } do |f|%>
+<%= f.input :fname, label: "First Name"  %>
+<br>
+<%= f.input :lname, label: "Last Name"  %>
+
+<br>
+
+<% if @coach.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-error">
+      The form contains <%= pluralize(@coach.errors.count, "error") %>.
+    </div>
+    <ul>
+    <% @coach.errors.full_messages.each do |msg| %>
+      <li>* <%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<br>
+
+<%= f.input :active, as: :radio_buttons, required: false, label: "Active?", prompt: "Status" %>
+
+<br><br>
+
+
+
+
+
+
+<br>
+  <%= f.button :submit %>
+
+
+<%end%>
+
+</div>
+

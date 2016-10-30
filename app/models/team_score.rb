@@ -12,7 +12,7 @@ class TeamScore < ActiveRecord::Base
 		when 1
 			"Champions"
 		when 2
-			"Runner-Up"
+			"Runner-up"
 		when 3 .. 4
 			"Placed"
 		when 5 .. 10

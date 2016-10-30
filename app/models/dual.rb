@@ -56,10 +56,10 @@ class Dual < ActiveRecord::Base
 			end
 			if t
 				score = "T #{score}"
-			elsif w == input.id
+			elsif w.id == input.id
 				# w
 				score = "W #{score}"
-			elsif l == input.id
+			elsif l.id == input.id
 				score = "L #{score}"
 				# l
 			end

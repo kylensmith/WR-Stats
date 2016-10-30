@@ -24,9 +24,6 @@ module Admin
     @team = School.where{ name =~ school_name }
     @school = @team[0]
     @school.update(school_info)
-    p "************"
-    p school_info.inspect
-    p "*************"
     if !@school.save
       flash.warning = "School info did not update.  Please try again."
     end

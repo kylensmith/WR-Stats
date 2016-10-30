@@ -85,7 +85,7 @@
               <li role="separator" class="divider"></li>
               <li><a href="#">Separated link</a></li>
               <li role="separator" class="divider"></li>
-              <li> <%= link_to "Status", admin_schools_status_path %></li>
+              <li> <%= link_to "All Coaches - Status", admin_coaches_path %></li>
             </ul>
           </li>
           <!-- end coaches -->
@@ -100,10 +100,26 @@
               <li role="separator" class="divider"></li>
               <li><a href="#">Separated link</a></li>
               <li role="separator" class="divider"></li>
-              <li> <%= link_to "Status", admin_schools_status_path %></li>
+              <li> <%= link_to "All Coaches - Status", admin_coaches_path %></li>
             </ul>
           </li>
           <!-- end seasons -->
+
+                     <!-- wrestlers-->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Wrestlers<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "New", new_admin_wrestler_path%></li>
+              <li><a href="#">Another action</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+              <li role="separator" class="divider"></li>
+              <li> <%= link_to "All Coaches - Status", admin_coaches_path %></li>
+            </ul>
+          </li>
+          <!-- end wrestlers -->
+
+
         
 
 

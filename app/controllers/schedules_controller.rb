@@ -8,8 +8,7 @@ class SchedulesController < ApplicationController
     @yduals = Dual.where(date: @ydate)
     @duals = Dual.where(date: @date)
     @tduals = Dual.where(date: @tdate)
-    # flash.notice = "Welcome to the Sample App!"
-    # flash.alert = "You can't do that son!?"
+
   end
 
   def show
@@ -20,8 +19,8 @@ class SchedulesController < ApplicationController
     @season = Season.find(params[:id])
     @alldual = @team.all_duals
     # This will sort while also accepting nil values
-    @duals = @alldual.select {|x| x['season_id'] == @season.year }.sort { |a,b| a <=> b || (b && 1) || -1 }
-    # .sort { |a, b| a.date <=> b.date }
+    @duals = @alldual.select {|x| x['season_id'] == @season.year }
+    @duals.sort! { |a,b| a.date <=> b.date || (b.date && 1) || -1 }
 
    
 

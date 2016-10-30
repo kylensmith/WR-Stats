@@ -35,6 +35,8 @@ class DualSeason < ActiveRecord::Base
 		end
 	end
 
+	
+
 
 
 

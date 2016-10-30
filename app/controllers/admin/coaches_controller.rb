@@ -3,7 +3,7 @@ module Admin
   
 
   def index
-  	@coaches = Coach.all.order("LOWER(lname)")
+  	@coaches = Coach.all.order("LOWER(lname)").order(:fname)
   end
 
   def show
@@ -28,7 +28,6 @@ module Admin
 
   def new
     @coach = Coach.new
-
   end
 
   def create
@@ -36,12 +35,16 @@ module Admin
       @name = "#{params[:coach]['lname']}, #{params[:coach]['fname']}"
       if @coach.update(name: @name)
         @coach.save
-        flash.notice = "Coach added to database."
+        flash.notice = "Coach '#{@name}' added to database."
       end
     else 
       flash.warning = "Record was not created."
     end
     redirect_to new_admin_coach_path
+  end
+
+  def edit
+    @coach = Coach.find(params[:id])
 
   end
   	

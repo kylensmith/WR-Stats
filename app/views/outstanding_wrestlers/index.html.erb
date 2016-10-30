@@ -1,9 +1,10 @@
 <h1>OutstandingWrestlers#index</h1>
 <p>Find me in app/views/outstanding_wrestlers/index.html.erb</p>
 
-
+<div class="container">
 <% @OW_list.each do |list|%>
 
 <%= list.season%>: <%= list.name%> (<%= list.division%> - <%= list.school%><%=" - #{list.weight}" %>)
 <br>
 <%end%>
+</div>

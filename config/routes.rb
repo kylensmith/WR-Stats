@@ -91,8 +91,9 @@ match 'admin/schools/change', action: :changes, controller: 'admin/schools', via
     # match '/duals/:id' => 'duals#updat', :as => 'admin/duals#update'
     resources :coaches, only: [:index, :update, :new, :create, :edit, :destroy]
     resources :duals, only: [:update, :new, :create, :edit, :destroy]
+    resources :wrestlers, only: [:update, :new, :create, :edit, :destroy]
     resources :users, only: [:index, :update, :edit]
-    resources :dual_seasons, only: [:new, :edit, :create, :update, :destroy] do
+    resources :dual_seasons, only: [:new, :edit, :create, :update, :destroy, :change, :new_all_active, :create_all_active] do
       # collection do
       #   put :create_multiple
       # end

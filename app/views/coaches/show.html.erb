@@ -1,85 +1,87 @@
-<h1><%="#{@coach.fname} #{@coach.lname}"%></h1>
+<div class="container">
+  <h1><%="#{@coach.fname} #{@coach.lname}"%></h1>
 
-<div class="row">
-  <div class="col-sm-3"><h5><%="Record: #{@coach.total_wins}-#{@coach.total_losses}-#{@coach.total_ties}"%></h5></div>
-  <div class="col-sm-3">
-    <% if @coach.win_percentage %>
-    <h5><%="Win %: #{sprintf('%#.3g', @coach.win_percentage)}"%></h5>
-    <%end%>
-  </div>  
+  <div class="row">
+    <div class="col-sm-3"><h5><%="Record: #{@coach.total_wins}-#{@coach.total_losses}-#{@coach.total_ties}"%></h5></div>
+    <div class="col-sm-3">
+      <% if @coach.win_percentage %>
+      <h5><%="Win %: #{sprintf('%#.3g', @coach.win_percentage)}"%></h5>
+      <%end%>
+    </div>  
 
-  <div class="col-sm-3"><h5><%="All-Americans: #{@coach.try(:total_aas)}"%></h5></div>
-  <div class="col-sm-3"><h5><%="Individual Champions: #{@coach.try(:total_champs)}"%></h5></div>
-</div>
-
-
-
+    <div class="col-sm-3"><h5><%="All-Americans: #{@coach.try(:total_aas)}"%></h5></div>
+    <div class="col-sm-3"><h5><%="Individual Champions: #{@coach.try(:total_champs)}"%></h5></div>
+  </div>
 
 
 
-<!-- bootstrap tab panes -->
-<div>
-  <!-- nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#team" aria-controls="team" role="tab" data-toggle="tab">Team</a></li>
-    <li role="presentation"><a href="#individual" aria-controls="individual" role="tab" data-toggle="tab">Individual</a></li>
-  </ul>
 
-  <!-- tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="team">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Season</th>
-            <th>Record</th>
-            <th>School</th>
-            <th>Final Rank</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @ds.each do |dual|%>
+
+
+  <!-- bootstrap tab panes -->
+  <div>
+    <!-- nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#team" aria-controls="team" role="tab" data-toggle="tab">Team</a></li>
+      <li role="presentation"><a href="#individual" aria-controls="individual" role="tab" data-toggle="tab">Individual</a></li>
+    </ul>
+
+    <!-- tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="team">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Season</th>
+              <th>Record</th>
+              <th>School</th>
+              <th>Final Rank</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @ds.each do |dual|%>
             <tr>
               <td><%=dual.season_id %></td>
               <td><%= link_to dual.clean_record, school_season_path(dual.school, dual.season_id) %></td>
               
-                <td><%= link_to dual.school.name, school_path(dual.school)%></td>
-             
+              <td><%= link_to dual.school.name, school_path(dual.school)%></td>
+
               
               <td><%= link_to_if dual.poll, "#{dual.rank_it}", :controller => 'team_ranking_releases',
-  :action => 'show', :id => dual.poll %></td>
+              :action => 'show', :id => dual.poll %></td>
               
             </tr>
-          <%end%>
-        </tbody>
-      </table>
-    </div>
+            <%end%>
+          </tbody>
+        </table>
+      </div>
 
-    <div role="tabpanel" class="tab-pane" id="individual">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Season</th>
-            <th>National Championship</th>
-            <th>Team Coached</th>
-            <th>National Finish</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- individual stats go here -->
-          <% @indy.each do |national| %>
+      <div role="tabpanel" class="tab-pane" id="individual">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Season</th>
+              <th>National Championship</th>
+              <th>Team Coached</th>
+              <th>National Finish</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- individual stats go here -->
+            <% @indy.each do |national| %>
             <tr>
               <td><%= national.season.year %></td>
-              <td><%= "#{national.try(:event).try(:ordinal)} #{national.event.name}" %></td>
+              <td><%= link_to "#{national.try(:event).try(:ordinal)} #{national.event.name}", event_path(national.event) %></td>
               <td><%= "#{national.try(:school).try(:name)}"%></td>
               <td><%= "#{national.try(:standing)}"%></td>
             </tr>
-          <% end %>
-        </tbody>
+            <% end %>
+          </tbody>
 
-      </table>
+        </table>
+
+      </div>
 
     </div>
-
   </div>
 </div>

@@ -14,6 +14,10 @@ class Event < ActiveRecord::Base
 		text :season_id
 	end
 
+	def to_param
+		"#{id} #{season_id} #{name}".parameterize
+	end
+
 
 	 # could connect to outstandingwrestlers
 

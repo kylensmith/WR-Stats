@@ -598,12 +598,11 @@ p "TeamScore Created"
 
 
 
-
-for i in 2010..2020 
+for i in 1890..2020 
  Season.find_or_create_by(year: i)
 end
 
-p "Created future seasons"
+p "Created past & future seasons"
 
 
 

@@ -1,21 +1,26 @@
-<h1><%="#{@event.season_id} #{@event.name}"%>
-<div style="width: 50%; display: inline-block">
-<ul class="list-group" style="width: 50%; display: inline-block">
-  <li class="list-group-item">
-    <span class="badge">14</span>
-    <h4>Cras justo odio</h4>
-  </li>
-</ul>
+<div class="container">
+	<h1><%="#{@event.season_id} #{@event.name}"%>
+		<div style="width: 50%; display: inline-block">
+			
+			<ul class="list-group" style="width: 50%; display: inline-block">
+				<% @placers.each do |aa|%>
+				<li class="list-group-item">
+					<span class="badge"><%= aa.place%></span>
+					<h4><%= aa.wrestler.name%></h4>
+				</li>
+				<%end%>
+			</ul>
+		</div>
+		
+		<div style="width: 50%;">
+			<ul class="list-group">
+				<li class="list-group-item">
+					<span class="badge">14</span>
+					Cras justo odio
+				</li>
+			</ul>
+		</div>
+	</div>
 </div>
-<div style="width: 50%;">
-<ul class="list-group">
-  <li class="list-group-item">
-    <span class="badge">14</span>
-    Cras justo odio
-  </li>
-</ul>
-</div>
-
-
 
 

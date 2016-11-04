@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 #used to help create database views in PostgresSQL
-gem 'rails_db_views', github: 'anykeyh/rails_db_views'
+# gem 'rails_db_views', github: 'anykeyh/rails_db_views'
 
 # Search Solution - need to run: 
 # 'rails g sunspot_rails:install'
@@ -56,6 +56,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+group :production do
+  gem 'pg'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

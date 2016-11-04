@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/anykeyh/rails_db_views.git
-  revision: eb467ce8a4901054df22c4edb78b20fb4a590fdf
-  specs:
-    rails_db_views (0.0.5)
-      rails (>= 4.0)
-      rake-hooks (~> 1.2, >= 1.2.3)
-
-GIT
   remote: https://github.com/activerecord-hackery/squeel
   revision: 5542266d502db8022e14105f9dfb455a79d6fc4a
   specs:
@@ -152,8 +144,6 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (11.1.2)
-    rake-hooks (1.2.3)
-      rake
     rdoc (4.2.2)
       json (~> 1.4)
     responders (2.3.0)
@@ -222,7 +212,6 @@ DEPENDENCIES
   pg
   rails (= 4.2.5)
   rails-erd
-  rails_db_views!
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   simple_form

@@ -7,9 +7,9 @@
 
 
 <%=simple_form_for @wrestler, :url => {:controller => "admin/wrestlers", :action => "create"}, html: { class: 'form-inline' } do |f|%>
-<%= f.input :fname, label: "First Name"  %>
+<%= f.input :fname, label: "First Name", required: true  %>
 <br>
-<%= f.input :lname, label: "Last Name"  %>
+<%= f.input :lname, label: "Last Name", required: true  %>
 
 
 <br>
@@ -21,18 +21,12 @@
 <br>
 
 
-<br><br>
-
-
-
-
-
-
 <br>
   <%= f.button :submit %>
 
 
 <%end%>
+<br><br>
 
 </div>
 

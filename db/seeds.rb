@@ -29,7 +29,12 @@ for i in 1..16154
 	t.save
 end
 csv.each do |row|
-  Wrestler.find(row[0]).update(name: row[1], hofid: row[2], all_american: row[3], transfer: row[4], division_i: row[5], high_school: row[13], state_id: row[14].to_i)
+	if row[14].present?
+		@state = row[14].to_i
+	else
+		@state = nil
+	end
+  Wrestler.find(row[0]).update(name: row[1], hofid: row[2], all_american: row[3], transfer: row[4], division_i: row[5], high_school: row[13], state_id: @state)
 end
 p "Wrestlers Created"
 
@@ -146,17 +151,52 @@ p "DualSeasons Created"
 
 
 
+
+
+
+
+csv2_text = File.read(Rails.root.join('lib', 'seeds', 'Duals.csv'))
+wrsc1 = CSV.parse(csv2_text, :headers => true)
+ct = 0
+wrsc1.each do |wr|
+	score = wr[3].split('-')
+	if Dual.find_by(team1_id: wr[0], team2_id: wr[1], season_id: wr[2], team1_score: score[0], team2_score: score[1])
+		next
+	elsif Dual.find_by(team1_id: wr[1], team2_id: wr[0], season_id: wr[2], team1_score: score[1], team2_score: score[2])
+		next
+	else	
+	dualer = Dual.create(team1_id: wr[0], team2_id: wr[1], season_id: wr[2], team1_score: score[0], team2_score: score[1], t: wr[6])
+		if wr[4] 
+			# zero = School.find(wr[0])
+			# one = School.find(wr[1])
+			 dualer.update(w_id: wr[0], l_id: wr[1], complete: true)		
+		elsif wr[5]
+			# zero = School.find(wr[0])
+			# one = School.find(wr[1])
+			dualer.update(w_id: wr[1], l_id: wr[0], complete: true)
+		end
+	end
+  
+  # Dual.create(school_id: wr[0], opponent_id: wr[1], season_id: wr[2], score: wr[3], win: wr[4], loss: wr[5], tie: wr[6])
+end
+p "Duals Created"
+
+ # need to do date here as well....
+
+
+
+
+
 csv2_text = File.read(Rails.root.join('lib', 'seeds', 'DualMeets.csv'))
 wrsc1 = CSV.parse(csv2_text, :headers => true)
 wrsc1.each do |wr|
-
 	if wr[3]
 		 dated = wr[3].split('/')
 		def add_zero(date)
 			if date.length == 1
-				"0#{date}"
+				"0#{date}".to_i
 			else
-				 date.to_s
+				 date.to_i
 			end
 		end
 
@@ -190,9 +230,9 @@ wrsc1.each do |wr|
 		else
 			dualer = Dual.create(date: dater, team1_id: wr[0], season_id: wr[1], team2_id: wr[6], team1_score: wr[7], team2_score: wr[8], t: wr[12])
 			if wr[10].to_i == 1
-				 dualer.update(w: wr[0], l: wr[6])
+				 dualer.update(w_id: wr[0], l_id: wr[6])
 			elsif wr[11].to_i == 1
-				dualer.update(w: wr[6], l: wr[0])
+				dualer.update(w_id: wr[6], l_id: wr[0])
 			end
 		end
 
@@ -212,9 +252,9 @@ wrsc1.each do |wr|
 		else
 			dualer = Dual.create(team1_id: wr[0], season_id: wr[1], team2_id: wr[6], team1_score: wr[7], team2_score: wr[8], t: wr[12])
 			if wr[10].to_i == 1
-				 dualer.update(w: wr[0], l: wr[6])		
+				 dualer.update(w_id: wr[0], l_id: wr[6])		
 			elsif wr[11].to_i == 1
-				dualer.update(w: wr[6], l: wr[0])
+				dualer.update(w_id: wr[6], l_id: wr[0])
 			end
 		end
 	end
@@ -244,30 +284,8 @@ p "DualMeets Created"
 
 
 
-csv2_text = File.read(Rails.root.join('lib', 'seeds', 'Duals.csv'))
-wrsc1 = CSV.parse(csv2_text, :headers => true)
-ct = 0
-wrsc1.each do |wr|
-	score = wr[3].split('-')
-	if Dual.find_by(team1_id: wr[0], team2: wr[1], season_id: wr[2], team1_score: score[0], team2_score: score[1])
-		next
-	elsif Dual.find_by(team1_id: wr[1], team2_id: wr[0], season_id: wr[2], team1_score: score[1], team2_score: score[2])
-		next
-	else	
-	dualer = Dual.create(team1_id: wr[0], team2_id: wr[1], season_id: wr[2], team1_score: score[0], team2_score: score[1], t: wr[6])
-		if wr[4] 
-			 dualer.update(w: wr[0], l: wr[1], complete: true)		
-		elsif wr[5]
-			dualer.update(w: wr[1], l: wr[0], complete: true)
-		end
-	end
-  
-  # Dual.create(school_id: wr[0], opponent_id: wr[1], season_id: wr[2], score: wr[3], win: wr[4], loss: wr[5], tie: wr[6])
-end
-p "Duals Created"
 
 
- # need to do date here as well....
 
 
 
@@ -279,18 +297,18 @@ wrsc1.each do |wr|
 	dated = wr[1].split('/')
 	def add_zero(date)
 		if date.length == 1
-			"0#{date}"
+			"0#{date}".to_i
 		else
-			 date.to_s
+			 date.to_i
 		end
 	end
 
 	def yearize(form, seas)
 		num = form.to_i
 		if num.between?(0, 20)	
-			"20#{form}"
+			"20#{form}".to_i
 		else 	
-			"19#{form}"
+			"19#{form}".to_i
 		end
 		
 	end
@@ -328,19 +346,19 @@ wrsc1.each do |wr|
 	dated = wr[1].split('/')
 	def add_zero(date)
 		if date.length == 1
-			"0#{date}"
+			"0#{date}".to_i
 		else
-			 date.to_s
+			 date.to_i
 		end
 	end
 
 	def yearize(form, seas)
 		num = form.to_i
 		if num.between?(0, 20)	
-			"20#{form}"
+			"20#{form}".to_i
 		else 
 			
-			"19#{form}"
+			"19#{form}".to_i
 		end
 		
 	end
@@ -368,9 +386,10 @@ csv2_text = File.read(Rails.root.join('lib', 'seeds', 'HeadCoach.csv'))
 sc= CSV.parse(csv2_text, :headers => true)
 
 for i in 1..1254
-	t = Coach.new
+	t = Coach.create(fname: "fname", lname: "lname")
 	t.save
 end
+
 sc.each do |row|
   Coach.find(row[0]).update(name: row[1], fname: row[3], lname: row[2], active: row[4], total_seasons: row[5], total_duals: row[6], total_wins: row[7], total_losses: row[8], total_ties: row[9], win_percentage: row[10], total_champs: row[11], total_aas: row[12], aa_percentage: row[14], champ_percentage: row[13])
 end
@@ -400,19 +419,19 @@ wrsc1.each do |wr|
 	ended = wr[5].split('/')
 	def add_zero(date)
 		if date.length == 1
-			"0#{date}"
+			"0#{date}".to_i
 		else
-			 date.to_s
+			 date.to_i
 		end
 	end
 
 	def yearize(form, seas)
 		num = form.to_i
 		if num.between?(0, 20)	
-			"20#{form}"
+			"20#{form}".to_i
 		else 
 			
-			"19#{form}"
+			"19#{form}".to_i
 		end
 		
 	end
@@ -448,19 +467,19 @@ wrsc1.each do |wr|
 	ended = wr[5].split('/')
 	def add_zero(date)
 		if date.length == 1
-			"0#{date}"
+			"0#{date}".to_i
 		else
-			 date.to_s
+			 date.to_i
 		end
 	end
 
 	def yearize(form, seas)
 		num = form.to_i
 		if num.between?(0, 20)	
-			"20#{form}"
+			"20#{form}".to_i
 		else 
 			
-			"19#{form}"
+			"19#{form}".to_i
 		end
 		
 	end
@@ -498,19 +517,19 @@ wrsc1.each do |wr|
 	ended = wr[5].split('/')
 	def add_zero(date)
 		if date.length == 1
-			"0#{date}"
+			"0#{date}".to_i
 		else
-			 date.to_s
+			 date.to_i
 		end
 	end
 
 	def yearize(form, seas)
 		num = form.to_i
 		if num.between?(0, 20)	
-			"20#{form}"
+			"20#{form}".to_i
 		else 
 			
-			"19#{form}"
+			"19#{form}".to_i
 		end
 		
 	end
@@ -645,7 +664,7 @@ School.where(name: nil).delete_all
 p "Killed all free floating school records"
 
 
-Coach.where(name: nil, fname: nil, lname: nil, active: nil).delete_all
+Coach.where(name: nil, fname: "fname", lname: "lname", active: nil).delete_all
 
 p "deleted any coaches that don't exist"
 

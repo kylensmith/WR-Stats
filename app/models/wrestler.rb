@@ -1,5 +1,6 @@
 class Wrestler < ActiveRecord::Base
 	attr_accessor :divison, :season, :fname, :lname
+
 	# has_many :wrestler_schools
 	has_many :seasons, through: :wrestler_schools, source: :season, primary_key: "year", foreign_key: "season_id"
 	has_many :schools, through: :wrestler_schools, source: :school

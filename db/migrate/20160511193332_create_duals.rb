@@ -10,8 +10,8 @@ class CreateDuals < ActiveRecord::Migration
       t.float :team1_score  
       t.float :team2_score  
       t.boolean :tie_break  
-      t.integer :w  
-      t.integer :l  
+      t.integer :w_id  
+      t.integer :l_id  
       t.boolean :t
       t.integer :attendance        
       t.boolean :complete

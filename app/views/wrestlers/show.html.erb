@@ -2,7 +2,7 @@
 <h1><%= @wrestler.clean_name%></h1>
 
 <div class="row" style="">
-  <div class="col-sm-3"><h5>High School: <%= "#{@wrestler.high_school} #{ }"%></h5></div>
+  <div class="col-sm-3"><h5>High School: <%= "#{@wrestler.high_school} #{@wrestler.state.abv }"%></h5></div>
  </div>
 
              
@@ -28,7 +28,7 @@
           
               <td><%= place.season_id%></td>
               <td><%= place.weight%></td>
-              <td><%= place.school ? place.school.name : "Unattached" %></td>
+              <td><%= link_to place.school ? place.school.name : "Unattached", school_path(place.school) %></td>
               <td><%= place.event ? place.event.name : place.division.event %></td>
               <td><%= place.place%></td>
               

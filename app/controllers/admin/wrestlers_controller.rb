@@ -8,7 +8,18 @@ module Admin
   end
 
   def create
-    
+    @lname = params[:wrestler]["lname"]
+    @fname = params[:wrestler]["fname"]
+    if @lname.present? && @fname.present? 
+      @name = "#{@lname}, #{@fname}"
+      @wrestler = Wrestler.create(name: @name)
+      @wrestler.update(wrestler_info)
+      @wrestler.save 
+      flash.notice = 'Wrestler: "' + @name + '" has been saved.'
+    else  
+      flash.alert = 'Wrestler NOT saved.'
+    end
+    redirect_to (:back)
   end
 
   def edit
@@ -30,8 +41,8 @@ module Admin
 
 private 
 
-  def school_info
-    params.require(:wrestler).permit(:name, :city, :state_id, :current_division)
+  def wrestler_info
+    params.require(:wrestler).permit(:high_school, :state_id)
   end
 
 end

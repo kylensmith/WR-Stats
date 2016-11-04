@@ -1,12 +1,41 @@
 
 
-<%= @poll.season_id%>
-<%= @poll.date.strftime("%B %d, %Y")%>
-<br>
-++<%= @poll.poll_name%>++
-<br><br><br><br><br><br>
-<% @rank_array.each do |rank|%>
-	<%= "#{rank.rank}. "%><%= link_to "#{rank.school.name}", school_season_path(rank.school, @poll.season_id) %> 
-	
-	<br>
-<%end%>
+
+<div class="container">
+  <h1>
+    <%= "#{@poll.poll_name} #{@poll.date.strftime("%B %d, %Y")}"%>
+  </h1>
+  
+ 
+
+
+
+
+    <!-- tab panes -->
+
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="team">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>School</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @rank_array.each do |rank|%>
+            <tr>
+            	<td><%= "#{rank.rank}. "%></td>
+            	<td><%= link_to "#{rank.school.name}", school_season_path(rank.school, @poll.season_id) %> </td>
+             
+
+            </tr>
+            <%end%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -23,6 +23,7 @@
                     
 
               <td><%= link_to (coach.active ? "Active" : "Inactive"), admin_coaches_change_status_path(:coach_id => coach.id, :val => "change_status-#{counter}"), method: :post, remote: true, id: "change_status-#{counter}", data: { confirm: "Are you sure you want to change the status of #{coach.name}?" }%></td>
+              
                         
 
               <td><%= link_to (coach.name ? "#{coach.try(:name)}" : "Unknown"), coach_path(coach)%></td>

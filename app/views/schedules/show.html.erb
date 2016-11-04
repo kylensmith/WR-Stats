@@ -43,9 +43,9 @@
             <%loser = 0%>
             <%draw = 0%>
             <% @duals.each do |dual|%>
-            <%if @team.id == dual.w.id%>
+            <%if @team == dual.w%>
             <% winner = winner + 1%>
-            <%elsif @team.id == dual.l.id%>
+            <%elsif @team == dual.l%>
             <% loser = loser + 1%>
             <%elsif dual.t == true%>
             <% draw = draw + 1%>

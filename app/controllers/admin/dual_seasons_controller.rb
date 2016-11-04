@@ -61,6 +61,7 @@ module Admin
   end
 
   def edit
+    @ds = DualSeason.find(params[:id])
   end
 
   def update

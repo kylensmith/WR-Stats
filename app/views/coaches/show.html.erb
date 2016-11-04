@@ -32,15 +32,24 @@
         <table class="table table-striped">
           <thead>
             <tr>
+            <% if current_user.admin?%> 
+              <th>Update?</th>
+            <%end%>
               <th>Season</th>
               <th>Record</th>
               <th>School</th>
               <th>Final Rank</th>
+
             </tr>
           </thead>
           <tbody>
             <% @ds.each do |dual|%>
             <tr>
+                          <% if current_user.admin?%> 
+              <th>
+                <%= link_to "Edit", edit_admin_dual_season_path(dual)%>
+              </th>
+            <%end%>
               <td><%=dual.season_id %></td>
               <td><%= link_to dual.clean_record, school_season_path(dual.school, dual.season_id) %></td>
               
@@ -64,16 +73,24 @@
               <th>National Championship</th>
               <th>Team Coached</th>
               <th>National Finish</th>
+              <th>All-Americans</th>
             </tr>
           </thead>
           <tbody>
             <!-- individual stats go here -->
             <% @indy.each do |national| %>
             <tr>
-              <td><%= national.season.year %></td>
-              <td><%= link_to "#{national.try(:event).try(:ordinal)} #{national.event.name}", event_path(national.event) %></td>
-              <td><%= "#{national.try(:school).try(:name)}"%></td>
-              <td><%= "#{national.try(:standing)}"%></td>
+              <td class="vert-align"><%= national.season.year %></td>
+              <td class="vert-align"><%= link_to "#{national.try(:event).try(:ordinal)} #{national.event.name}", event_path(national.event) %></td>
+              <td class="vert-align"><%= "#{national.try(:school).try(:name)}"%></td>
+              <td class="vert-align"><%= "#{national.try(:standing)}"%></td>
+              <td class="vert-align">
+                <ul class="aa_list">
+                  <% national.team_aa.each do |aa|%>
+                  <li><%= link_to aa.wrestler.name, wrestler_path(aa.wrestler)%></li>
+                  <%end%>
+                </ul>
+              </td>
             </tr>
             <% end %>
           </tbody>

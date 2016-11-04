@@ -3,9 +3,7 @@
 
 
 
-<!-- 
- comment out the city until reseed with attribute 
-will addd = to show -->
+
 
 
 <div class="container">
@@ -36,6 +34,9 @@ will addd = to show -->
             <th>Record</th>
             <th>Coach</th>
             <th>Final Rank</th>
+            <% if current_user.admin?%> 
+            <th>Update Dual Season</th>
+            <%end%>
           </tr>
         </thead>
         <tbody>
@@ -50,6 +51,12 @@ will addd = to show -->
               
               <td><%= link_to_if dual.poll, "#{dual.rank_it}", :controller => 'team_ranking_releases',
   :action => 'show', :id => dual.poll %></td>
+
+            <% if current_user.admin?%> 
+              <th>
+                <%= link_to "Edit", edit_admin_dual_season_path(dual)%>
+              </th>
+            <%end%>
               
             </tr>
             
@@ -74,8 +81,10 @@ will addd = to show -->
           <% @indy.each do |national| %>
             <tr>
               <td class="vert-align"><%= national.season.year %></td>
-              <td class="vert-align"><%= "#{national.try(:event).try(:ordinal)} #{national.event.name}" %></td>
-              <td class="vert-align"><% if national.coach %>
+                <td class="vert-align"><%= link_to "#{national.try(:event).try(:ordinal)} #{national.event.name}", event_path(national.event) %></td>
+              <td class="vert-align">
+
+                <% if national.coach %>
                 <%= link_to "#{national.try(:coach).try(:fname).try(:first)}. #{national.try(:coach).try(:lname)}", coach_path(national.coach)%>
                 <%else%>
                   <%= "#{national.try(:coach).try(:fname).try(:first)}. #{national.try(:coach).try(:lname)}"%>
@@ -91,11 +100,6 @@ will addd = to show -->
                 </ul>
               </td>
           </tr>
-
-
-
-
-
           <% end %>
         </tbody>
 

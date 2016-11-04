@@ -206,35 +206,6 @@
 
 
 
-<%if user_signed_in?%>
-
-
-	User is logged in
-	<%if current_user.admin? && !current_user.super_admin?%>
-	user is an admin
-	<% elsif current_user.super_admin && !current_user.admin?%> 
-	user is super admin
-	<% elsif current_user.super_admin && current_user.admin%>
-	user is admin and a super one at that!
-	<% else %>
-	no admin rights 
-	<% end %>
-<%else%>
-user is not logged in
-<%end%>
-
-	<br><br>
-	<%= is_admin? ? "Yup, an admin and it works." : "Negative hombre"%>
-	
-
-	
-
-<br><br>
-	<%=link_to "log in", new_user_session_path%>
-<br>
-	<%=link_to "Sign out", destroy_user_session_path,:method => :delete%>
-	<!-- link_to "Profiles", profiles_path -->
-
 
 
 

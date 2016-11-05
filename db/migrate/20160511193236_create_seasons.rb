@@ -31,7 +31,7 @@ class CreateSeasons < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :seasons, :year, unique: true
+    add_index :seasons, :year, unique: false
     # change_column :seasons, :year, :string
   end
 end

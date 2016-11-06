@@ -56,10 +56,10 @@
               		<td><%=  "Tie #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)}"%></td> 
               		
               		
-              		<% elsif dual.w == dual.team1.id%>
+              		<% elsif dual.w == dual.team1%>
               		<td><%= "#{dual.team1.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
               		
-              		<% elsif dual.team2 && dual.w == dual.try(:team2).try(:id)%>
+              		<% elsif dual.team2 && dual.w == dual.try(:team2)%>
               		<td><%= "#{dual.team2.name} #{sprintf('%g', dual.team2_score)}-#{sprintf('%g', dual.team1_score)} #{dual.tb}"%></td>
               		
 
@@ -118,10 +118,10 @@
               		<td><%=  "Tie #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)}"%></td> 
               		
               		
-              		<% elsif dual.w == dual.team1.id%>
+              		<% elsif dual.w == dual.team1%>
               		<td><%= "#{dual.team1.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
               		
-              		<% elsif dual.team2 && dual.w == dual.team2.id%>
+              		<% elsif dual.team2 && dual.w == dual.team2%>
               		<td><%= "#{dual.team2.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
 
                   <% else %>
@@ -169,10 +169,10 @@
               		<td><%=  "Tie #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)}"%></td> 
               		
               		
-              		<% elsif dual.w == dual.team1.id%>
+              		<% elsif dual.w == dual.team1%>
               		<td><%= "#{dual.team1.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
               		
-              		<% elsif dual.team2 && dual.w == dual.team2.id%>
+              		<% elsif dual.team2 && dual.w == dual.team2%>
               		<td><%= "#{dual.team2.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
 
                   <% else %>

@@ -5,10 +5,12 @@ source 'https://rubygems.org'
 
 # Search Solution - need to run: 
 # 'rails g sunspot_rails:install'
-# rake sunspot:solr:start
-gem 'sunspot_rails'
 
-gem 'sunspot_solr'
+## Disabling Sunpot for a test of deployment and considering conversion to full text search on postgres
+## rake sunspot:solr:start
+# gem 'sunspot_rails'
+# gem 'sunspot_solr'
+
 
 # Makes forms easier.
 gem 'simple_form'

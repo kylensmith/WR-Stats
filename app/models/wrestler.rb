@@ -37,10 +37,11 @@ class Wrestler < ActiveRecord::Base
 	# def division
 	# 	Division.find(division_id)
 	# end
-	
-	searchable do 
-		text :name
-	end
+
+# comment out sunspot search	
+	# searchable do 
+	# 	text :name
+	# end
 
 	def to_param
 		"#{id} #{name}".parameterize

@@ -9,10 +9,11 @@ class Event < ActiveRecord::Base
 	has_many :team_scores
 	has_many :all_americans
 
-	searchable do 
-		text :name
-		text :season_id
-	end
+# comment out sunspot
+	# searchable do 
+	# 	text :name
+	# 	text :season_id
+	# end
 
 	def to_param
 		"#{id} #{season_id} #{name}".parameterize

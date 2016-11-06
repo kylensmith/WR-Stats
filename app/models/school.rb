@@ -37,10 +37,10 @@ class School < ActiveRecord::Base
 	# end
 
 
-
-	searchable do 
-		text :name, :boost => 5.0
-	end
+# commented out to remove sunspot search
+	# searchable do 
+	# 	text :name, :boost => 5.0
+	# end
 
 	def to_param
 		name.tr(' ', '_') 

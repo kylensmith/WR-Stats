@@ -1,15 +1,24 @@
 <div class="container">
 	<h1><%="#{@event.season_id} #{@event.name}"%>
+</h1>
+
+
+
+<!-- 
+
 		<div style="width: 50%; display: inline-block">
-			
+			<% @placers.each do |aa|%>
 			<ul class="list-group" style="width: 50%; display: inline-block">
-				<% @placers.each do |aa|%>
+				
 				<li class="list-group-item">
-					<span class="badge"><%= aa.place%></span>
-					<h4><%= aa.wrestler.name%></h4>
+					<% aa[1].each do |placer|%>
+					<span class="badge"><%= aa[0]%></span>
+					<h4><%= placer.wrestler.name%></h4>
 				</li>
 				<%end%>
+				
 			</ul>
+			<%end%>
 		</div>
 		
 		<div style="width: 50%;">
@@ -21,6 +30,47 @@
 			</ul>
 		</div>
 	</div>
+</div>
+
+
+
+
+
+ -->
+
+
+
+
+    <!-- tab panes -->
+
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="team">
+      	<% @placers.each do |aa|%>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+            
+              <th>Place</th>
+              <th><%= aa[0]%></th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <% aa[1].each do |placer|%>
+           
+            <tr>
+            	<td><%= "#{placer.place}. "%></td>
+            	<td><%= link_to "#{placer.wrestler.name}", wrestler_path(placer.wrestler) %> </td>
+             
+
+            </tr>
+            <%end%>
+          </tbody>
+        </table>
+        <%end%>
+      </div>
+    </div>
+  </div>
 </div>
 
 

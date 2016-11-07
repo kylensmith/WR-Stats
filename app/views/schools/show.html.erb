@@ -34,7 +34,7 @@
             <th>Record</th>
             <th>Coach</th>
             <th>Final Rank</th>
-            <% if current_user.admin?%> 
+            <% if is_admin? %> 
             <th>Update Dual Season</th>
             <%end%>
           </tr>
@@ -52,7 +52,7 @@
               <td><%= link_to_if dual.poll, "#{dual.rank_it}", :controller => 'team_ranking_releases',
   :action => 'show', :id => dual.poll %></td>
 
-            <% if current_user.admin?%> 
+            <% if is_admin? %> 
               <th>
                 <%= link_to "Edit", edit_admin_dual_season_path(dual)%>
               </th>

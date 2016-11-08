@@ -28,8 +28,22 @@
           
               <td><%= place.season_id%></td>
               <td><%= place.weight%></td>
-              <td><%= link_to place.school ? place.school.name : "Unattached", school_path(place.school) %></td>
-              <td><%= place.event ? place.event.name : place.division.event %></td>
+
+              <td>
+                <% if place.school %>
+                <%= link_to place.school.name, school_path(place.school)  %>
+                <%end%>
+              </td>
+
+              <!-- Some events were not created, or if they were, they are not connected to the placing. -->
+
+              <td>
+                <% if place.event %>
+                <%= link_to place.event ? place.event.name : "Unknown", event_path(place.event) %>
+                <% elsif place.division %>
+                <%= place.division.event%>
+                <%end%>
+              </td>
               <td><%= place.place%></td>
               
 

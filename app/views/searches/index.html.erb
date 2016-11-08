@@ -15,9 +15,9 @@
         	
 
 	<% @return.each do |record|%>
-<% if record.name%>
+<% if record.searchable.name%>
 <td>
-<%= link_to_if record.name, "#{record.class}: #{record.try(:season_id)} #{record.name}", polymorphic_path(record) %>
+<%= link_to_if record.searchable.name, "#{record.searchable.class}: #{record.searchable.try(:season_id)} #{record.searchable.name}", polymorphic_path(record.searchable) %>
 </td>
 
 <% end %>

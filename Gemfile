@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 #used to help create database views in PostgresSQL
 # gem 'rails_db_views', github: 'anykeyh/rails_db_views'
 
+# full-text search using postgres
+gem 'pg_search'
+
 # Search Solution - need to run: 
 # 'rails g sunspot_rails:install'
 

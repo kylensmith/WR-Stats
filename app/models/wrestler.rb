@@ -29,14 +29,19 @@ class Wrestler < ActiveRecord::Base
 	
 
 
+# Used for full-text search on postgres
+	include PgSearch
+	multisearchable :against => [:name]
+	# , :using => {
+ #                    :tsearch => {:dictionary => "english", :prefix => true, :any_word => true}
+ #                  }
+
+	def self.rebuild_pg_search_documents
+    	find_each { |record| record.update_pg_search_document }
+  	end
 
 
-	# has_many :matches_a, foreign_key: :first_competitor_id, class_name: 'Match'
 
-	
-	# def division
-	# 	Division.find(division_id)
-	# end
 
 # comment out sunspot search	
 	# searchable do 

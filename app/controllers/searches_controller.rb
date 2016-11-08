@@ -25,4 +25,11 @@ class SearchesController < ApplicationController
   # 	end
 
   # end
+
+  def index
+    @search_key = params[:search]
+    @return = PgSearch.multisearch(@search_key)
+  end
+
+
 end

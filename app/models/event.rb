@@ -9,6 +9,17 @@ class Event < ActiveRecord::Base
 	has_many :team_scores
 	has_many :all_americans
 
+	# Used for full-text search on postgres
+	include PgSearch
+	multisearchable :against => [:name, :season_id]
+	# :using => {
+ #                    :tsearch => {:dictionary => "english", :prefix => true, :any_word => true}
+ #                  }
+
+	def self.rebuild_pg_search_documents
+    	find_each { |record| record.update_pg_search_document }
+  	end
+
 # comment out sunspot
 	# searchable do 
 	# 	text :name

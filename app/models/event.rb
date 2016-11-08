@@ -5,6 +5,9 @@ class Event < ActiveRecord::Base
 	has_one :outstandingwrestler
 	has_one :ow_wrestler, through: :outstandingwrestler, source: :wrestler
 	has_one :ow_school, through: :outstandingwrestler, source: :school
+	# need to do a migration to show team_champions
+	# need to change attribute to team_champions_id
+	# belongs_to :team_champion, class_name: "School"
 
 	has_many :team_scores
 	has_many :all_americans

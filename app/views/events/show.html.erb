@@ -2,6 +2,11 @@
 	<h1><%="#{@event.season_id} #{@event.name}"%>
 </h1>
 
+<div class="row">
+	<div class="col-sm-3"><h5><%="Location: #{@event.try(:location)}"%></h5></div>
+	 <!-- <div class="col-sm-3"><h5><%="Team Champions: #{@event.try(:team_champion).try(:name)}"%></h5></div> -->
+</div>
+
 
 
 <!-- 

@@ -2,7 +2,7 @@
 <h1><%= @wrestler.clean_name%></h1>
 
 <div class="row" style="">
-  <div class="col-sm-3"><h5>High School: <%= "#{@wrestler.high_school} #{@wrestler.state.abv }"%></h5></div>
+  <div class="col-sm-3"><h5>High School: <%= "#{@wrestler.try(:high_school)} #{@wrestler.try(:state).try(:abv) }"%></h5></div>
  </div>
 
              

@@ -31,7 +31,7 @@
 	
 <div class="row row-centered">
 		<div class="col-xs-4 col-centered"> 
-			Result: <%= f.collection_check_boxes :dual_result, [[1, "Team 1 Won  "],  [2, "Team 1 Won  "], [3, "Tie"]], :first, :last, wrapper_html: { class: 'form-check-input' }, label_html: { label: 'form-check-input' }%>
+			Result: <%= f.collection_check_boxes :dual_result, [[1, "Team 1 Won  "],  [2, "Team 2 Won  "], [3, "Tie"]], :first, :last, wrapper_html: { class: 'form-check-input' }, label_html: { label: 'form-check-input' }%>
 		</div>
 
 		<%= f.input :tie_break%>

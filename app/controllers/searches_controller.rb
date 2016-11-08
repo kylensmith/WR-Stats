@@ -29,6 +29,9 @@ class SearchesController < ApplicationController
   def index
     @search_key = params[:search]
     @return = PgSearch.multisearch(@search_key)
+    if @return.length == 1
+       redirect_to polymorphic_path(@return.first.searchable)
+     end
   end
 
 

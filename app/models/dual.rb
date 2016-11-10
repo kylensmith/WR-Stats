@@ -20,8 +20,11 @@ class Dual < ActiveRecord::Base
 	def opp(input)
 		if input == team1
 			team2
-		else
+		
+		elsif input == team2
 			team1
+		else
+			
 		end
 	end
 

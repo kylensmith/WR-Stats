@@ -7,7 +7,10 @@
 
 <br>
 <br>
-<%= f.input :time,  {ampm: true} %>
+
+<%= f.input :time,  {ampm: true, :as => :time, :minute_step => 15} %>
+
+
 <br>
  <p class='form-control-static'>Location of dual: </p>
  <%= f.collection_check_boxes :site, [[1,"Team 1  "], [0, 'Neutral  .'],  [2, "Team 2  "] ], :first, :last, input_html: { class: 'form-check' }%>

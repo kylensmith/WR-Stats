@@ -6,7 +6,9 @@
   <div class="row" style="">
     <div class="col-sm-3">
       <h5>
+        <% if @ds.coach%>
         Head Coach: <%= link_to "#{@ds.try(:coach).try(:fname)} #{@ds.try(:coach).try(:lname)}", coach_path(@ds.coach)%>
+        <%end%>
       </h5>
     </div>
     <div class="col-sm-3">
@@ -53,7 +55,14 @@
             <tr>
               <td><%=dual.try(:date).try(:strftime, "%a %b %d, %Y")%></td>
               
-              <td><%= link_to "#{dual.location(@team)} #{dual.opp(@team).name}", school_season_path(dual.opp(@team), dual.season_id)  %></td>
+              <td>
+                <% if dual.opp(@team)%>
+                <%= link_to "#{dual.location(@team)} #{dual.opp(@team).name}", school_season_path(dual.opp(@team), dual.season_id)  %>
+                <%else%>
+                <p>Unknown</p>
+                <%end%>
+              </td>
+
 
               <td><%="#{dual.result(@team)} #{dual.try(:tie_breaker) ? "TB" : ""}"%></td>
               <td><%= "#{winner}-#{loser}-#{draw}"%></td>

@@ -99,7 +99,7 @@ module Admin
 	  	when 3
 	  		@dual.t = true
 	  	end
-	  	p @dual.save
+	  	 @dual.update(dual_info)
 	  	if @dual.save
 	  		flash.notice = "Dual scheduled."
 	  	else

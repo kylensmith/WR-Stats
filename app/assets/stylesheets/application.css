@@ -53,6 +53,10 @@ h1{
 top: 50%;
 }*/
 
+.centered {
+  text-align: center;
+}
+
 ul.aa_list {
     list-style-type: circle;
 }

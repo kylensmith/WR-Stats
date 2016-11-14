@@ -4,8 +4,8 @@
 
 <div class="container">
 
-	<h1>Create Dual Season</h1>
-  <p>This form will create Dual Seasons one at a time.  To create all schools for a season, use the mass creator under seasons.</p>
+	<h1>Update Dual Season</h1>
+  <p>This form will update Dual Seasons one at a time.  To create all schools for a season, use the mass creator under seasons.</p>
   <p>Note: Only one record, per season for each school is permitted.</p>
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="team">
@@ -22,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          <%=simple_form_for @ds, method: :post, :url => {:controller => params[:controller], :action => "update"}, html: { class: 'form-inline' } do |f|%> 
+          <%=simple_form_for @ds, :url => {:controller => params[:controller], :action => "update"}, html: { class: 'form-inline' } do |f|%> 
           
         
             <tr>

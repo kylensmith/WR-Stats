@@ -4,6 +4,7 @@ module Admin
 
   def index
   	@coaches = Coach.all.order("LOWER(lname)").order(:fname)
+    @title = "Admin: Coaches"
   end
 
   def show
@@ -11,6 +12,7 @@ module Admin
  	@coach = Coach.find(params[:id])
   	@ds = @coach.dual_seasons.sort { |a, b| b.season_id <=> a.season_id }
   	@indy = @coach.team_scores.sort { |a, b| b.season_id <=> a.season_id }
+    @title = "Admin: #{@coach.try(:name)}"
 
   end
 
@@ -28,6 +30,7 @@ module Admin
 
   def new
     @coach = Coach.new
+    @title = "Admin: New Coach"
   end
 
   def create
@@ -45,6 +48,7 @@ module Admin
 
   def edit
     @coach = Coach.find(params[:id])
+    @title = "Admin: Edit Coach"
 
   end
   	

@@ -1,5 +1,6 @@
 class SchedulesController < ApplicationController
   def index
+    @title = "WRStats: Home"
   	@user = current_user
     @date = Time.now.to_date
     # @date = @date - 3887
@@ -21,7 +22,7 @@ class SchedulesController < ApplicationController
     # This will sort while also accepting nil values
     @duals = @alldual.select {|x| x['season_id'] == @season.year }
     @duals.sort! { |a,b| a.date <=> b.date || (b.date && 1) || -1 }
-
+    @title = "#{@season.id} #{@team.name} Schedule"
    
 
   end

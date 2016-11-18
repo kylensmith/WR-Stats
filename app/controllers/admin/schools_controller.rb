@@ -5,6 +5,7 @@ module Admin
   before_filter :is_admin?
   def new
     @school = School.new
+    @title = "Admin: New School"
   end
 
   def create
@@ -17,6 +18,7 @@ module Admin
     school_name =  params[:name].tr('_', ' ').tr('.','%')
     @team = School.where{ name =~ school_name }
     @school = @team[0]
+    @title = "Admin: Edit #{@school.try(:name)}"
   end
 
   def update

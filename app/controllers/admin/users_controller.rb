@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     if @user == User.first
       redirect_to root_path
     end
+    @title = "Admin: Edit User"
   end
 
   def update
@@ -27,6 +28,7 @@ class UsersController < ApplicationController
 
   def index
   	@adm = User.all
+    @title = "Admin: Users"
   end
 
 private

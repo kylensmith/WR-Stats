@@ -5,6 +5,7 @@ module Admin
   before_filter :is_admin?
   
   def new
+    @title = "Admin: New Dual Season"
     @schools = School.all.where(active: true).order(:name)
     @ds = DualSeason.new
     @coaches = Coach.all
@@ -61,6 +62,7 @@ module Admin
   end
 
   def edit
+    @title = "Admin: Edit Dual Season"
     @ds = DualSeason.find(params[:id])
   end
 
@@ -68,7 +70,7 @@ module Admin
     @ds = DualSeason.find(params[:id])
     @ds.update(ds_info)
     if @ds.save
-      flash.notice = "The dual season has been created."
+      flash.notice = "The dual season has been updated."
     else 
       flash.alert = "Failure.  The dual season for was not created.  Please try again with all required fields."
     end

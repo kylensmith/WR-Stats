@@ -13,6 +13,7 @@ class TeamRankingReleasesController < ApplicationController
 
   def show
   	@poll = TeamRankingRelease.find(params[:id])
+    @title = "Dual Ranking Poll"
   	@rank_array = @poll.team_rankings.order(:rank)
   end
 end

@@ -5,6 +5,7 @@ module Admin
 		before_filter :is_admin?
 		def new
 			@dual = Dual.new
+			@title = "Admin: New Dual"
 		end
 
 		def create
@@ -47,6 +48,7 @@ module Admin
 	  def edit
 	  	@dual = Dual.find(params[:id])
 	  	@seasons = Season.all.sort { |a, b| b.id <=> a.id }
+		@title = "Admin: Edit Dual" 
 		  	# @schools = School.all.sort { |a,b| a <=> b || (b && 1) || -1 }
 	  	# else
 	  	# 	redirect root_path
@@ -58,6 +60,7 @@ module Admin
 
 	  def this_week
 	  	# @duals = Dual.where(complete: nil)
+	  	@title = "Admin: This Week's Duals."
 	  	@duals = Dual.where(date: 4.days.ago..4.days.from_now).order(:date, :time)
 	  	# current_user.tasks.where(due_date: 1.week.ago..Date.today)
 

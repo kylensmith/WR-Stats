@@ -24,7 +24,7 @@ class Dual < ActiveRecord::Base
 		elsif input == team2
 			team1
 		else
-			
+			false
 		end
 	end
 

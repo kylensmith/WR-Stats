@@ -13,7 +13,7 @@ class CoachesController < ApplicationController
  @coach = Coach.find(params[:id])
   @ds = @coach.dual_seasons.sort { |a, b| b.season_id <=> a.season_id }
   @indy = @coach.team_scores.sort { |a, b| b.season_id <=> a.season_id }
-
+  @title = "Coach: #{@coach.try(:name)}"
   end
 
   def edit

@@ -32,6 +32,7 @@ class SearchesController < ApplicationController
     if @return.length == 1
        redirect_to polymorphic_path(@return.first.searchable)
      end
+     @title = "Search: #{@search_key}"
   end
 
 

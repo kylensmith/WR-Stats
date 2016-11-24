@@ -2,6 +2,7 @@ class Dual < ActiveRecord::Base
 	include ActiveModel::Validations
 	validates_presence_of :team1
 	attr_accessor :dual_result 
+	# accepts_nested_attributes_for :team2
 	# :date
 	belongs_to :season, :foreign_key => "season_id"
 	belongs_to :wrestler

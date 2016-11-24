@@ -27,6 +27,7 @@
 
 
 
+
     <!-- tab panes -->
 
     <div class="tab-content">
@@ -75,8 +76,29 @@
       </div>
     </div>
   </div>
-</div>
 
+
+
+
+  <div class="season_form">
+    <%= simple_form_for @new_school, :url =>  {:controller => 'admin/duals', :action => "mass_create" }, :html => { :class => 'form-inline' } do |c| %>
+
+    <%= c.fields_for :duals do |f| %>
+
+
+
+         <%= render "new_dual_form", :f => f %>
+        <%= render "new_dual_form", :f => f %>
+        <%= render "new_dual_form", :f => f %>
+
+
+      
+
+      <p><%= c.submit "Submit" %></p>
+    <%end%>
+    <% end %>
+  </div>
+</div>
 
 
 

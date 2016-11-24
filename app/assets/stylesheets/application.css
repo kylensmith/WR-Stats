@@ -21,7 +21,9 @@ body{
  
 }
 
-
+.form-inline {
+   margin:5px 13px;
+}
 
 input.radio {
   margin-right: 5px;

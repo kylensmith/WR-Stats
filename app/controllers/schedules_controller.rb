@@ -23,8 +23,19 @@ class SchedulesController < ApplicationController
     @duals = @alldual.select {|x| x['season_id'] == @season.year }
     @duals.sort! { |a,b| a.date <=> b.date || (b.date && 1) || -1 }
     @title = "#{@season.id} #{@team.name} Schedule"
-   
+    @team1 = School.new
+    @schedule = []
+    @new_school = School.new
+    3.times do
+
+    @new_school.duals.build
+     # = Dual.new
+    # @schedule.push(@new_dual)
+    # @new_dual = @team.build_duals
+   end
 
   end
+
+
 
 end

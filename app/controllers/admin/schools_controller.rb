@@ -64,6 +64,13 @@ module Admin
   def create_dual_season
   end
 
+    def dual_create
+      p "reached mass create *************"
+      p params
+      p "**************"
+   
+   end
+
 
 
 private 

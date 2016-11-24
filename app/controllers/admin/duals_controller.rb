@@ -1,6 +1,8 @@
 module Admin
 	class DualsController < ApplicationController
 		include ApplicationHelper
+		protect_from_forgery with: :null_session
+		
 		before_filter :authenticate_user!
 		before_filter :is_admin?
 		def new
@@ -110,6 +112,15 @@ module Admin
 	  	end 
 	  	redirect_to edit_admin_dual_path(@dual)
 	  end
+
+	def mass_create
+
+    	p "reached mass create *************"
+    	p params.inspect
+    	p "**************"
+    	p params[:dual_attributes]
+ 	 
+ 	 end
 
 
 

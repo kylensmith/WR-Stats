@@ -19,6 +19,13 @@ class School < ActiveRecord::Base
 
 	has_many :dual_seasons
 	has_many :duals
+	accepts_nested_attributes_for :duals, :reject_if => lambda { |b| b[:team2].blank? } || :all_blank
+  	# has_many :dual_attributes
+	# accepts_nested_attributes_for :dual_attributes, :reject_if => lambda { |b| b[:team2].blank? } || :all_blank
+  	
+  	attr_accessor :dual_attributes
+
+
 
 	has_many :team1, foreign_key: :team1_id, class_name: 'Dual'
 	has_many :team2, foreign_key: :team2_id, class_name: 'Dual'
@@ -28,6 +35,8 @@ class School < ActiveRecord::Base
 	has_many :dual_meets
 	# belongs_to :team_ranking
 	belongs_to :state
+
+
 
 	has_many :season_duals, -> { select("duals.*, dual_seasons.division_id AS division_id") }, through: :dual_seasons, source: :dual
 	

@@ -1,0 +1,28 @@
+<div class="new_dual_form">
+	<p>
+		
+	
+	
+		<%= f.input :team1_id, :as => :hidden, :input_html => { :value => 
+			@team.id }%>
+			<%= f.input :season_id, :as => :hidden, :input_html => { :value => 
+				@season.id }%>
+				<!-- Might need to change inputs to team1_id and season_id -->
+				<%= f.input :date, discard_year: true%>
+
+				<%= f.input :time,  {ampm: true, :as => :time, :minute_step => 15} %>
+
+				<%= f.association :team2, collection: School.all.order(:name), required: false, prompt: "Choose Opponent", label: "Opponent"%>
+
+				<%= f.input :site, collection: [["Home", 1], ['Neutral', 0], ["Away", 2]], include_blank: true, prompt: "Dual Location"%>
+
+
+				<%= f.label :_destroy, "Remove Question" %>
+				
+				
+			</p>
+			<span class="dual_results">
+			</span>
+
+			<hr align="center" width="70%">
+		</div>

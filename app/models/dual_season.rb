@@ -13,7 +13,11 @@ class DualSeason < ActiveRecord::Base
 # Method that returns the team's ranking, if they were ranked in the final dual ranking of the season.
 	def rank_it
 		# @tr = TeamRankingRelease.reject { |x|  x.nwca == false }
-		@trr = TeamRankingRelease.where(season_id: self.season_id, division_id: self.division_id).order(:date).last 
+		if self.season_id <= 1973
+			@trr = TeamRankingRelease.where(season_id: self.season_id).order(:date).last 
+			else
+			@trr = TeamRankingRelease.where(season_id: self.season_id, division_id: self.division_id).order(:date).last 
+		end
 		if @trr != nil
 			@new_record = @trr.team_rankings.where(school_id: self.school_id)
 			if @new_record.length > 0

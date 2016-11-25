@@ -114,13 +114,61 @@ module Admin
 	  end
 
 	def mass_create
+		p "*****"
+		p "*****"
+		p "*****"
+		p "*****"
+
+
+		# Still does not change date to the correct year.
+
+		params[:school][:duals_attributes].values.each do |dual_data|
+  	p dual_data
+
+  	@d = Dual.new(dual_data)
+
+  		# yr = dual_data["date(1i)"].to_i
+	  	# mon = dual_data["date(2i)"].to_i
+	  	# day = dual_data["date(3i)"].to_i
+  	if @d.save
+  		p "Passed"
+  	end
+
+	end
+
+		# Dual.create(multi_dual)
+
+
+		# @duals = 
+		# p params[:school][:duals_attributes]
+		# for i in 0...@duals.length
+		# # if Dual.create(params[:school][:duals_attributes]['#{i}'])
+		# p i
+
+		# # p @duals[i].inspect
+		# # 	p "passed ***********"
+		# # else
+		# # 	p "Failed *****"
+		# # end
+
+
+		# # .each do |multi_dual|
+		# # 	p "*****"
+		# # 	Dual.create(multi_dual.first.to_hash)
+		# # 	p "*****"
+
+		# end
+		# Dual.create(multi_dual)
 
     	p "reached mass create *************"
-    	p params.inspect
-    	p "**************"
-    	p params[:dual_attributes]
+    	  	# p params[:school][:duals_attributes].json
+    	  	# p params[:school].to_json
  	 
- 	 end
+    	p "**************"
+    	# p params[:dual_attributes][0].inspect
+    	redirect_to (:back)
+ 	 
+ 	end
 
 
 
@@ -128,6 +176,10 @@ module Admin
 	  def dual_info
 	  	params.require(:dual).permit(:time, :dual_result, :site, :team1_id, :team2_id, :team1_score, :team2_score, :tie_break, :w, :l, :t, :attendance, :complete, :estimated)
 	  end
+
+	  def multi_dual
+	  	params.require(:school).permit(:dual_attributes => [:date, :time, :dual_result, :site, :team1, :team2_id])
+       end
 
 	end
 	

@@ -26,12 +26,17 @@ class SchedulesController < ApplicationController
     @team1 = School.new
     @schedule = []
     @new_school = School.new
+    # @new_duals = @team.duals.new
+    # .build
+
     3.times do
 
-    @new_school.duals.build
-     # = Dual.new
-    # @schedule.push(@new_dual)
-    # @new_dual = @team.build_duals
+      @new_dual = Dual.new
+
+    # @new_school.duals.build
+   #   # = Dual.new
+    @schedule.push(@new_dual)
+   #  # @new_dual = @team.build_duals
    end
 
   end

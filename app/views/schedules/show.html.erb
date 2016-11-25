@@ -81,21 +81,22 @@
 
 
   <div class="season_form">
-    <%= simple_form_for @new_school, :url =>  {:controller => 'admin/duals', :action => "mass_create" }, :html => { :class => 'form-inline' } do |c| %>
+    <%= simple_form_for @team, :url =>  {:controller => 'admin/duals', :action => "mass_create" }, :html => { :class => 'form-inline' }, :method => 'post' do |c| %>
 
-    <%= c.fields_for :duals do |f| %>
+    <%= c.fields_for :duals, @schedule do |f| %>
+    
 
 
 
          <%= render "new_dual_form", :f => f %>
-        <%= render "new_dual_form", :f => f %>
-        <%= render "new_dual_form", :f => f %>
+         
+        
 
 
       
-
+  <%end%>
       <p><%= c.submit "Submit" %></p>
-    <%end%>
+    
     <% end %>
   </div>
 </div>

@@ -1,5 +1,8 @@
 module ApplicationHelper
 
+	
+  
+
 	# Returns whatever a championship division was called at the time of the contest
 	def self.find_event(division, season)
 		if season <= 1973 && division.alternate_name != nil

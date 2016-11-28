@@ -27,7 +27,8 @@ class School < ActiveRecord::Base
 	has_many :team1, foreign_key: :team1_id, class_name: 'Dual'
 	has_many :team2, foreign_key: :team2_id, class_name: 'Dual'
 
-	accepts_nested_attributes_for :duals
+	# accepts_nested_attributes_for :duals,  :allow_destroy => true
+	accepts_nested_attributes_for :duals, :allow_destroy => true,:reject_if => :all_blank
 	attr_accessor :dual_attributes
 	# , :reject_if => lambda { |b| b[:team2].blank? } || :all_blank
   	

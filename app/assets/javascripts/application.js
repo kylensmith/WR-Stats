@@ -28,3 +28,13 @@
 // };
 
 
+function remove_fields(link){
+	console.log("Passes Test");
+	// $(link).prev("input[type=hidden").value = true;
+	$(link).prevAll("input[type=hidden]").first().val("1");
+	// $(link).up(".dual_fields").hide();
+	$(link).closest(".fields").hide();
+	// console.log($(link).closest(".fields"));
+};
+
+

@@ -178,7 +178,7 @@ module Admin
 	  end
 
 	  def multi_dual
-	  	params.require(:school).permit(:dual_attributes => [:date, :time, :dual_result, :site, :team1, :team2_id])
+	  	params.require(:school).permit(:dual_attributes => [:id, :date, :time, :dual_result, :site, :team1, :team2_id, :_destroy])
        end
 
 	end

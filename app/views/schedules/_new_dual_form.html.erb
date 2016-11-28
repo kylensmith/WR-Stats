@@ -1,6 +1,6 @@
 <div class="new_dual_form">
-	<p>
-		
+	<p class="fields">
+		<fieldset>
 	
 	
 		<%= f.input :team1_id, :as => :hidden, :input_html => { :value => 
@@ -17,7 +17,16 @@
 				<%= f.input :site, collection: [["Home", 1], ['Neutral', 0], ["Away", 2]], include_blank: true, prompt: "Dual Location"%>
 
 
-				<%= f.label :_destroy, "Remove Question" %>
+				
+				
+
+				  <%= f.hidden_field :_destroy %>
+  <%= link_to "remove", '#', class: "remove_fields" %>
+				
+
+        </fieldset>
+		
+
 				
 				
 			</p>

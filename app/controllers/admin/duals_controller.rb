@@ -11,6 +11,7 @@ module Admin
 		end
 
 		def create
+			p params.inspect
 			@dual = Dual.new(dual_info)
 			yr = params[:dual]["date(1i)"].to_i
 			mon = params[:dual]["date(2i)"].to_i
@@ -114,10 +115,6 @@ module Admin
 	  end
 
 	def mass_create
-		p "*****"
-		p "*****"
-		p "*****"
-		p "*****"
 
 
 		# Still does not change date to the correct year.
@@ -135,39 +132,17 @@ module Admin
   	end
 
 	end
-
-		# Dual.create(multi_dual)
-
-
-		# @duals = 
-		# p params[:school][:duals_attributes]
-		# for i in 0...@duals.length
-		# # if Dual.create(params[:school][:duals_attributes]['#{i}'])
-		# p i
-
-		# # p @duals[i].inspect
-		# # 	p "passed ***********"
-		# # else
-		# # 	p "Failed *****"
-		# # end
-
-
-		# # .each do |multi_dual|
-		# # 	p "*****"
-		# # 	Dual.create(multi_dual.first.to_hash)
-		# # 	p "*****"
-
-		# end
-		# Dual.create(multi_dual)
-
-    	p "reached mass create *************"
-    	  	# p params[:school][:duals_attributes].json
-    	  	# p params[:school].to_json
- 	 
-    	p "**************"
-    	# p params[:dual_attributes][0].inspect
     	redirect_to (:back)
  	 
+ 	end
+
+ 	def masscreate2
+ 		# strong_params is an array that needs to be iterated over for each create method.
+ 		duals_info.each do |this|
+ 			@dual = Dual.new(this)
+ 			@dual.save
+ 		end
+ 		redirect_to (:back)
  	end
 
 
@@ -177,8 +152,43 @@ module Admin
 	  	params.require(:dual).permit(:time, :dual_result, :site, :team1_id, :team2_id, :team1_score, :team2_score, :tie_break, :w, :l, :t, :attendance, :complete, :estimated)
 	  end
 
+	  def duals_info
+	  	params.permit(:duals => [ :team1_id, :site, :team2_id, :season_id, :month, :day, :time, :hour, :minute]).require(:duals).tap do |whitelisted|
+	  	i = 0
+	  	whitelisted.each do |instance|
+	  		month = params[:duals][i][:month].to_i
+	  		year = params[:duals][i][:season_id].to_i
+	  		day = params[:duals][i][:day].to_i
+	  		hour = params[:duals][i][:hour].to_i
+	  		min = params[:duals][i][:minute].to_i
+	  		if month < 7
+	  			year = year
+	  		elsif month > 7
+	  			year = year - 1
+	  		end   
+
+	  		instance[:date] = Date.new(year, month, day)
+	  		# p "Current iteration of time"
+	  		# p params[:duals][i][:time]
+	  		# p "new iteration of time"
+	  		instance[:time] = Time.new(year, month, day, hour, min)
+	  		# Time.new(year, month, day, hour, min)
+	  		# p "***************"
+	  		# p "***************"
+
+	  		i = i+1
+
+	  	# params[:duals][:time]['time(1i)']
+	  	end
+	  end
+	  end
+
+	 #  params.require(:user).permit(:username).tap do |whitelisted|
+  # 		whitelisted[:data] = params[:user][:data]
+		# end
+
 	  def multi_dual
-	  	params.require(:school).permit(:dual_attributes => [:id, :date, :time, :dual_result, :site, :team1, :team2_id, :_destroy])
+	  	params.require(:school).permit(:dual_attributes => [:id, :date, :month, :day, :time, :dual_result, :site, :team1_id, :team2_id, :_destroy])
        end
 
 	end

@@ -55,6 +55,8 @@ Rails.application.routes.draw do
   # get 'wrestler/new'
 
   # get 'wrestler/create'
+    post 'admin/duals/masscreate2', action: :masscreate2, controller: 'admin/duals'
+  
   post 'admin/duals/mass_create', action: :mass_create, controller: 'admin/duals'
     get 'admin/duals/this_week_complete', action: :this_week_complete, controller: 'admin/duals'
     get 'admin/dual_seasons/new_all_active', action: :new_all_active, controller: 'admin/dual_seasons'
@@ -91,7 +93,7 @@ match 'admin/schools/change', action: :changes, controller: 'admin/schools', via
   namespace :admin do
     # match '/duals/:id' => 'duals#updat', :as => 'admin/duals#update'
     resources :coaches, only: [:index, :update, :new, :create, :edit, :destroy]
-    resources :duals, only: [:update, :new, :create, :edit, :destroy, :mass_create]
+    resources :duals, only: [:update, :new, :create, :edit, :destroy, :mass_create, :mass_create2]
     resources :wrestlers, only: [:update, :new, :create, :edit, :destroy]
     resources :users, only: [:index, :update, :edit]
     resources :dual_seasons, only: [:new, :edit, :create, :update, :destroy, :change, :new_all_active, :create_all_active] do

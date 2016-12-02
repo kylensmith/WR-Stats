@@ -21,7 +21,9 @@ class School < ActiveRecord::Base
 	has_many :duals
 	
 
-
+scope :alphabetically, -> {
+  order("name ASC")
+}
 
 
 	has_many :team1, foreign_key: :team1_id, class_name: 'Dual'

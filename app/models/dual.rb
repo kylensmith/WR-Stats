@@ -1,7 +1,7 @@
 class Dual < ActiveRecord::Base
 	include ActiveModel::Validations
 	validates_presence_of :team1
-	attr_accessor :dual_result 
+	attr_accessor :dual_result, :month, :day, :hour, :minute
 	# accepts_nested_attributes_for :team2
 	# :date
 	belongs_to :season, :foreign_key => "season_id"
@@ -105,6 +105,14 @@ class Dual < ActiveRecord::Base
 			# @vacationrequest.try(:request_date).try(:strftime, '%B %e, %Y') 
 			"#{date.try(:strftime, '%A')}-#{date.try(:day).try(:ordinalize)}"
 		end
+	end
+
+	def form_date(input)
+		
+		p "******** Okay, it called. #{input.inspect}"
+	
+		
+
 	end
 
 

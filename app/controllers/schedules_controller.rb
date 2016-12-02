@@ -26,6 +26,8 @@ class SchedulesController < ApplicationController
     @team1 = School.new
     @schedule = []
     @new_school = School.new
+
+    @schools = School.alphabetically
     # @new_duals = @team.duals.new
     # .build
 

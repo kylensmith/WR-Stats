@@ -157,6 +157,8 @@
             <li><p class="centered"><%= current_user.email ? current_user.email : "Something else here"%></p></li>
             
             <li><%= link_to "Change your password", edit_user_registration_path %></li>
+
+            <li><%=link_to "Sign out", destroy_user_session_path,:method => :delete%></li>
             
           </ul>
         </li>

@@ -1,0 +1,16 @@
+
+
+<!-- Form for adding more duals -->
+
+<div class ="centered new_dual_form">
+  <h2><%= "Add duals to #{@team.name}'s #{@season.year} schedule."%></h2>
+  <p>Remove any rows that are not needed before submitting form.</p>
+
+  <%= form_tag admin_duals_masscreate2_path do %>  
+  <%= render "new_dual_form_template"%>
+   <a class="add_new_field" return false;>Add another dual</a>
+   <%= submit_tag "Submit" %>
+  <% end %>
+ 
+   
+</div>

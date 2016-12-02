@@ -80,6 +80,76 @@
 
 
 
+
+
+
+
+<br>
+
+
+
+
+
+
+<!-- Ability to add duals through the Admin controller will be hidden unless the user is an admin.-->
+<% if is_admin? %>
+
+<!-- Javascript for functionality of adding additional fields. -->
+<script type="text/javascript">
+// remove form instance
+$(document).on('click', '.remove_field', function(e) {
+ e.preventDefault();
+ $(this).closest('.clone_form').remove();
+ return false;
+});
+
+// Run functions on page ready
+$(document).ready(function(){
+  // Hide form on page ready
+  $(".new_dual_form").hide();
+
+  // When link to show form is clicked, show the form and hide the link that has been clicked
+  $(".show_link").click(function(){
+    $(".new_dual_form").show();
+    $(this).hide();
+  });
+
+// Click on link to add a new field and insert a cloned form div with the appended remove link
+$(".add_new_field").click(function(){
+  var newForm = $(".clone_form").first().clone();
+  var newDualForm = $(newForm).html($(newForm).html() + ' ' + '<input class="remove_field" type="button" value="Remove" />');
+  $(newDualForm).appendTo(".dual_form_wrap");
+});
+});
+</script>
+
+
+  <a class="show_link centered" return false;>Add duals to the schedule.</a>
+
+  <%= render "admin_multiple_duals_create"%>
+
+<% end %>
+
+
+
+
+<br><br>
+
+
+
+
+
+
+
+
+
+
+<br><br><br>
+
+
+
+
+
   <div class="season_form">
     <%= simple_form_for @team, :url =>  {:controller => 'admin/duals', :action => "mass_create" }, :html => { :class => 'form-inline' }, :method => 'post' do |c| %>
 
@@ -87,7 +157,7 @@
     
 
 
-
+<div class=""
          <%= render "new_dual_form", :f => f %>
          
         
@@ -95,14 +165,11 @@
 
       
   <%end%>
+    
       <p><%= c.submit "Submit" %></p>
     
     <% end %>
   </div>
 </div>
-
-
-
-
 
 

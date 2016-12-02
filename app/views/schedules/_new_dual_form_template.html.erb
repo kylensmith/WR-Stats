@@ -1,0 +1,55 @@
+
+	<p class="fields">
+		<fieldset class="dual_form_wrap centerd">
+			<div class="form-group date optional school_duals_date clone_form">
+				<label class="control-label date optional" >
+					<div class="form-inline simple_form">
+						
+						<%= hidden_field_tag('duals[][team1_id]', @team.id) %>
+						<%= hidden_field_tag('duals[][season_id]', @season.year) %>
+						<span class="spacer">
+							Date: <%= select_month(Date.current, field_name: "month", :prefix => 'duals[]', :html=>{:class => 'control-label' 'date' 'optional' })%>
+						</span>
+						<span class="spacer">
+							<%= select_day(Date.current, field_name: "day", :prefix => 'duals[]', :html=>{:class => 'control-label' 'date' 'optional' }) %>
+						</span>
+
+						<span class="spacer">
+							Opponent: <%= select_tag 'duals[][team2_id]',
+							options_from_collection_for_select(@schools, 'id', 'name'),
+							:include_blank => true %>
+						</span>
+
+						<span class="spacer">
+							Time: 
+							<%=select_hour(Time.current, field_name: "hour", :prefix => 'duals[]', minute_step: 15, ampm: true)%>
+
+							<%=select_minute(Time.current, field_name: "minute", :prefix => 'duals[]', minute_step: 15)%>
+
+							
+
+
+
+
+						</span>
+
+
+						
+							Location: <%= select_tag('duals[][site]', options_for_select([["Home", 1], ['Neutral', 3], ["Away", 2]]), include_blank: true)%>
+						
+
+					</div>
+					<hr align="center" width="50%">
+
+				</label>
+
+				
+			</div>
+
+
+		</fieldset>
+
+	</p>
+	
+
+	

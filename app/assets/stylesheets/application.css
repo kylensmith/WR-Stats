@@ -51,6 +51,9 @@ h1{
     vertical-align: middle;
 }
 
+.control_label {
+  inherit: none;
+}
 /*.vert_center{
 top: 50%;
 }*/
@@ -58,6 +61,18 @@ top: 50%;
 .centered {
   text-align: center;
 }
+
+.new_dual_form{
+border-radius: 25px;
+background-color: #f6f2f6;
+  /*outline: 1px solid grey;*/
+  
+}
+
+/*.new_dual_form {
+text-align: left;
+}
+*/
 
 ul.aa_list {
     list-style-type: circle;
@@ -77,3 +92,9 @@ ul.aa_list {
 .centerer {
     text-align:center;
 } 
+
+
+
+.clone_form {
+  text-align: left;
+}

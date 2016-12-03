@@ -39,6 +39,10 @@
               <th>Opponent</th>
               <th>Result</th>
               <th>Record</th>
+              <% if is_admin?%>
+              <th>Edit Dual?</th>
+                <%end%>
+              
             </tr>
           </thead>
           <tbody>
@@ -62,11 +66,19 @@
                 <%else%>
                 <p>Unknown</p>
                 <%end%>
+
+
               </td>
 
 
               <td><%="#{dual.result(@team)} #{dual.try(:tie_breaker) ? "TB" : ""}"%></td>
               <td><%= "#{winner}-#{loser}-#{draw}"%></td>
+              <% if is_admin?%>
+              <td>
+                <%= link_to "Update", edit_admin_dual_path(dual)%>
+                </td>
+                <%end%>
+              
               
 
             </tr>

@@ -84,7 +84,7 @@
 
 
 
-<br>
+
 
 
 
@@ -93,6 +93,7 @@
 
 <!-- Ability to add duals through the Admin controller will be hidden unless the user is an admin.-->
 <% if is_admin? %>
+<div class="container">
 
 <!-- Javascript for functionality of adding additional fields. -->
 <script type="text/javascript">
@@ -127,7 +128,7 @@ $(".add_new_field").click(function(){
   <a class="show_link centered" return false;>Add duals to the schedule.</a>
 
   <%= render "admin_multiple_duals_create"%>
-
+</div>
 <% end %>
 
 
@@ -144,32 +145,11 @@ $(".add_new_field").click(function(){
 
 
 
-<br><br><br>
 
 
 
 
 
-  <div class="season_form">
-    <%= simple_form_for @team, :url =>  {:controller => 'admin/duals', :action => "mass_create" }, :html => { :class => 'form-inline' }, :method => 'post' do |c| %>
 
-    <%= c.fields_for :duals, @schedule do |f| %>
-    
-
-
-<div class=""
-         <%= render "new_dual_form", :f => f %>
-         
-        
-
-
-      
-  <%end%>
-    
-      <p><%= c.submit "Submit" %></p>
-    
-    <% end %>
-  </div>
-</div>
 
 

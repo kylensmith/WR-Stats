@@ -1,0 +1,38 @@
+  <div class="season_form">
+  	<%= simple_form_for @ranking, :url =>  {:controller => 'admin/team_ranking_releases', :action => "create" }, :html => { :class => 'form-inline' }, :method => 'post' do |c| %>
+
+
+  	<%= c.input :poll_name, label: "Ranking Name" %>
+  	<br>
+  	<%= c.input :date,  label: "Date Released"%>
+  	<br>
+
+
+  	<%= c.input :nwca, as: :boolean, checked_value: true, unchecked_value: false , label: "NWCA Ranking?"%>
+
+  	<br>
+
+  	<%= c.input :dual_ranking, as: :boolean, checked_value: false, unchecked_value: true , label: "Tournament Ranking?"%>
+  	<br>
+
+
+
+  	<%= c.association :division, collection: Division.all.order(:event), label_method: :event, required: false, prompt: "Select Division", label: "Division"%>
+
+  	<br><br><br>
+
+  	<%= c.fields_for :team_rankings, @ranked_teams do |f| %>
+
+
+
+  	<div class=""
+  	<%= render "team_ranking_form", :f => f %>
+
+
+  	<%end%>
+
+  	<p><%= c.submit "Submit" %></p>
+
+  	<% end %>
+  </div>
+</div>

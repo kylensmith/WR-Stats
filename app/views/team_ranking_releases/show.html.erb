@@ -3,12 +3,15 @@
 
 <div class="container">
   <h1>
-    <%= "Dual Ranking: #{@poll.poll_name} #{@poll.date.strftime("%B %d, %Y")}"%>
+    <%= " #{@poll.try(:poll_name)}"%>
   </h1>
+   <h2>
+    <%= "#{@poll.try(:date).strftime("%B %d, %Y")}"%>
+  </h2>
   
  
 
-
+<%= link_to "edit", edit_admin_team_ranking_release_path(@poll)%>
 
 
     <!-- tab panes -->
@@ -18,7 +21,7 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Rank</th>
+              <th><%= @poll.dual_ranking ? "Dual Ranking" : "Ranking"%></th>
               <th>School</th>
             </tr>
           </thead>

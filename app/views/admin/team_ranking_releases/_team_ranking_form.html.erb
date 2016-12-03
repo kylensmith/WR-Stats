@@ -1,0 +1,14 @@
+<div class="new_rank_form">
+	<p class="fields">
+		<fieldset>
+			
+			<%= f.input :rank, label: "Ranking"%>
+
+			<%= f.association :school, collection: School.all.order(:name), required: false, prompt: "Select School", label: "School"%>
+
+		</fieldset>
+		
+	</p>
+
+	<hr align="left" style="margin-left:5%" width="30%">
+</div>

@@ -95,6 +95,7 @@ match 'admin/schools/change', action: :changes, controller: 'admin/schools', via
     resources :coaches, only: [:index, :update, :new, :create, :edit, :destroy]
     resources :duals, only: [:update, :new, :create, :edit, :destroy, :mass_create, :mass_create2]
     resources :wrestlers, only: [:update, :new, :create, :edit, :destroy]
+    resources :team_ranking_releases, only: [:update, :new, :create, :edit, :destroy] 
     resources :users, only: [:index, :update, :edit]
     resources :dual_seasons, only: [:new, :edit, :create, :update, :destroy, :change, :new_all_active, :create_all_active] do
       # collection do

@@ -56,8 +56,9 @@
               <td><%= link_to dual.school.name, school_path(dual.school)%></td>
 
               
-              <td><%= link_to_if dual.poll, "#{dual.rank_it}", :controller => 'team_ranking_releases',
-              :action => 'show', :id => dual.poll %></td>
+              <td><% if dual.poll %>
+                <%= link_to "#{dual.rank_it}", poll_path(dual.poll) %>
+                <%end%></td>
               
             </tr>
             <%end%>

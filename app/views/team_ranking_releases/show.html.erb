@@ -11,7 +11,7 @@
   
  
 <% if is_admin? %> 
-<%= link_to "edit", edit_admin_team_ranking_release_path(@poll)%>
+<%= link_to "edit poll", edit_admin_team_ranking_release_path(@poll)%>
 <% end%> 
 
 
@@ -31,8 +31,6 @@
             <tr>
             	<td><%= "#{rank.rank}. "%></td>
             	<td><%= link_to "#{rank.school.name}", school_season_path(rank.school, @poll.season_id) %> </td>
-             
-
             </tr>
             <%end%>
           </tbody>

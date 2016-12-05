@@ -2,5 +2,11 @@
 
 <div class="container">
 	<h1>Create a new ranking</h1>
-	<%= render "poll_form"%>
+	<%= simple_form_for @ranking, :url =>  {:controller => 'admin/team_ranking_releases', :action => "create" }, :html => { :class => 'form-inline' }, :method => 'post' do |c| %>
+	
+	<%= render "poll_form", :c => c  %>
+
+	  	<p><%= c.submit "Submit" %></p>
+
+  	<% end %>
 </div>

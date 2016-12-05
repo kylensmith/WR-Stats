@@ -1,5 +1,5 @@
   <div class="season_form">
-  	<%= simple_form_for @ranking, :url =>  {:controller => 'admin/team_ranking_releases', :action => "create" }, :html => { :class => 'form-inline' }, :method => 'post' do |c| %>
+  	
 
 
   	<%= c.input :poll_name, label: "Ranking Name" %>
@@ -25,14 +25,12 @@
 
 
 
-  	<div class=""
+  	<div class="">
   	<%= render "team_ranking_form", :f => f %>
 
 
   	<%end%>
 
-  	<p><%= c.submit "Submit" %></p>
 
-  	<% end %>
   </div>
 </div>

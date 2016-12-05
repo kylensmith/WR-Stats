@@ -4,76 +4,74 @@
 <div class="container">
   <!-- nav tabs -->
   <ul class="nav nav-tabs centerer">
-                
-                 <li class=""><a class="" href="#yesterday" data-toggle="tab">Yesterday <span class="badge"><%=@yduals.count%></span></a>
-                </li><li class="active"><a class="" href="#today" data-toggle="tab"><%=@date.strftime("%A %b %d, %Y")%> <span class="badge"><%=@duals.count%></span></a>
-                </li>
-                <li><a class="" href="#tmr" data-toggle="tab">Tomorrow <span class="badge"><%=@tduals.count%></span></a>
-                </li>
-               
-            </ul>
 
-  <!-- tab panes -->
-   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="today">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Time</th>
-            <th>Dual</th>
-            <th>Result</th>
-            
+   <li class=""><a class="" href="#yesterday" data-toggle="tab">Yesterday <span class="badge"><%=@yduals.count%></span></a>
+   </li><li class="active"><a class="" href="#today" data-toggle="tab"><%=@date.strftime("%A %b %d, %Y")%> <span class="badge"><%=@duals.count%></span></a>
+ </li>
+ <li><a class="" href="#tmr" data-toggle="tab">Tomorrow <span class="badge"><%=@tduals.count%></span></a>
+ </li>
+
+</ul>
+
+<!-- tab panes -->
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="today">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Dual</th>
+          <th>Result</th>
+          <% if is_admin?%>
+          <th></th>
+          <% end%>     
+        </tr>
+      </thead>
+      <tbody>
+       <% @duals.each do |dual| %>
+       <tr>
+         <td><%= "#{dual.try(:clean_time)}"%> </td>
+         <!-- Check location of dual to determine how to list -->
+         <% if dual.site == 1 %>
+         <td><%if dual.team2%>
+          <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
+          <%else%>
+          <%end%>at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
+
+
+          <% elsif dual.site == 2%>
+          <td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> at <%if dual.team2%>
+            <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
+            <%else%>
+            <%end%></td>
+
+            <% else%>
+            <td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> vs <%if dual.team2%>
+              <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
+              <%else%>
+              <%end%>
+            </td>
+
+            <% end%>
+
+            <% if dual.t? %>
+            <td><%=  "Tie #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)}"%></td> 
+
+
+            <% elsif dual.w == dual.team1%>
+            <td><%= "#{dual.team1.name} #{dual.team1_score ? sprintf('%g', dual.team1_score) : ""}-#{dual.team2_score ? sprintf('%g', dual.team2_score) : ""} #{dual.tb}"%></td>
+
+            <% elsif dual.team2 && dual.w == dual.try(:team2)%>
+            <td><%= "#{dual.team2.name} #{dual.team2_score ? sprintf('%g', dual.team2_score) : ""}-#{dual.team1_score ? sprintf('%g', dual.team1_score) : ""} #{dual.tb}"%></td>
+
+            <% end%>
+            <% if is_admin?%>
+            <td>
+              <%= link_to "edit", edit_admin_dual_path(dual)%> 
+            </td>
+            <% end%>
           </tr>
-        </thead>
-        <tbody>
-         <% @duals.each do |dual| %>
-            <tr>
-             <td><%= is_admin? ? (link_to "edit", edit_admin_dual_path(dual)) : "#{dual.try(:clean_time)}"%> </td>
-              <!-- Check location of dual to determine how to list -->
-              	<% if dual.site == 1 %>
-              		<td><%if dual.team2%>
-                    <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
-                    <%else%>
-                    <%end%>at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
-              		
-              		
-              		<% elsif dual.site == 2%>
-              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> at <%if dual.team2%>
-                    <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
-                    <%else%>
-                    <%end%></td>
-              		
-              		<% else%>
-              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> vs <%if dual.team2%>
-                    <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
-                    <%else%>
-                    <%end%>
-                  </td>
-              		
-              		<% end%>
-
-              		<% if dual.t? %>
-              		<td><%=  "Tie #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)}"%></td> 
-              		
-              		
-              		<% elsif dual.w == dual.team1%>
-              		<td><%= "#{dual.team1.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
-              		
-              		<% elsif dual.team2 && dual.w == dual.try(:team2)%>
-              		<td><%= "#{dual.team2.name} #{sprintf('%g', dual.team2_score)}-#{sprintf('%g', dual.team1_score)} #{dual.tb}"%></td>
-              		
-
-              		<% else %>
-                  <td>
-                  </td>
-              		
-
-
-              		<% end%>
-              		
-              
-            </tr>
-            <%end%>
+          <%end%>
         </tbody>
       </table>
     </div>
@@ -85,108 +83,113 @@
             <th>Time</th>
             <th>Dual</th>
             <th>Result</th>
+            <% if is_admin?%>
+            <th></th>
+            <% end%>
             
           </tr>
         </thead>
         <tbody>
          <% @yduals.each do |dual| %>
+         <tr>
+          <td><%= "#{dual.try(:clean_time)}"%> </td>
+          <!-- Check location of dual to determine how to list -->
+          <% if dual.site == 1 %>
+          <td><%if dual.team2%>
+            <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
+            <%else%>
+            <%end%> at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
+
+
+            <% elsif dual.site == 2%>
+            <td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> at <%if dual.team2%>
+              <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
+              <%else%>
+              <%end%></td>
+
+              <% else%>
+              <td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> vs <%if dual.team2%>
+                <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
+                <%else%>
+                <%end%></td>
+
+                <% end%>
+
+                <% if dual.t? %>
+                <td><%=  "Tie #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)}"%></td> 
+
+
+                <% elsif dual.w == dual.team1%>
+                <td><%= "#{dual.team1.name} #{dual.team1_score ? sprintf('%g', dual.team1_score) : ""}-#{dual.team2_score ? sprintf('%g', dual.team2_score) : ""} #{dual.tb}"%></td>
+
+                <% elsif dual.team2 && dual.w == dual.try(:team2)%>
+                <td><%= "#{dual.team2.name} #{dual.team2_score ? sprintf('%g', dual.team2_score) : ""}-#{dual.team1_score ? sprintf('%g', dual.team1_score) : ""} #{dual.tb}"%></td>
+
+
+                <% end%>
+                <% if is_admin?%>
+                <td>
+                  <%= link_to "edit", edit_admin_dual_path(dual)%> 
+                </td>
+                <% end%>
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tmr">
+          <table class="table table-striped">
+           <thead>
             <tr>
-              <td><%= is_admin? ? (link_to "edit", edit_admin_dual_path(dual)) : "#{dual.try(:clean_time)}"%> </td>
-              <!-- Check location of dual to determine how to list -->
-              	<% if dual.site == 1 %>
-              		<td><%if dual.team2%>
-                    <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
-                    <%else%>
-                    <%end%> at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
-              		
-              		
-              		<% elsif dual.site == 2%>
-              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> at <%if dual.team2%>
-                    <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
-                    <%else%>
-                    <%end%></td>
-              		
-              		<% else%>
-              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> vs <%if dual.team2%>
-                    <%= link_to "#{dual.team2.try(:name)}", school_season_path(dual.team2, dual.season_id) %>
-                    <%else%>
-                    <%end%></td>
-              		
-              		<% end%>
+              <th>Time</th>
+              <th>Dual</th>
+              <th>Result</th>
+              <% if is_admin?%>
+              <th></th>
+              <% end%>
 
-              		<% if dual.t? %>
-              		<td><%=  "Tie #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)}"%></td> 
-              		
-              		
-              		<% elsif dual.w == dual.team1%>
-              		<td><%= "#{dual.team1.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
-              		
-              		<% elsif dual.team2 && dual.w == dual.team2%>
-              		<td><%= "#{dual.team2.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
-
-                  <% else %>
-                  <td>
-                  </td>
-              		
-              		<% end%>
-              		 
-              
             </tr>
-            <%end%>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+           <% @tduals.each do |dual| %>
+           <tr>
+            <td><%= "#{dual.try(:clean_time)}"%> </td>
+            <!-- Check location of dual to determine how to list -->
+            <% if dual.site == 1 %>
+            <td><%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %> at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
 
-    </div>
 
-     <div role="tabpanel" class="tab-pane" id="tmr">
-      <table class="table table-striped">
-       <thead>
-          <tr>
-            <th>Time</th>
-            <th>Dual</th>
-            <th>Result</th>
-            
+            <% elsif dual.site == 2%>
+            <td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> at <%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %></td>
+
+            <% else%>
+            <td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> vs <%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %></td>
+
+            <% end%>
+
+            <% if dual.t? %>
+            <td><%=  "Tie #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)}"%></td> 
+
+
+            <% elsif dual.w == dual.team1%>
+            <td><%= "#{dual.team1.name} #{dual.team1_score ? sprintf('%g', dual.team1_score) : ""}-#{dual.team2_score ? sprintf('%g', dual.team2_score) : ""} #{dual.tb}"%></td>
+
+            <% elsif dual.team2 && dual.w == dual.try(:team2)%>
+            <td><%= "#{dual.team2.name} #{dual.team2_score ? sprintf('%g', dual.team2_score) : ""}-#{dual.team1_score ? sprintf('%g', dual.team1_score) : ""} #{dual.tb}"%></td>
+            <% end %>
+            <% if is_admin?%>
+            <td>
+              <%= link_to "edit", edit_admin_dual_path(dual)%> 
+            </td>
+            <% end%>
+
+
+
+
           </tr>
-        </thead>
-        <tbody>
-         <% @tduals.each do |dual| %>
-            <tr>
-              <td><%= is_admin? ? (link_to "edit", edit_admin_dual_path(dual)) : "#{dual.try(:clean_time)}"%> </td>
-              <!-- Check location of dual to determine how to list -->
-              	<% if dual.site == 1 %>
-              		<td><%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %> at <%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %></td> 
-              		
-              		
-              		<% elsif dual.site == 2%>
-              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> at <%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %></td>
-              		
-              		<% else%>
-              		<td><%= link_to "#{dual.team1.name}", school_season_path(dual.team1, dual.season_id) %> vs <%= link_to "#{dual.team2.name}", school_season_path(dual.team2, dual.season_id) %></td>
-              		
-              		<% end%>
-
-              		<% if dual.t? %>
-              		<td><%=  "Tie #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)}"%></td> 
-              		
-              		
-              		<% elsif dual.w == dual.team1%>
-              		<td><%= "#{dual.team1.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
-              		
-              		<% elsif dual.team2 && dual.w == dual.team2%>
-              		<td><%= "#{dual.team2.name} #{sprintf('%g', dual.team1_score)}-#{sprintf('%g', dual.team2_score)} #{dual.tb}"%></td>
-
-                  <% else %>
-                  <td>
-                  </td>
-
-              		
-              		<% end%>
-                  <td>
-
-              		
-              
-            </tr>
-            <%end%>
+          <%end%>
         </tbody>
 
       </table>

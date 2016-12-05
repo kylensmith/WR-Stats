@@ -4,52 +4,13 @@
 
 <div class="container">
 	<h1>Edit Dual</h1>
+
 	<%=simple_form_for @dual, :url => {:controller => "admin/duals", :action => "update"}, html: { class: 'form-inline' } do |f|%>
 	
-	<%= f.input :date%>
-	<br>
-	<%= f.input :time,  {ampm: true, :as => :time, :minute_step => 15} %>
-	<br>
-	<p class='form-control-static'>Location of dual: </p>
-	<%= f.collection_check_boxes :site, [[1,"Team 1  "], [0, 'Neutral  .'],  [2, "Team 2  "] ], :first, :last, input_html: { class: 'checkbox' }%>
-	<br>
-	<%= f.association :team1, collection: School.all.order(:name)%>
-	<%= f.input :team1_score, required: false%>
-	<br>
-	<%= f.association :team2, collection: School.all.order(:name), required: false %>
-	<%= f.input :team2_score, required: false  %>
-	<br>
-	<br>
-
-	<%if @dual.w %>
-
-	<%= @dual.try(:w).try(:name)%>
-
-	<br>
-	<br>
-	<%end%>
-	
-<div class="row row-centered">
-		<div class="col-xs-4 col-centered"> 
-			Result: <%= f.collection_check_boxes :dual_result, [[1, "Team 1 Won  "],  [2, "Team 2 Won  "], [3, "Tie"]], :first, :last, wrapper_html: { class: 'form-check-input' }, label_html: { label: 'form-check-input' }%>
-		</div>
-
-		<%= f.input :tie_break%>
-	</div>
-
-
+	<!-- fields for the dual form -->
+	<%= render "dual_form", :f => f %>
 	
 	
-	<br>
-	<%= f.input :complete %>
-	<br>
-	<br>
-	<%= f.input :attendance %>
-	<%= f.input :estimated %>
-	
-	<br>
-	<br>
-	<br>
 	<div class="row row-centered">
 		<div class="col-xs-4 col-centered"> 
 			<%= f.button :submit %>
@@ -60,5 +21,6 @@
 	</div>
 
 
-</div>
+
+<!-- </div> -->
 

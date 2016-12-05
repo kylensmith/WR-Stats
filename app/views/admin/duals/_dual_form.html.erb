@@ -1,55 +1,52 @@
 
 
 
-<div class="container">
-<%=simple_form_for @dual, :url => {:controller => "admin/duals", :action => "create"}, html: { class: 'form-inline' } do |f|%>
-<%= f.input :season_id, collection: Season.all.order(:year).reverse, label_method: :year, required: true %><br>
-<%= f.input :date, required: true %>
+
+
+<%= f.input :date%>
 <br>
-link?
-<%= link_to "Remove", @dual, method: :delete, data: { confirm: "Are you sure?" } %>
-
-
-<%= f.input :time%>
+<%= f.input :time,  {ampm: true, :as => :time, :minute_step => 15} %>
 <br>
- <p class='form-control-static'>Location of dual: </p>
- <%= f.collection_check_boxes :site, [[1,"Team 1  "], [0, 'Neutral  .'],  [2, "Team 2  "] ], :first, :last, input_html: { class: 'form-check' }%>
-
-
+<p class='form-control-static'>Location of dual: </p>
+<%= f.collection_select :site, [[1,"#{@dual.team1 ? @dual.team1.name : "Team 1"}"], [0, 'Neutral'],  [2, "#{@dual.team2 ? @dual.team2.name : "Team 2"}"] ], :first, :last, input_html: { class: 'checkbox' }%>
 <br>
-<%= f.association :team1, collection: School.all.order(:name), required: true, prompt: "Choose a School" %>
-<%= f.input :team1_score, required: false%>
+<%= f.association :team1, collection: School.all.order(:name),placeholder: 'user@domain.com'%>
+<%= f.input :team1_score, label: "#{@dual.team1 ? "#{@dual.team1.name} Score" : "Team 1 Score"}", required: false%>
 <br>
-<%= f.association :team2, collection: School.all.order(:name), required: false, prompt: "Choose a School" %>
-<%= f.input :team2_score, required: false  %>
-
-<br><br>
-<p class='form-control-static'>Result: </p> 
-  <%= f.collection_check_boxes :dual_result, [[1, "Team 1 Won  "],  [2, "Team 1 Won  "], [3, "Tie"]], :first, :last, wrapper_html: { class: 'form-check-input' }, label_html: { label: 'form-check-input' }%>
-
-
-
-
-
-
-
-
-
-<%= f.input :tie_break%>
+<%= f.association :team2, collection: School.all.order(:name), required: false %>
+<%= f.input :team2_score, label: "#{@dual.team2 ? "#{@dual.team1.name} Score" : "Team 2 Score"}", required: false  %>
 <br>
-<%= f.input :attendance %>
+<br>
 
-<%= f.input :estimated %>
+<%if @dual.w %>
+
+<%= @dual.try(:w).try(:name)%>
 
 <br>
+<br>
+<%end%>
+
+<div class="row row-centered">
+	<div class="col-xs-4 col-centered"> 
+		Result: 
+
+		<%= f.collection_select :dual_result, [[nil, "Undecided"], [1, "#{@dual.team1 ? "#{@dual.team1.name} Won" : "Team 1 Won"}"],  [2, "#{@dual.team2 ? "#{@dual.team2.name} Won" : "Team 2 Won"}"], [3, "Tie"]], :first, :last, include_blank: true, wrapper_html: { class: 'form-check-input' }, label_html: { label: 'form-check-input' }%>
+
+
+	</div>
+
+	<%= f.input :tie_break, label: "Tie Break?", hint: 'Select if winner was decided via tie-breaker.'%>
+</div>
+
+
+<!-- <br> -->
 <%= f.input :complete %>
 <%= f.hint "If COMPLETE is selected, the record will be considered completed and will not be reserved for updating."%>
 
 <br>
-  <%= f.button :submit %>
 
 
-<%end%>
 
-</div>
+
+
 

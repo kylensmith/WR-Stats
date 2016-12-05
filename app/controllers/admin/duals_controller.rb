@@ -107,7 +107,7 @@ module Admin
 	  	end
 	  	 @dual.update(dual_info)
 	  	if @dual.save
-	  		flash.notice = "Dual scheduled."
+	  		flash.notice = "Dual has been edited."
 	  	else
 	  		flash.alert = "Error: Dual not created.  Please confirm all required fields are populated."
 	  	end 

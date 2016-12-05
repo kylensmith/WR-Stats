@@ -34,7 +34,24 @@ module Admin
       @ranked_teams = @ranking.team_rankings.order(:rank)
     end
 
-    def index
+    def update
+      @ranking = TeamRankingRelease.find(params[:id])
+      @ranking.update(ranking_info)
+      if @ranking.team_rankings.count > 1
+        if @ranking.date.mon < 7
+          @ranking.season_id = @ranking.date.year
+        else @ranking.date.mon >= 7
+          @ranking.season_id = (@ranking.date.year+1)
+        end
+        @ranking.teams_ranked = @ranking.team_rankings.count
+        @ranking.save
+        flash[:notice] = "You've update the #{@ranking.poll_name} poll for #{@ranking.date}."
+        redirect_to poll_path(@ranking)
+      else        
+        flash[:alert] = "Your ranking was not saved.  Please ensure all the information is complete."
+        redirect_to (:back)
+      end
+
     end
 
     def show

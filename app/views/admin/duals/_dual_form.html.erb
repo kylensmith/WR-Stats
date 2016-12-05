@@ -10,7 +10,7 @@
 <p class='form-control-static'>Location of dual: </p>
 <%= f.collection_select :site, [[1,"#{@dual.team1 ? @dual.team1.name : "Team 1"}"], [0, 'Neutral'],  [2, "#{@dual.team2 ? @dual.team2.name : "Team 2"}"] ], :first, :last, input_html: { class: 'checkbox' }%>
 <br>
-<%= f.association :team1, collection: School.all.order(:name),placeholder: 'user@domain.com'%>
+<%= f.association :team1, collection: School.all.order(:name)%>
 <%= f.input :team1_score, label: "#{@dual.team1 ? "#{@dual.team1.name} Score" : "Team 1 Score"}", required: false%>
 <br>
 <%= f.association :team2, collection: School.all.order(:name), required: false %>

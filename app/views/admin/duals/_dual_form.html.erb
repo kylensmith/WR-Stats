@@ -18,13 +18,7 @@
 <br>
 <br>
 
-<%if @dual.w %>
 
-<%= @dual.try(:w).try(:name)%>
-
-<br>
-<br>
-<%end%>
 
 <div class="row row-centered">
 	<div class="col-xs-4 col-centered"> 
@@ -37,11 +31,14 @@
 
 	<%= f.input :tie_break, label: "Tie Break?", hint: 'Select if winner was decided via tie-breaker.'%>
 </div>
+<%= f.input :attendance %> <%= f.input :estimated %>
 
-
+<br>
 <!-- <br> -->
 <%= f.input :complete %>
 <%= f.hint "If COMPLETE is selected, the record will be considered completed and will not be reserved for updating."%>
+
+
 
 <br>
 
